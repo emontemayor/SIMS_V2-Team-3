@@ -2,7 +2,7 @@
  * main.c
  * Main program for Display board.
  *
- * Author : Dan Filbey
+ * Author : Emiliano Montemayor
  * Capstone Project 2017 - 2018
  **********************************************/
 /************************************************************************/
@@ -29,8 +29,7 @@ void configure_port_pins(void);
 /************************************************************************/
 /*                                Globals                               */
 /************************************************************************/
-extern FATFS fatFs;   	/* FatFs work area needed for each volume */
-extern FIL fil;   		/* File object needed for each open file */
+
 extern struct rtc_module rtc_instance;		//declare rtc instance for calendar 
 extern struct rtc_calendar_time time;		//time instance to get and set time
 
@@ -63,33 +62,54 @@ int main(void){
 	// mask all interrupt but TAG
 	Ft_Gpu_Hal_Wr8(phost, REG_INT_MASK, 6);
 	
-	//detect if SD Card is inserted
-	if (1 == port_pin_get_input_level(SD_CD)){
-		disStart();
-		Ft_Gpu_CoCmd_Text(phost,disWid/2,disHei/2,28,OPT_CENTER,"Fail to detect SD Card");
-		disEnd();
-	} else{
-		//mount and initialize disk
-		f_mount(&fatFs,"",0);
-		f_open(&fil, "newfile.txt", FA_READ);
-		f_close(&fil);
-		disStart();
-		Ft_Gpu_CoCmd_Text(phost,disWid/2,disHei/2,28,OPT_CENTER,"SD Card detected");
-		disEnd();
-	}
 	delay_ms(2000);
 	
 	//put static portions into ram_g/*
 	appAttn();
 	appRssi();
 	appHist();
-	
+
+
+
+//Debug screen. Displays 'FTDI' anda red circle. 
+while(1){	
+	disStart();
+	lcd_wr32(RAM_DL +0,CLEAR(1,1,1));// clear screen
+	lcd_wr32(RAM_DL +4,BEGIN(BITMAPS));// start drawing bitmaps
+	lcd_wr32(RAM_DL +8,VERTEX2II(220,110,31,'F'));// ascii F in font 31
+	lcd_wr32(RAM_DL +12,VERTEX2II(244,110,31,'T'));// ascii T
+	lcd_wr32(RAM_DL +16,VERTEX2II(270,110,31,'D'));// ascii D
+	lcd_wr32(RAM_DL +20,VERTEX2II(299,110,31,'I'));// ascii I
+	lcd_wr32(RAM_DL +24,END());
+	lcd_wr32(RAM_DL +28,COLOR_RGB(160,22,22));// change colourto red
+	lcd_wr32(RAM_DL +32,POINT_SIZE(320));// set point size to 20 pixels in
+	lcd_wr32(RAM_DL +36,BEGIN(FTPOINTS));// start drawing points
+	lcd_wr32(RAM_DL +40,VERTEX2II(192,133,0,0));// red point
+	lcd_wr32(RAM_DL +44,END());
+	lcd_wr32(RAM_DL +48,DISPLAY());// display the image
+	disEnd();
+}
+
+
+
+/*
+while(1){
+	disStart();
+	Ft_Gpu_CoCmd_Scrollbar(phost, 20, 30, 120, 8, 0, 10, 40, 100);
+	Ft_Gpu_CoCmd_FgColor(phost,0x703800);
+	Ft_Gpu_CoCmd_Scrollbar(phost,20, 60, 120, 8, 0, 30, 40, 100);
+	Ft_Gpu_CoCmd_FgColor(phost,0x387000);
+	Ft_Gpu_CoCmd_Scrollbar(phost,20, 90, 120, 8, 0, 50, 40, 100);
+	disEnd();	
+}
+*/
+/*
 	//main home menu and GUI
 	while(1){
 	tag = 0;
 		disStart();
 		//set background
-		Ft_Gpu_CoCmd_Gradient(phost, 0, 0, 0xCCCCCC, disWid, disHei, 0xB2B2B2);
+		Ft_Gpu_CoCmd_Gradient(phost, 0, 0x060A39, 0, disWid, disHei, 0x0A4F7A);
 		//get time and put it on display
 		Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(0,0,0));
 		printTime();
@@ -112,7 +132,9 @@ int main(void){
 		Ft_Gpu_CoCmd_Button(phost, disWid*.52,(disHei*0.52),(disWid*0.25),(disHei*0.25),30, (tag == sett)? OPT_FLAT:0,"  Settings  ");
 	    
 		disEnd();
-        
+		
+		
+        tag = sett;
         //check tag value and determine further action
 		if(tag!=0)		tempTag = tag;
 		if (tempTag != tag && tag == 0 && tag!=back){
@@ -124,6 +146,7 @@ int main(void){
 			delay_ms(50);
 		}
 	}
+	*/
 }//end main
 
 /****************************************************************************************************************************
@@ -139,16 +162,22 @@ void sim_system_init(void){
 	system_init();
 	// config system clocks
 	sys_clock_init();
+	
+	//configure port pins
+	configure_port_pins();
+	
 	// config LCD spi
 	lcd_spi_init();
-	configure_port_pins();
+	
 	// configure the external interrupt pins
 	configure_ext_ints();
 	// configure the callback functions for external interrupts
 	configure_ext_int_callback();
 
 	// initialize the LCD
-	lcd_init_seq();
+	lcd_init_seq(); 
+	
+	
 	// set the interrupt masks for the LCD interrupts
 	lcd_int_mask(LCD_DEFAULT_MASK);
 	// write 1 to the LCD REG_INT_EN register to enable it
@@ -237,24 +266,46 @@ void clock_gclk0_init(void){
 /* Function Name    : configure_port_pins
 	* Parameters       : void
 	* Return Values(s) : void
-	* Description      : config select pins for lcd and sd
+	* Description      : config select pins for lcd 
 	*/
 void configure_port_pins(void){
 	struct port_config config_port_pin;
 	port_get_config_defaults(&config_port_pin);
 
-	// configure inputs
-	config_port_pin.direction = PORT_PIN_DIR_INPUT;
-	config_port_pin.input_pull = PORT_PIN_PULL_UP;
-	port_pin_set_config(SD_CD, &config_port_pin);
-	port_pin_set_config(SD_WP, &config_port_pin);
-	    
+
 	// configure outputs
 	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
 	config_port_pin.input_pull = LCD_PD_PULL;
 	port_pin_set_config(LCD_PD, &config_port_pin);
-	    
+	
 	port_pin_set_output_level(LCD_PD, LCD_PD_DIS);
+	
+/*
+
+	//Debugging routine used to find that pins on uC were defunct. 
+	uC was replaced, this routine was run, and 
+	port_pin_set_config(PIN_PA10, &config_port_pin);    
+	port_pin_set_output_level(PIN_PA10, true);
+	
+	//MISO
+	port_pin_set_config(PIN_PB12, &config_port_pin);    
+	port_pin_set_output_level(PIN_PB12, true);
+	
+	//EN
+	port_pin_set_config(PIN_PB13, &config_port_pin); 
+	port_pin_set_output_level(PIN_PB13, true);
+	
+	//MOSI
+	port_pin_set_config(PIN_PB14, &config_port_pin); 
+	port_pin_set_output_level(PIN_PB14, true);	
+		
+	//SCK
+	port_pin_set_config(PIN_PB15, &config_port_pin); 
+	port_pin_set_output_level(PIN_PB15, true);	
+	
+*/
+
+
 }//end configure_port_pins
 
 /****************************************************************************************************************************

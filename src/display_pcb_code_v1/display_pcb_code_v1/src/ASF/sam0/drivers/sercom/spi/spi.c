@@ -44,7 +44,7 @@
  * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
  */
 #include "spi.h"
-
+#include "delay.h"
 /**
  * \brief Resets the SPI module
  *
@@ -889,6 +889,7 @@ enum status_code spi_select_slave(
 			} else {
 				/* Drive Slave Select low */
 				port_pin_set_output_level(slave->ss_pin, false);
+				
 			}
 		} else {
 			/* Drive Slave Select high */

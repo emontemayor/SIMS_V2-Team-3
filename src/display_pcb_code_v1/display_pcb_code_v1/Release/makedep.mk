@@ -2,8 +2,6 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-src\ASF\common2\components\memory\sd_mmc\sd_mmc.c
-
 src\ASF\sam0\drivers\extint\extint_callback.c
 
 src\ASF\sam0\drivers\extint\extint_sam_d_r_h\extint.c
@@ -47,8 +45,6 @@ src\GLCD_hal\sim_system_glcd_software.c
 src\ASF\sam0\drivers\sercom\spi\spi.c
 
 src\ASF\common2\services\delay\sam0\systick_counter.c
-
-src\ASF\common2\components\memory\sd_mmc\sd_mmc_spi.c
 
 src\ASF\sam0\drivers\port\port.c
 

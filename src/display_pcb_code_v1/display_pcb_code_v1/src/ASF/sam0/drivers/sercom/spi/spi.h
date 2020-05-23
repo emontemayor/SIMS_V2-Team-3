@@ -913,7 +913,7 @@ static inline void spi_get_config_defaults(
 	config->mode             = SPI_MODE_MASTER;
 	config->data_order       = SPI_DATA_ORDER_MSB;
 	config->transfer_mode    = SPI_TRANSFER_MODE_0;
-	config->mux_setting      = SPI_SIGNAL_MUX_SETTING_D;
+	config->mux_setting      = SPI_SIGNAL_MUX_SETTING_E;
 	config->character_size   = SPI_CHARACTER_SIZE_8BIT;
 	config->run_in_standby   = false;
 	config->receiver_enable  = true;
@@ -958,7 +958,7 @@ static inline void spi_slave_inst_get_config_defaults(
 {
 	Assert(config);
 
-	config->ss_pin          = 10;
+	config->ss_pin          = 47;
 	config->address_enabled = false;
 	config->address         = 0;
 }

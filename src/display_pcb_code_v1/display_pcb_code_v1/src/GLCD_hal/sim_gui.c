@@ -531,19 +531,7 @@ void saveHist(int16_t rssi169, int16_t rssi915, int16_t rssi245){
 	history[0][7] = rssi915;
 	history[0][8] = rssi245;
 	
-	//detect if SD card is inserted to save it
-	if (0 == port_pin_get_input_level(SD_CD)){
-		//open file, write permission
-		f_open(&fil, "history.txt", FA_WRITE | FA_OPEN_APPEND);
-		//format string and write to SD card
-		f_write(&fil, "Shield failure detected at ", 27, &bw);
-		snprintf(buff, 128, "%d:%d:%d on %d/%d/%d", time.hour, time.minute, time.second, time.month, time.day, time.year);
-		f_write(&fil, buff, strlen(buff), &bw);
-		snprintf(buff, 128, "\r\n\t169 MHZ attenuation: %d\r\n\t915 MHz attenuation: %d\r\n\t2.45 GHz attenuation: %d\r\n\n", rssi169, rssi915, rssi245);
-		f_write(&fil, buff, strlen(buff), &bw);
-		//close the file 
-		f_close(&fil);
-	}
+
 }//end saveHist
 
 

@@ -25,7 +25,7 @@ static volatile uint8_t lcd_int_flags = 0xff;
 /* Function Name    : lcd_init_seq
  * Parameters       : void
  * Return Values(s) : ASF general status code
- * Description      : Initializaion sequence as described by the 
+ * Description      : Initialization sequence as described by the 
  *  FT81X_Series_Programmer_Guide datasheet pg 11.
  */
 void lcd_init_seq(void)

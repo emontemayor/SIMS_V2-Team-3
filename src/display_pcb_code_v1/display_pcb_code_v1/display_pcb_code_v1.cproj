@@ -5,7 +5,7 @@
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.ARMGCC.C</ToolchainName>
     <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
-    <avrdevice>ATSAMD21E18A</avrdevice>
+    <avrdevice>ATSAMD21J18A</avrdevice>
     <avrdeviceseries>samd21</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>C</Language>
@@ -261,26 +261,26 @@
         <board id="board.user_board.samd21j" value="Add" config="" content-id="Atmel.ASF" />
       </framework-data>
     </AsfFrameworkConfig>
-    <avrtool>com.atmel.avrdbg.tool.samice</avrtool>
-    <avrtoolserialnumber>801001841</avrtoolserialnumber>
-    <avrdeviceexpectedsignature>0x1001030A</avrdeviceexpectedsignature>
+    <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
+    <avrtoolserialnumber>J42700014656</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0x10010300</avrdeviceexpectedsignature>
     <avrtoolinterface>SWD</avrtoolinterface>
     <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
         <InterfaceProperties>
-          <SwdClock>0</SwdClock>
+          <SwdClock>2000000</SwdClock>
         </InterfaceProperties>
         <InterfaceName>SWD</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
-      <ToolNumber>J41800092216</ToolNumber>
+      <ToolNumber>J42700014656</ToolNumber>
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
-    <avrtoolinterfaceclock>4000000</avrtoolinterfaceclock>
+    <avrtoolinterfaceclock>2000000</avrtoolinterfaceclock>
     <com_atmel_avrdbg_tool_samice>
       <ToolOptions>
         <InterfaceProperties>
-          <SwdClock>4000000</SwdClock>
+          <SwdClock>0</SwdClock>
         </InterfaceProperties>
         <InterfaceName>SWD</InterfaceName>
         <JlinkConfigFile>H:\Capstone\programming\display_pcb_code_v1\display_pcb_code_v1\jlink.config</JlinkConfigFile>
@@ -363,9 +363,9 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
-  <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
+  <armgcc.compiler.optimization.DebugLevel>Default (-g2)</armgcc.compiler.optimization.DebugLevel>
   <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
   <armgcc.compiler.miscellaneous.OtherFlags>-pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500</armgcc.compiler.miscellaneous.OtherFlags>
   <armgcc.linker.general.UseNewlibNano>True</armgcc.linker.general.UseNewlibNano>
@@ -458,6 +458,7 @@
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
 </ArmGcc>
     </ToolchainSettings>
   </PropertyGroup>
@@ -631,8 +632,6 @@
     <Folder Include="src\ASF\common2\boards\" />
     <Folder Include="src\ASF\common2\boards\user_board\" />
     <Folder Include="src\ASF\common2\components\" />
-    <Folder Include="src\ASF\common2\components\memory\" />
-    <Folder Include="src\ASF\common2\components\memory\sd_mmc\" />
     <Folder Include="src\ASF\common2\services\" />
     <Folder Include="src\ASF\common2\services\delay\" />
     <Folder Include="src\ASF\common2\services\delay\sam0\" />
@@ -697,9 +696,6 @@
     <Folder Include="src\firmware" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\ASF\common2\components\memory\sd_mmc\sd_mmc.c">
-      <SubType>compile</SubType>
-    </Compile>
     <None Include="src\ASF\sam0\drivers\extint\extint.h">
       <SubType>compile</SubType>
     </None>
@@ -754,6 +750,156 @@
     <None Include="src\ASF\sam0\drivers\sercom\usart\usart_interrupt.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e15a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e15b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e15bu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e15l.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e16a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e16b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e16bu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e16l.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e17a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e18a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g15a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g15b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g15l.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g16a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g16b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g16l.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g17a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g17au.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g18a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g18au.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j15a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j15b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j16a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j16b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j17a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e15a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e15b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e15bu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e15l.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e16a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e16b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e16bu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e16l.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e17a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e18a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g15a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g15b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g15l.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g16a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g16b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g16l.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g17a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g17au.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g18a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g18au.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j15a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j15b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j16a.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j16b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j17a.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\chanlib\diskio.c">
       <SubType>compile</SubType>
     </Compile>
@@ -886,21 +1032,6 @@
     <Compile Include="src\ASF\common2\services\delay\sam0\systick_counter.c">
       <SubType>compile</SubType>
     </Compile>
-    <None Include="src\ASF\common2\components\memory\sd_mmc\sd_mmc_protocol.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\config\conf_sd_mmc.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\common2\components\memory\sd_mmc\sd_mmc_spi.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\common2\components\memory\sd_mmc\sd_mmc.h">
-      <SubType>compile</SubType>
-    </None>
-    <Compile Include="src\ASF\common2\components\memory\sd_mmc\sd_mmc_spi.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\ASF\sam0\drivers\port\port.c">
       <SubType>compile</SubType>
     </Compile>
@@ -952,37 +1083,10 @@
     <None Include="src\ASF\sam0\drivers\system\system.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g18a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g15a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g16a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g17a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g18a.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\sercom5.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g16a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g15a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g17a.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\gclk.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e16bu.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\pm.h">
@@ -997,9 +1101,6 @@
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\tcc0.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g18au.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\adc.h">
       <SubType>compile</SubType>
     </None>
@@ -1007,9 +1108,6 @@
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\ac.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e15bu.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\adc.h">
@@ -1024,15 +1122,6 @@
     <None Include="src\ASF\sam0\utils\status_codes.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j16a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j17a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j15a.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\i2s.h">
       <SubType>compile</SubType>
     </None>
@@ -1045,37 +1134,7 @@
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\tc.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j15b.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j16b.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e18a.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\compiler.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e15a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e16a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e17a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e18a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e16a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e17a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e15a.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\port.h">
@@ -1093,12 +1152,6 @@
     <None Include="src\ASF\common\utils\interrupt.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g15l.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g16l.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\tc4.h">
       <SubType>compile</SubType>
     </None>
@@ -1106,9 +1159,6 @@
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\tcc.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g17au.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\drivers\system\interrupt\system_interrupt.h">
@@ -1144,34 +1194,13 @@
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\tc5.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j15a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j16a.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j17a.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21j18a.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\sysctrl.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g16l.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g15l.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\nvmctrl.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e15l.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e16l.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\utils\preprocessor\stringz.h">
@@ -1198,9 +1227,6 @@
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\tc6.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e15bu.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\sercom.h">
       <SubType>compile</SubType>
     </None>
@@ -1216,25 +1242,13 @@
     <None Include="src\ASF\sam0\drivers\system\pinmux\quick_start\qs_pinmux_basic.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g16b.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\dac.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g15b.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\drivers\system\clock\gclk.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e16l.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\sercom2.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e15l.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\common\utils\interrupt\interrupt_sam_nvic.h">
@@ -1258,9 +1272,6 @@
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\rtc.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g18au.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\pac2.h">
       <SubType>compile</SubType>
     </None>
@@ -1276,19 +1287,10 @@
     <None Include="src\config\conf_board.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e16bu.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\sysctrl.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j16b.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\thirdparty\CMSIS\Include\core_cmFunc.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j15b.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\wdt.h">
@@ -1303,25 +1305,10 @@
     <None Include="src\ASF\common\boards\board.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g15b.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21g16b.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\component\tcc_lighting.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e16b.h">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\ASF\thirdparty\CMSIS\Include\core_cmInstr.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21e15b.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21g17au.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\drivers\system\pinmux\pinmux.h">
@@ -1373,12 +1360,6 @@
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\sam0\utils\cmsis\samd21\include\instance\ac.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e15b.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\sam0\utils\cmsis\samd21\include\pio\samd21e16b.h">
       <SubType>compile</SubType>
     </None>
     <Compile Include="src\ASF\sam0\utils\cmsis\samd21\source\gcc\startup_samd21.c">

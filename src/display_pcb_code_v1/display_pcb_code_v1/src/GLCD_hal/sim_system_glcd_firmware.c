@@ -7,6 +7,19 @@
  * Capstone Project 2017 - 2018
  **********************************************/
 #include "sim_system_glcd_firmware.h"
+#undef ENABLE
+
+
+/************************************************************************/
+/*                                Changes from original                 */
+/************************************************************************/
+/*
+1. Changes to SPI init. Changed to manually initializing SPI rather
+	than utilizing ASF functions.
+2. Changed SPI
+
+*/
+
 
 /************************************************************************/
 /*                                Globals                               */
@@ -35,26 +48,6 @@ void lcd_spi_init(void)
     struct spi_slave_inst_config lcd_init_slave_config;
     // initialize card detect pin
     struct port_config pin_conf;
-    
-    // initialize the slave select pin
-    port_get_config_defaults(&pin_conf);
-    
-    // get defaults for lcd master config
-    spi_get_config_defaults(&lcd_init_master_config);
-
-    lcd_init_master_config.mux_setting = LCD_PINMUX_SETTING;
-    lcd_init_master_config.pinmux_pad0 = LCD_MOSI_PAD;
-    lcd_init_master_config.pinmux_pad1 = LCD_UNUSED;
-    lcd_init_master_config.pinmux_pad2 = LCD_MISO_PAD;
-    lcd_init_master_config.pinmux_pad3 = LCD_SCK_PAD;
-    
-    // clock source should always be GLCK0
-    lcd_init_master_config.generator_source = LCD_SPI_SOURCE_CLOCK;
-    lcd_init_master_config.mode_specific.master.baudrate = LCD_SPI_MAX_CLOCK;
-
-    // enable the master
-    spi_init(&lcd_master, LCD_SPI, &lcd_init_master_config);
-    spi_enable(&lcd_master);
 
     // get default configs for slave
     spi_slave_inst_get_config_defaults(&lcd_init_slave_config);
@@ -62,6 +55,33 @@ void lcd_spi_init(void)
     lcd_init_slave_config.ss_pin = LCD_CS;
     // attach the slave configs to the slave
     spi_attach_slave(&lcd_slave, &lcd_init_slave_config);
+    
+	
+	// initialize the slave select pin
+    //port_get_config_defaults(&pin_conf); commented out because 
+    
+	
+	
+    // get defaults for lcd master config
+    spi_get_config_defaults(&lcd_init_master_config);
+
+    lcd_init_master_config.mux_setting = LCD_PINMUX_SETTING;
+    lcd_init_master_config.pinmux_pad0 = LCD_MISO_PAD;
+    lcd_init_master_config.pinmux_pad1 = LCD_UNUSED; 
+    lcd_init_master_config.pinmux_pad2 = LCD_MOSI_PAD;
+    lcd_init_master_config.pinmux_pad3 = LCD_SCK_PAD;
+    
+	
+	
+    //clock source should always be GLCK0
+	lcd_init_master_config.generator_source = LCD_SPI_SOURCE_CLOCK;
+	lcd_init_master_config.mode_specific.master.baudrate = LCD_SPI_MAX_CLOCK;
+    
+	// enable the master
+    spi_init(&lcd_master, LCD_SPI, &lcd_init_master_config);
+    spi_enable(&lcd_master);
+	
+
     
     lcd_init_complete = true;
 }
@@ -113,12 +133,10 @@ status_code_genare_t lcd_start_xfer(LCD_ADDRESS param_addr, LCD_XFER_DIR dir)
     
     if(dir == READ)
         // send preamble = two read bits, 22 bit address, and dummy byte
-        read_status = spi_write_buffer_wait(&lcd_master, \
-            lcd_xfer_preamble.preamble, 4);
+        read_status = spi_write_buffer_wait(&lcd_master, lcd_xfer_preamble.preamble, 4);
     else if(dir == WRT)
         // send preamble = two wrt bits and 22 bit address
-        read_status = spi_write_buffer_wait(&lcd_master, \
-        lcd_xfer_preamble.preamble, 3);
+        read_status = spi_write_buffer_wait(&lcd_master, lcd_xfer_preamble.preamble, 3);
     
     return read_status;
 }
@@ -323,16 +341,17 @@ status_code_genare_t lcd_host_cmd(uint8_t cmd, uint8_t param_byte)
     
     // 3 byte array for sending host command to the LCD
     uint8_t cmd_packet[3] = {cmd, param_byte, 0x00};
-    
+   
     // select the slave
     do{
         // select the slave
         wrt_status = spi_select_slave(&lcd_master, &lcd_slave, true);
+		//port_pin_set_output_level(PIN_PA10, true);
     }while(wrt_status == STATUS_BUSY);
     
     // send host command
     wrt_status = spi_write_buffer_wait(&lcd_master, cmd_packet, 3);
-    
+
     // status check
     if(wrt_status != STATUS_OK)
     {
