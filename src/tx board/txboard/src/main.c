@@ -32,31 +32,33 @@ int main (void)
     simSysInit();
     
     // init registers for 169MHz
-    spi169_tx_init();
+//    spi169_tx_init();
     
     // init registers for 169MHz
-    spi27_tx_init();
+//    spi27_tx_init();
 	   
     while(1)
     {
         // start a SPI transfer to the FIFO
-        spi169_start_xfer(AX5043_FIFODATA, WRT);
+ //       spi169_start_xfer(AX5043_FIFODATA, WRT);
         
         // write the preamble
-        spi169_write(tx_preamble, 4);
+ //       spi169_write(tx_preamble, 4);
 
         // stop the SPI transfer to the FIFO
-        spi169_stop_xfer();
+ //       spi169_stop_xfer();
         
 		
 		
         // send an AT command to the 915 MHz module
-        uart915_write_cmd("AT+SEND=test\r\n");
+        uart915_write_cmd("AT\r\n");
+		//uart915_write_cmd("AT+SEND=test\r\n");
         
         // send the 2.45 GHz test signal (carrier)
-        uart245_enter_config();
-        uart245_config_test1();
-        uart245_exit_config();
+		
+       // uart245_enter_config();
+        //uart245_config_test1();
+        //uart245_exit_config();
     }
 	
 }
@@ -73,11 +75,18 @@ int main (void)
 void simSysInit(void)
 {
 	system_init();
-	sys_clk_init();
+	sys_clk_init();	
 	conf_port_pin();
-    spi169_init();
-    uart245_init();
-    uart915_init();
+	
+	
+	
+//    spi169_init();
+	port_pin_set_output_level(CONFIG245, true);
+    
+	
+	
+	//uart245_init();
+	uart915_init();
 }
 
 
@@ -105,6 +114,8 @@ void conf_port_pin(void)
 	port_get_config_defaults(&config_port_pin);
 	
 	/**************config pin for 245*************/
+
+	
 	// cts
 	config_port_pin.direction = PORT_PIN_DIR_INPUT;
     config_port_pin.input_pull = PORT_PIN_PULL_UP;
@@ -215,9 +226,3 @@ void clk_gclk0_init(void)
 	//enable GCLK0
 	system_gclk_gen_enable(GCLK_GENERATOR_0);
 }
-
-/* Function Name    : 
- * Parameters       : 
- * Return Values(s) : 
- * Description      : 
- */

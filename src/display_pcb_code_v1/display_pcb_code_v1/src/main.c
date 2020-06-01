@@ -68,10 +68,10 @@ int main(void){
 	appAttn();
 	appRssi();
 	appHist();
+	//bacnet_task();
 
 
-
-//Debug screen. Displays 'FTDI' anda red circle. 
+/*Debug screen. Displays 'FTDI' anda red circle. 
 while(1){	
 	disStart();
 	lcd_wr32(RAM_DL +0,CLEAR(1,1,1));// clear screen
@@ -89,7 +89,7 @@ while(1){
 	lcd_wr32(RAM_DL +48,DISPLAY());// display the image
 	disEnd();
 }
-
+*/
 
 
 /*
@@ -103,7 +103,7 @@ while(1){
 	disEnd();	
 }
 */
-/*
+
 	//main home menu and GUI
 	while(1){
 	tag = 0;
@@ -133,7 +133,7 @@ while(1){
 	    
 		disEnd();
 		
-		
+attnOp(NULL);
         tag = sett;
         //check tag value and determine further action
 		if(tag!=0)		tempTag = tag;
@@ -144,9 +144,9 @@ while(1){
 			else if(tempTag == rssi)		rssiOp();
 			tempTag = 0;
 			delay_ms(50);
+
 		}
 	}
-	*/
 }//end main
 
 /****************************************************************************************************************************

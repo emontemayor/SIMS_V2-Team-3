@@ -224,7 +224,7 @@ void uart915_write_cmd(const char* cmd_str)
     // write the AT command
     usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
     
-    while(!flag_ok_received);
+	//while(!flag_ok_received);
 }
 
 

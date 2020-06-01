@@ -361,13 +361,16 @@
       <Value>../src/ASF/sam0/drivers/rtc/rtc_sam_d_r_h</Value>
       <Value>../src/firmware</Value>
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
+      <Value>../src/bacnet-stack/src</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
+  <armgcc.compiler.optimization.level>Optimize debugging experience (-Og)</armgcc.compiler.optimization.level>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
-  <armgcc.compiler.optimization.DebugLevel>Default (-g2)</armgcc.compiler.optimization.DebugLevel>
+  <armgcc.compiler.optimization.DebugLevel>Maximum (-g3)</armgcc.compiler.optimization.DebugLevel>
   <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
   <armgcc.compiler.miscellaneous.OtherFlags>-pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500</armgcc.compiler.miscellaneous.OtherFlags>
+  <armgcc.compiler.miscellaneous.Verbose>True</armgcc.compiler.miscellaneous.Verbose>
   <armgcc.linker.general.UseNewlibNano>True</armgcc.linker.general.UseNewlibNano>
   <armgcc.linker.libraries.Libraries>
     <ListValues>
@@ -418,8 +421,10 @@
       <Value>../src/ASF/sam0/drivers/rtc</Value>
       <Value>../src/ASF/sam0/drivers/rtc/rtc_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
+      <Value>../src/bacnet-stack/src</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
+  <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBOARD=USER_BOARD -DSYSTICK_MODE -DEXTINT_CALLBACK_MODE=true -DSPI_CALLBACK_MODE=false -DRTC_CALENDAR_ASYNC=false -DUSART_CALLBACK_MODE=true</armgcc.preprocessingassembler.general.AssemblerFlags>
   <armgcc.preprocessingassembler.general.IncludePaths>
     <ListValues>
@@ -456,6 +461,7 @@
       <Value>../src/ASF/sam0/drivers/rtc</Value>
       <Value>../src/ASF/sam0/drivers/rtc/rtc_sam_d_r_h</Value>
       <Value>../src/ASF/sam0/drivers/sercom/usart</Value>
+      <Value>../bacnet-stack/src</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -690,6 +696,17 @@
     <Folder Include="src\ASF\thirdparty\CMSIS\Include\" />
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\" />
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\GCC\" />
+    <Folder Include="src\bacnet-stack\" />
+    <Folder Include="src\bacnet-stack\src\" />
+    <Folder Include="src\bacnet-stack\src\bacnet\" />
+    <Folder Include="src\bacnet-stack\src\bacnet\basic\" />
+    <Folder Include="src\bacnet-stack\src\bacnet\basic\binding\" />
+    <Folder Include="src\bacnet-stack\src\bacnet\basic\npdu\" />
+    <Folder Include="src\bacnet-stack\src\bacnet\basic\object\" />
+    <Folder Include="src\bacnet-stack\src\bacnet\basic\service\" />
+    <Folder Include="src\bacnet-stack\src\bacnet\basic\sys\" />
+    <Folder Include="src\bacnet-stack\src\bacnet\basic\tsm\" />
+    <Folder Include="src\bacnet-stack\src\bacnet\datalink\" />
     <Folder Include="src\config\" />
     <Folder Include="src\GLCD_hal" />
     <Folder Include="src\chanlib" />
@@ -900,6 +917,261 @@
     <Compile Include="src\ASF\sam0\utils\cmsis\samd21\include\samd21j17a.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\abort.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\abort.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacaddr.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacaddr.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacapp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacapp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacdcode.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacdcode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacerror.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacerror.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacint.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacreal.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacreal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacstr.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\bacstr.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\binding\address.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\binding\address.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\npdu\h_npdu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\npdu\h_npdu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\object\device.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\object\device.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\services.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_apdu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_apdu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_dcc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_dcc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_noserv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_noserv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_rd.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_rd.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_rp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_rp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_rpm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_rpm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_whohas.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_whohas.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_whois.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_whois.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_wp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\h_wp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\s_iam.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\s_iam.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\s_ihave.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\service\s_ihave.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\sys\fifo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\sys\fifo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\sys\mstimer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\sys\mstimer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\sys\ringbuf.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\sys\ringbuf.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\tsm\tsm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\basic\tsm\tsm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\datalink\crc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\datalink\crc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\dcc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\dcc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\iam.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\iam.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\ihave.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\ihave.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\lighting.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\lighting.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\lso.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\memcopy.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\memcopy.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\npdu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\npdu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\proplist.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\proplist.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\rd.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\rd.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\reject.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\reject.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\rp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\rp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\rpm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\rpm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\whohas.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\whohas.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\whois.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\whois.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\wp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet-stack\src\bacnet\wp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bacnet.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\chanlib\diskio.c">
       <SubType>compile</SubType>
     </Compile>
@@ -924,9 +1196,18 @@
     <Compile Include="src\chanlib\integer.h">
       <SubType>compile</SubType>
     </Compile>
+    <None Include="src\bacnet-stack\src\bacnet\basic\object\device.mak">
+      <SubType>compile</SubType>
+    </None>
     <None Include="src\config\conf_extint.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\device.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\dlmstp.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\firmware\rssi_mngr.h">
       <SubType>compile</SubType>
     </Compile>
@@ -994,6 +1275,24 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\GLCD_hal\sim_system_glcd_software.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\led.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\led.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\mstimer-init.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\netport.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\rs485.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\rs485.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\SIM_PIN_DEF.h">

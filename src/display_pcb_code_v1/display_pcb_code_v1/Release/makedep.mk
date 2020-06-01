@@ -16,6 +16,90 @@ src\ASF\sam0\drivers\sercom\usart\usart.c
 
 src\ASF\sam0\drivers\sercom\usart\usart_interrupt.c
 
+src\bacnet-stack\src\bacnet\abort.c
+
+src\bacnet-stack\src\bacnet\bacaddr.c
+
+src\bacnet-stack\src\bacnet\bacapp.c
+
+src\bacnet-stack\src\bacnet\bacdcode.c
+
+src\bacnet-stack\src\bacnet\bacerror.c
+
+src\bacnet-stack\src\bacnet\bacint.c
+
+src\bacnet-stack\src\bacnet\bacreal.c
+
+src\bacnet-stack\src\bacnet\bacstr.c
+
+src\bacnet-stack\src\bacnet\basic\binding\address.c
+
+src\bacnet-stack\src\bacnet\basic\npdu\h_npdu.c
+
+src\bacnet-stack\src\bacnet\basic\object\device.c
+
+src\bacnet-stack\src\bacnet\basic\service\h_apdu.c
+
+src\bacnet-stack\src\bacnet\basic\service\h_dcc.c
+
+src\bacnet-stack\src\bacnet\basic\service\h_noserv.c
+
+src\bacnet-stack\src\bacnet\basic\service\h_rd.c
+
+src\bacnet-stack\src\bacnet\basic\service\h_rp.c
+
+src\bacnet-stack\src\bacnet\basic\service\h_rpm.c
+
+src\bacnet-stack\src\bacnet\basic\service\h_whohas.c
+
+src\bacnet-stack\src\bacnet\basic\service\h_whois.c
+
+src\bacnet-stack\src\bacnet\basic\service\h_wp.c
+
+src\bacnet-stack\src\bacnet\basic\service\s_iam.c
+
+src\bacnet-stack\src\bacnet\basic\service\s_ihave.c
+
+src\bacnet-stack\src\bacnet\basic\sys\fifo.c
+
+src\bacnet-stack\src\bacnet\basic\sys\mstimer.c
+
+src\bacnet-stack\src\bacnet\basic\sys\ringbuf.c
+
+src\bacnet-stack\src\bacnet\basic\tsm\tsm.c
+
+src\bacnet-stack\src\bacnet\datalink\crc.c
+
+src\bacnet-stack\src\bacnet\dcc.c
+
+src\bacnet-stack\src\bacnet\iam.c
+
+src\bacnet-stack\src\bacnet\ihave.c
+
+src\bacnet-stack\src\bacnet\lighting.c
+
+src\bacnet-stack\src\bacnet\memcopy.c
+
+src\bacnet-stack\src\bacnet\npdu.c
+
+src\bacnet-stack\src\bacnet\proplist.c
+
+src\bacnet-stack\src\bacnet\rd.c
+
+src\bacnet-stack\src\bacnet\reject.c
+
+src\bacnet-stack\src\bacnet\rp.c
+
+src\bacnet-stack\src\bacnet\rpm.c
+
+src\bacnet-stack\src\bacnet\whohas.c
+
+src\bacnet-stack\src\bacnet\whois.c
+
+src\bacnet-stack\src\bacnet\wp.c
+
+src\bacnet.c
+
 src\chanlib\diskio.c
 
 src\chanlib\ff.c
@@ -23,6 +107,10 @@ src\chanlib\ff.c
 src\chanlib\ffsystem.c
 
 src\chanlib\ffunicode.c
+
+src\device.c
+
+src\dlmstp.c
 
 src\firmware\sim_sd_log.c
 
@@ -41,6 +129,14 @@ src\GLCD_hal\sim_gui.c
 src\GLCD_hal\sim_system_glcd_firmware.c
 
 src\GLCD_hal\sim_system_glcd_software.c
+
+src\led.c
+
+src\mstimer-init.c
+
+src\netport.c
+
+src\rs485.c
 
 src\ASF\sam0\drivers\sercom\spi\spi.c
 
