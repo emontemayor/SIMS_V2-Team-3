@@ -51,8 +51,8 @@ int main (void)
 		
 		
         // send an AT command to the 915 MHz module
-        uart915_write_cmd("AT\r\n");
-		//uart915_write_cmd("AT+SEND=test\r\n");
+       // uart915_write_cmd("AT\r");
+		uart915_write_cmd("AT+SEND=test\r\n");
         
         // send the 2.45 GHz test signal (carrier)
 		
