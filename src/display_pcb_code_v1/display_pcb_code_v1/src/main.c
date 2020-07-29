@@ -3,7 +3,7 @@
  * Main program for Display board.
  *
  * Author : Emiliano Montemayor
- * Capstone Project 2017 - 2018
+ * Capstone Project 2019 - 2020
  **********************************************/
 /************************************************************************/
 /*                                include headers                       */

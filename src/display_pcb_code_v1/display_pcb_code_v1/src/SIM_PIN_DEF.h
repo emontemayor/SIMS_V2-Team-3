@@ -21,7 +21,7 @@
         SAM_PART_IS_DEFINED(SAMHA1E17B) || \
         SAM_PART_IS_DEFINED(SAMHA1E18B)    \
     )
-*/
+*/ 
 
 // LCD defines:
 // SPI pin configs for LCD:

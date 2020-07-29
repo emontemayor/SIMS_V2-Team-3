@@ -32,7 +32,7 @@ int main (void)
     simSysInit();
     
     // init registers for 169MHz
-//    spi169_tx_init();
+    spi169_tx_init();
     
     // init registers for 169MHz
 //    spi27_tx_init();
@@ -40,19 +40,19 @@ int main (void)
     while(1)
     {
         // start a SPI transfer to the FIFO
- //       spi169_start_xfer(AX5043_FIFODATA, WRT);
+       spi169_start_xfer(AX5043_FIFODATA, WRT);
         
         // write the preamble
- //       spi169_write(tx_preamble, 4);
+       spi169_write(tx_preamble, 4);
 
         // stop the SPI transfer to the FIFO
- //       spi169_stop_xfer();
+       spi169_stop_xfer();
         
 		
 		
         // send an AT command to the 915 MHz module
        // uart915_write_cmd("AT\r");
-		uart915_write_cmd("AT+SEND=test\r\n");
+		//uart915_write_cmd("AT+SEND=test\r\n");
         
         // send the 2.45 GHz test signal (carrier)
 		
@@ -80,13 +80,13 @@ void simSysInit(void)
 	
 	
 	
-//    spi169_init();
+    spi169_init();
 	port_pin_set_output_level(CONFIG245, true);
     
 	
 	
 	//uart245_init();
-	uart915_init();
+//	uart915_init();
 }
 
 
@@ -154,8 +154,8 @@ void conf_port_pin(void)
 	// Wake up from low power modes on rising edge
 	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
 	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;
-	port_pin_set_config(WAKE915, &config_port_pin);
-    port_pin_set_output_level(WAKE915, true);
+//	port_pin_set_config(WAKE915, &config_port_pin);	//turned off for 169MHz testing
+//    port_pin_set_output_level(WAKE915, true);
 	
     
 	/**************config pin for 169*************/
@@ -167,7 +167,8 @@ void conf_port_pin(void)
     
 	// irq
 	config_port_pin.direction = PORT_PIN_DIR_INPUT;
-	port_pin_set_config(IRQ169, &config_port_pin);
+	//port_pin_set_config(IRQ169, &config_port_pin);
+	
 } // end conf_port_pin(void)
 
 

@@ -34,17 +34,24 @@ void spi169_init(void)
 	struct spi_slave_inst_config spi169SlaveConf;
 	struct port_config pinConf;
 	
+	// get default configs for slave
+	spi_slave_inst_get_config_defaults(&spi169SlaveConf);
+	// change configs as necessary
+	spi169SlaveConf.ss_pin = SS169;
+	// attach the slave configs to the slave
+	spi_attach_slave(&spi169Slave, &spi169SlaveConf);
+		
     // initialize the slave select pin
-	port_get_config_defaults(&pinConf);
+//	port_get_config_defaults(&pinConf);
     
-    // get defaults for lcd master config
+    // get defaults for master config
 	spi_get_config_defaults(&spi169MasterConf);
     
     spi169MasterConf.mux_setting = SPI169_PINXMUX;
     spi169MasterConf.pinmux_pad0 = MOSI169;
-    spi169MasterConf.pinmux_pad1 = SCK169;
-    spi169MasterConf.pinmux_pad2 = PINMUX_UNUSED;
-    spi169MasterConf.pinmux_pad3 = MISO169;
+    spi169MasterConf.pinmux_pad1 = PINMUX_UNUSED;
+    spi169MasterConf.pinmux_pad2 = MISO169;
+    spi169MasterConf.pinmux_pad3 = SCK169;
 	
 	// clock source should always be GLCK0
 	spi169MasterConf.generator_source = SPI169_CLK;
@@ -54,12 +61,7 @@ void spi169_init(void)
 	spi_init(&spi169Master, SPI169, &spi169MasterConf);
 	spi_enable(&spi169Master);
 
-	// get default configs for slave
-	spi_slave_inst_get_config_defaults(&spi169SlaveConf);
-	// change configs as necessary
-	spi169SlaveConf.ss_pin = SS169;
-	// attach the slave configs to the slave
-	spi_attach_slave(&spi169Slave, &spi169SlaveConf);
+
     
     spi169InitComp = true;
 }

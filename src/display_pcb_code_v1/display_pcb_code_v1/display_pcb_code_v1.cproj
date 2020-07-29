@@ -1196,9 +1196,6 @@
     <Compile Include="src\chanlib\integer.h">
       <SubType>compile</SubType>
     </Compile>
-    <None Include="src\bacnet-stack\src\bacnet\basic\object\device.mak">
-      <SubType>compile</SubType>
-    </None>
     <None Include="src\config\conf_extint.h">
       <SubType>compile</SubType>
     </None>
