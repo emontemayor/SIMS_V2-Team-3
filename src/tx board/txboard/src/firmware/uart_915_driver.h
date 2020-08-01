@@ -57,6 +57,13 @@ void configure_uart915_callbacks(void);
  */
 void uart915_write_cmd(const char* cmd_str);
 
+/* Function Name    : uart915_network_config
+ * Parameters       : void
+ * Return Values(s) : void
+ * Description      : Configuration for network between Tx and Rx MTXDOTs
+ *  AT command sequence obtained from MTXDOT Developer Guide pg. 121 
+ */
+void uart915_network_config(void);
 
 /* Function Name    : uart915_get_rssi
  * Parameters       : void

@@ -36,11 +36,16 @@ int main (void)
 
 	
     // init registers for 169MHz
+<<<<<<< HEAD
     //spi27_tx_init();
+=======
+//    spi27_tx_init();
+>>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
 	   
     while(1)
     {
         // start a SPI transfer to the FIFO
+<<<<<<< HEAD
       //  spi169_start_xfer(AX5043_FIFODATA, WRT);
         
         // write the preamble
@@ -48,10 +53,20 @@ int main (void)
 
         // stop the SPI transfer to the FIFO
        // spi169_stop_xfer();
+=======
+       spi169_start_xfer(AX5043_FIFODATA, WRT);
+        
+        // write the preamble
+       spi169_write(tx_preamble, 4);
+
+        // stop the SPI transfer to the FIFO
+       spi169_stop_xfer();
+>>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
         
 		
 	
         // send an AT command to the 915 MHz module
+<<<<<<< HEAD
         uart915_write_cmd("AT+SEND=test\r\n");
 		
 		
@@ -61,6 +76,16 @@ int main (void)
         uart245_config_test1();
         uart245_exit_config();
 		*/
+=======
+       // uart915_write_cmd("AT\r");
+		//uart915_write_cmd("AT+SEND=test\r\n");
+        
+        // send the 2.45 GHz test signal (carrier)
+		
+       // uart245_enter_config();
+        //uart245_config_test1();
+        //uart245_exit_config();
+>>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
     }
 	
 }
@@ -77,11 +102,23 @@ int main (void)
 void simSysInit(void)
 {
 	system_init();
-	sys_clk_init();
+	sys_clk_init();	
 	conf_port_pin();
+	
+	
+	
     spi169_init();
+<<<<<<< HEAD
   //  uart245_init();
     uart915_init();
+=======
+	port_pin_set_output_level(CONFIG245, true);
+    
+	
+	
+	//uart245_init();
+//	uart915_init();
+>>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
 }
 
 
@@ -109,6 +146,8 @@ void conf_port_pin(void)
 	port_get_config_defaults(&config_port_pin);
 	
 	/**************config pin for 245*************/
+
+	
 	// cts
 	config_port_pin.direction = PORT_PIN_DIR_INPUT;
     config_port_pin.input_pull = PORT_PIN_PULL_UP;
@@ -147,8 +186,8 @@ void conf_port_pin(void)
 	// Wake up from low power modes on rising edge
 	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
 	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;
-	port_pin_set_config(WAKE915, &config_port_pin);
-    port_pin_set_output_level(WAKE915, true);
+//	port_pin_set_config(WAKE915, &config_port_pin);	//turned off for 169MHz testing
+//    port_pin_set_output_level(WAKE915, true);
 	
 
 	
@@ -162,7 +201,8 @@ void conf_port_pin(void)
     
 	// irq
 	config_port_pin.direction = PORT_PIN_DIR_INPUT;
-	port_pin_set_config(IRQ169, &config_port_pin);
+	//port_pin_set_config(IRQ169, &config_port_pin);
+	
 } // end conf_port_pin(void)
 
 
@@ -221,9 +261,3 @@ void clk_gclk0_init(void)
 	//enable GCLK0
 	system_gclk_gen_enable(GCLK_GENERATOR_0);
 }
-
-/* Function Name    : 
- * Parameters       : 
- * Return Values(s) : 
- * Description      : 
- */
