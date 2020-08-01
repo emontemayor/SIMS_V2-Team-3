@@ -36,16 +36,16 @@ int main (void)
 
 	
     // init registers for 169MHz
-<<<<<<< HEAD
+
     //spi27_tx_init();
-=======
+
 //    spi27_tx_init();
->>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
+
 	   
     while(1)
     {
         // start a SPI transfer to the FIFO
-<<<<<<< HEAD
+
       //  spi169_start_xfer(AX5043_FIFODATA, WRT);
         
         // write the preamble
@@ -53,7 +53,7 @@ int main (void)
 
         // stop the SPI transfer to the FIFO
        // spi169_stop_xfer();
-=======
+
        spi169_start_xfer(AX5043_FIFODATA, WRT);
         
         // write the preamble
@@ -61,12 +61,11 @@ int main (void)
 
         // stop the SPI transfer to the FIFO
        spi169_stop_xfer();
->>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
-        
+
+      
 		
 	
         // send an AT command to the 915 MHz module
-<<<<<<< HEAD
         uart915_write_cmd("AT+SEND=test\r\n");
 		
 		
@@ -76,7 +75,7 @@ int main (void)
         uart245_config_test1();
         uart245_exit_config();
 		*/
-=======
+
        // uart915_write_cmd("AT\r");
 		//uart915_write_cmd("AT+SEND=test\r\n");
         
@@ -85,7 +84,6 @@ int main (void)
        // uart245_enter_config();
         //uart245_config_test1();
         //uart245_exit_config();
->>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
     }
 	
 }
@@ -108,17 +106,17 @@ void simSysInit(void)
 	
 	
     spi169_init();
-<<<<<<< HEAD
+
   //  uart245_init();
     uart915_init();
-=======
+
 	port_pin_set_output_level(CONFIG245, true);
     
 	
 	
 	//uart245_init();
 //	uart915_init();
->>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
+
 }
 
 

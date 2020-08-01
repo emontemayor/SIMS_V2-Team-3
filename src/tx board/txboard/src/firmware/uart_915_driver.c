@@ -68,12 +68,12 @@ void uart915_init(void)
     // configure the callback(s) for this module
     configure_uart915_callbacks();
 	
-<<<<<<< HEAD
+
 	uart915_preconnect();
-=======
+
 	 uart915_network_config();
 	
->>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
+
 }
 
 
@@ -233,19 +233,11 @@ void uart915_write_cmd(const char* cmd_str)
     // write the AT command
     usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
     
-<<<<<<< HEAD
+
     while(!flag_ok_received){
 		usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
 		delay_ms(10);
 		};
-=======
-	//continue writing commands until a response is received. Configured this way
-	//because single commands were not providing a response. 
-	while(!flag_ok_received){ 
-			delay_cycles_us(2000);
-		   usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
-	};
->>>>>>> a6882ac4cbb87db12a88d25bf7ae91808d72c1f2
 }
 
 /* Function Name    : uart915_write_cmd
