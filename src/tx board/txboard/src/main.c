@@ -32,31 +32,35 @@ int main (void)
     simSysInit();
     
     // init registers for 169MHz
-    spi169_tx_init();
-    
+  //  spi169_tx_init();
+
+	
     // init registers for 169MHz
-    spi27_tx_init();
+    //spi27_tx_init();
 	   
     while(1)
     {
         // start a SPI transfer to the FIFO
-        spi169_start_xfer(AX5043_FIFODATA, WRT);
+      //  spi169_start_xfer(AX5043_FIFODATA, WRT);
         
         // write the preamble
-        spi169_write(tx_preamble, 4);
+      //  spi169_write(tx_preamble, 4);
 
         // stop the SPI transfer to the FIFO
-        spi169_stop_xfer();
+       // spi169_stop_xfer();
         
 		
-		
+	
         // send an AT command to the 915 MHz module
         uart915_write_cmd("AT+SEND=test\r\n");
-        
+		
+		
+        /*
         // send the 2.45 GHz test signal (carrier)
         uart245_enter_config();
         uart245_config_test1();
         uart245_exit_config();
+		*/
     }
 	
 }
@@ -76,7 +80,7 @@ void simSysInit(void)
 	sys_clk_init();
 	conf_port_pin();
     spi169_init();
-    uart245_init();
+  //  uart245_init();
     uart915_init();
 }
 
@@ -145,6 +149,8 @@ void conf_port_pin(void)
 	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;
 	port_pin_set_config(WAKE915, &config_port_pin);
     port_pin_set_output_level(WAKE915, true);
+	
+
 	
     
 	/**************config pin for 169*************/

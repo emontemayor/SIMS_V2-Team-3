@@ -89,7 +89,7 @@ void spi27_read_byte_from_reg (char *read_byte, uint8_t *reg){
 
 void spi27_write_byte_to_reg (char byte, uint8_t *reg){
 	 status_code_genare_t write_status;
-	 uint16_t buf;
+	 uint16_t *buf;
 	 
 	//Add 2 leading 0s to put module in WRITE mode
 	*reg = *reg && 0b00111111;

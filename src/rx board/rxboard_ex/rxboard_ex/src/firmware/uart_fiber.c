@@ -66,12 +66,19 @@ void uartfiber_deinit(void)
 }
 
 
+
+
+/*2020 update: Following functions commented out since uartib_inst does not exist in their code.
+Will investigate later.
+
 /* Function Name    : uartib_get_169_rssi
  * Parameters       : void
  * Return Values(s) : int16_t
  * Description      : Polls the receiver that is in the same box as the display
  *  controller. Gets the 169 MHz RSSI and returns it as a 2 byte int.
  */
+
+/*
 int16_t uartib_get_169_rssi(void)
 {
     union{
@@ -86,13 +93,14 @@ int16_t uartib_get_169_rssi(void)
     return float_bytes.f_val;
 }
 
+*/
 
 /* Function Name    : uartib_get_915_rssi
  * Parameters       : void
  * Return Values(s) : int16_t
  * Description      : Polls the receiver that is in the same box as the display
  *  controller. Gets the 915 MHz RSSI and returns it as a 2 byte int.
- */
+ 
 int16_t uartib_get_915_rssi(void)
 {
     union{
@@ -105,14 +113,14 @@ int16_t uartib_get_915_rssi(void)
     
     return float_bytes.f_val;
 }
-
+*/
 
 /* Function Name    : uartib_get_245_rssi
  * Parameters       : void
  * Return Values(s) : int16_t
  * Description      : Polls the receiver that is in the same box as the display
  *  controller. Gets the 2.45 GHz RSSI and returns it as a 2 byte int.
- */
+ 
 int16_t uartib_get_245_rssi(void)
 {
     union{
@@ -125,7 +133,7 @@ int16_t uartib_get_245_rssi(void)
     
     return float_bytes.f_val;
 }
-
+*/
 
 /* Function Name    : configure_uartfiber_callbacks
  * Parameters       : void

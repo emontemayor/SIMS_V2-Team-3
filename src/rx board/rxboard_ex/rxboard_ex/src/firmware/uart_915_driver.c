@@ -220,7 +220,11 @@ void uart915_write_cmd(const char* cmd_str)
     // write the AT command
     usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
     
-    while(!flag_ok_received);
+	
+	
+    while(!flag_ok_received){
+		usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
+	};
 }
 
 
@@ -280,7 +284,7 @@ void uart915_preconnect(void)
 {
     int i = 0;
     
-    /* send 10 "AT" and "AT+SEND" commands to validate conenction
+    /* send 10 "AT" and "AT+SEND" commands to validate connection
      * between the receiver and transmitter */
     for(; i < 10; i++)
     {

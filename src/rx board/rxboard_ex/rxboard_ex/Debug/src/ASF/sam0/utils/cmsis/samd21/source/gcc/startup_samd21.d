@@ -2,14 +2,14 @@ src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.d \
  src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o: \
  ../src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.c \
  ../src/ASF/sam0/utils/cmsis/samd21/include/samd21.h \
- ../src/ASF/sam0/utils/cmsis/samd21/include/samd21e18a.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h \
+ ../src/ASF/sam0/utils/cmsis/samd21/include/samd21j18a.h \
+ d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
+ d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
+ d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
+ d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h \
+ d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
+ d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h \
+ d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cmInstr.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cmFunc.h \
@@ -58,34 +58,38 @@ src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.d \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/sercom1.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/sercom2.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/sercom3.h \
+ ../src/ASF/sam0/utils/cmsis/samd21/include/instance/sercom4.h \
+ ../src/ASF/sam0/utils/cmsis/samd21/include/instance/sercom5.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/sysctrl.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc3.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc4.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc5.h \
+ ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc6.h \
+ ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc7.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tcc0.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tcc1.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tcc2.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/usb.h \
  ../src/ASF/sam0/utils/cmsis/samd21/include/instance/wdt.h \
- ../src/ASF/sam0/utils/cmsis/samd21/include/pio/samd21e18a.h
+ ../src/ASF/sam0/utils/cmsis/samd21/include/pio/samd21j18a.h
 
 ../src/ASF/sam0/utils/cmsis/samd21/include/samd21.h:
 
-../src/ASF/sam0/utils/cmsis/samd21/include/samd21e18a.h:
+../src/ASF/sam0/utils/cmsis/samd21/include/samd21j18a.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h:
+d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h:
+d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h:
+d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h:
+d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h:
+d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h:
+d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h:
+d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h:
 
@@ -183,6 +187,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/utils/cmsis/samd21/include/instance/sercom3.h:
 
+../src/ASF/sam0/utils/cmsis/samd21/include/instance/sercom4.h:
+
+../src/ASF/sam0/utils/cmsis/samd21/include/instance/sercom5.h:
+
 ../src/ASF/sam0/utils/cmsis/samd21/include/instance/sysctrl.h:
 
 ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc3.h:
@@ -190,6 +198,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc4.h:
 
 ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc5.h:
+
+../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc6.h:
+
+../src/ASF/sam0/utils/cmsis/samd21/include/instance/tc7.h:
 
 ../src/ASF/sam0/utils/cmsis/samd21/include/instance/tcc0.h:
 
@@ -201,4 +213,4 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/utils/cmsis/samd21/include/instance/wdt.h:
 
-../src/ASF/sam0/utils/cmsis/samd21/include/pio/samd21e18a.h:
+../src/ASF/sam0/utils/cmsis/samd21/include/pio/samd21j18a.h:

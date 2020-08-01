@@ -66,4 +66,6 @@ void uart915_write_cmd(const char* cmd_str);
  */
 int16_t uart915_get_rssi(void);
 
+
+uart915_preconnect(void);
 #endif /* UART_915_DRIVER_H_ */

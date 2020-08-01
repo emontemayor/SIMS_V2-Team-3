@@ -2,8 +2,6 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-src\firmware\rssi_mngr.c
-
 src\firmware\simsys_ringbuff.c
 
 src\firmware\spi_40_driver.c

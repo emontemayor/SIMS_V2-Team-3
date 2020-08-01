@@ -56,7 +56,7 @@ void uart915_init(void)
     config_usart.pinmux_pad1 = URX915;
     config_usart.pinmux_pad2 = PINMUX_UNUSED;
     config_usart.pinmux_pad3 = PINMUX_UNUSED;
-    config_usart.generator_source = UART245_CLK;
+	config_usart.generator_source = UART245_CLK;
     config_usart.transfer_mode = USART_TRANSFER_ASYNCHRONOUSLY;
     
     // initialize the uart module until an STATUS_OK is returned
@@ -67,6 +67,8 @@ void uart915_init(void)
     
     // configure the callback(s) for this module
     configure_uart915_callbacks();
+	
+	uart915_preconnect();
 }
 
 
@@ -224,7 +226,10 @@ void uart915_write_cmd(const char* cmd_str)
     // write the AT command
     usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
     
-    while(!flag_ok_received);
+    while(!flag_ok_received){
+		usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
+		delay_ms(10);
+		};
 }
 
 
@@ -267,4 +272,14 @@ int16_t uart915_get_rssi(void)
     return atoi((char*) &rspns_buff[i]);
 }
 
-
+uart915_preconnect(void){
+    int i = 0;
+    
+    /* send 10 "AT" and "AT+SEND" commands to validate conenction
+     * between the receiver and transmitter */
+    for(; i < 10; i++)
+    {
+        uart915_write_cmd("AT\r\n");
+       // uart915_write_cmd("AT+SEND\r\n");  
+    }
+}
