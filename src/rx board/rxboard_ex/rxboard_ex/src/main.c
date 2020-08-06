@@ -29,6 +29,9 @@ int main (void)
 {
     rssi_vals acquired_rssi = {10, 20, 30};
     
+	struct date test_date = {44, 69, 12, 5, 96, 255};
+	struct measurement test_data = {test_date, 10, 20, 30, 40};
+	
     simSysInit();
     
     delay_ms(100);
@@ -37,7 +40,7 @@ int main (void)
    // spi40_rx_init();
     
     // initialize the MTXDOT (915 MHz) in preparation for RSSI reading
-    uart915_preconnect();
+    //uart915_preconnect();
     
     // initialize RC2500 in preparation for RSSI reading
     /* no functions */
@@ -47,11 +50,13 @@ int main (void)
 
     while (1)
     {   
-        // get the RSSI from all the modules
-      //  acquired_rssi.rssi169 = spi40_rssi();
-        acquired_rssi.rssi915 = uart915_get_rssi();
+        //get the RSSI from all the modules
+		//acquired_rssi.rssi169 = spi40_rssi();
+        //acquired_rssi.rssi915 = uart915_get_rssi();
         //acquired_rssi.rssi245 = uart245_rssi();
         
+		usart_fiber_write(test_data);
+		
         delay_ms(100);
     }
 	
@@ -71,10 +76,10 @@ void simSysInit(void)
 	system_init();
 	sys_clk_init();
 	conf_port_pin();
- //   spi40_init();
- //   uart245_init();
-    uart915_init();
- //   uartfiber_init();
+	//spi40_init();
+	//uart245_init();
+    //uart915_init();
+    uartfiber_init();
 }
 
 
@@ -221,9 +226,3 @@ void clk_gclk0_init(void)
 	//enable GCLK0
 	system_gclk_gen_enable(GCLK_GENERATOR_0);
 }
-
-/* Function Name    : 
- * Parameters       : 
- * Return Values(s) : 
- * Description      : 
- */

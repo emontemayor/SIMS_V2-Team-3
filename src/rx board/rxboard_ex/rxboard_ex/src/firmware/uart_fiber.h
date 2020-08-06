@@ -14,6 +14,23 @@
 #include <string.h>
 #include "rssi_mngr.h"
 
+//Structs used to store a single shield measurement
+struct date {
+	uint8_t year;
+	uint8_t month;
+	uint8_t day;
+	uint8_t hour;
+	uint8_t min;
+	uint8_t sec;
+};
+struct measurement {
+	struct date timestamp;
+	uint8_t MHz70RSSI;
+	uint8_t MHz169RSSI;
+	uint8_t MHz915RSSI;
+	uint8_t GHz24RSSI;
+};
+
 
 /* Function Name    : uartfiber_init
  * Parameters       : void
@@ -39,6 +56,12 @@ void uartfiber_deinit(void);
  *  controller. Gets the 169 MHz RSSI and returns it as a 2 byte int.
  */
 int16_t uartib_get_169_rssi(void);
+
+/** 
+ * Asynchronous buffer write to transmit single shield measurement
+ * Simply calls "usart_write_buffer_job" with specific parameters
+ */
+void usart_fiber_write(struct measurement temp);
 
 
 /* Function Name    : uartib_get_915_rssi
