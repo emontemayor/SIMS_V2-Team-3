@@ -14,21 +14,17 @@
 #include <string.h>
 #include "rssi_mngr.h"
 
-//Structs used to store a single shield measurement
-struct date {
-	uint8_t year;
-	uint8_t month;
-	uint8_t day;
-	uint8_t hour;
-	uint8_t min;
-	uint8_t sec;
-};
+//Struct used to store a single shield measurement
 struct measurement {
-	struct date timestamp;
 	uint8_t MHz70RSSI;
 	uint8_t MHz169RSSI;
 	uint8_t MHz915RSSI;
 	uint8_t GHz24RSSI;
+};
+struct fiber_packet {
+	const uint8_t head = '$';
+	struct measurement data;
+	const uint8_t tail = '\r';
 };
 
 

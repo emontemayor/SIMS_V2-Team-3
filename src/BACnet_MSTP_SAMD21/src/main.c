@@ -128,8 +128,8 @@ int main(void){
 		if (tempTag != tag && tag == 0 && tag!=back){
 			if(tempTag == attn)				attnOp(NULL);
 			else if(tempTag == hist)		historyOp();
-			else if(tempTag == sett)		settingOp();
-			else if(tempTag == rssi)		rssiOp();
+			//else if(tempTag == sett)		settingOp();
+			//else if(tempTag == rssi)		rssiOp();
 			tempTag = 0;
 			delay_ms(50);
 

@@ -1,18 +1,18 @@
 src/bacnet.d src/bacnet.o: ../src/bacnet.c \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h \
  ../src/bacnet-stack/src/bacnet/basic/sys/mstimer.h \
  ../src/bacnet-stack/src/bacnet/bacnet_stack_exports.h ../src/rs485.h \
  ../src/bacnet-stack/src/bacnet/datalink/datalink.h \
  ../src/bacnet-stack/src/bacnet/config.h \
  ../src/bacnet-stack/src/bacnet/bacdef.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/bacnet-stack/src/bacnet/bacenum.h \
  ../src/bacnet-stack/src/bacnet/bacint.h \
  ../src/bacnet-stack/src/bacnet/datalink/dlmstp.h \
@@ -23,29 +23,29 @@ src/bacnet.d src/bacnet.o: ../src/bacnet.c \
  ../src/bacnet-stack/src/bacnet/basic/npdu/h_routed_npdu.h \
  ../src/bacnet-stack/src/bacnet/basic/npdu/s_router.h \
  ../src/bacnet-stack/src/bacnet/bacapp.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\reent.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_types.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_types.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\lock.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\types.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\endian.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_endian.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\select.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_sigset.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_timeval.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\timespec.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_timespec.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_pthreadtypes.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\types.h \
- d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\stdio.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\reent.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_types.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_types.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\lock.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\types.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\endian.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_endian.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\select.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_sigset.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_timeval.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\timespec.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_timespec.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_pthreadtypes.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\types.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\stdio.h \
  ../src/bacnet-stack/src/bacnet/bacstr.h \
  ../src/bacnet-stack/src/bacnet/datetime.h \
  ../src/bacnet-stack/src/bacnet/lighting.h \
@@ -136,21 +136,21 @@ src/bacnet.d src/bacnet.o: ../src/bacnet.c \
  ../src/bacnet-stack/src/bacnet/basic/object/bv.h \
  ../src/bacnet-stack/src/bacnet/basic/object/msv.h ../src/bacnet.h
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\features.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_newlib_version.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_intsup.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_stdint.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdbool.h:
 
 ../src/bacnet-stack/src/bacnet/basic/sys/mstimer.h:
 
@@ -164,7 +164,7 @@ d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\
 
 ../src/bacnet-stack/src/bacnet/bacdef.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h:
 
 ../src/bacnet-stack/src/bacnet/bacenum.h:
 
@@ -186,51 +186,51 @@ d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\
 
 ../src/bacnet-stack/src/bacnet/bacapp.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\config.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\ieeefp.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdarg.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\reent.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\reent.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_types.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_types.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_types.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_types.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\lock.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\lock.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\types.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\types.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\endian.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\endian.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_endian.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_endian.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\select.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\select.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_sigset.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_sigset.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_timeval.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_timeval.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\timespec.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\timespec.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_timespec.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_timespec.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_pthreadtypes.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_pthreadtypes.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\types.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\types.h:
 
-d:\applications\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\stdio.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\stdio.h:
 
 ../src/bacnet-stack/src/bacnet/bacstr.h:
 

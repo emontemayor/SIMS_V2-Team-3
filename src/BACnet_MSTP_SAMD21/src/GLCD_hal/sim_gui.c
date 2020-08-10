@@ -50,6 +50,8 @@ int16_t history[10][10];
  *  write to SD card if one is detected
  *  record attenuation values every 30 minutes regardless of shield status
 */
+//attnOp
+/*
 void attnOp(rssi_vals* attn_vals){
 	//declare values for time checking and shield failure triggering
     static rssi_vals attenuation;
@@ -113,7 +115,7 @@ void attnOp(rssi_vals* attn_vals){
 		disEnd();
 	} while (tag != back);
 }// end attnOp
-
+*/
 
 /* Function Name    : historyOp
  * Parameters       : void
@@ -157,6 +159,8 @@ void historyOp(){
  * Return Values(s) : void
  * Description      : Display the RSSI outside and inside the shield
  */
+//rssiOp
+/*
 void rssiOp(){
 	do {
 	tag = 0;
@@ -180,7 +184,7 @@ void rssiOp(){
 		disEnd();
 	} while (tag != back);
 }//end rssiOp
-
+*/
 
 /* Function Name    : settingOp
  * Parameters       : void
