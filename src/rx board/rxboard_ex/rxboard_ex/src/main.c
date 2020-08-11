@@ -29,7 +29,7 @@ int main (void)
 {
     rssi_vals acquired_rssi = {10, 20, 30};
     
-	struct measurement test_data = {10, 20, 30, 40};
+	struct measurement test_data = {40, 10, 30, 40};
 	
     simSysInit();
     
