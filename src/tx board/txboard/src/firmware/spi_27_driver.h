@@ -144,5 +144,11 @@ void spi27_autorange(void);
  */
 void spi27_tx_init(void);
 
+/* Function Name    : spi27_connect
+ * Parameters       : void
+ * Return Values(s) : void
+ * Description      : Initializes a 27 MHz module for transmitting.
+ */
+void spi27_connect(void);
 
 #endif /* DRIVER_H_ */

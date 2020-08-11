@@ -7,7 +7,12 @@
  **********************************************/
 #include "spi_27_driver.h"
 
+/*
+Note: The AS3900 needs a master and a client to transmit
+The transmitter board will function as the client. The
+reciever will function as the master. 
 
+*/
 /************************************************************************/
 /*                                Globals                               */
 /************************************************************************/
@@ -40,10 +45,10 @@ void spi27_init(void)
 	spi_get_config_defaults(&spi27MasterConf);
     
     spi27MasterConf.mux_setting = SPI27_PINXMUX;
-    spi27MasterConf.pinmux_pad0 = MISO27;
-    spi27MasterConf.pinmux_pad1 = PINMUX_UNUSED;
-    spi27MasterConf.pinmux_pad2 = MOSI27 ;
-    spi27MasterConf.pinmux_pad3 = SCK27;
+    spi27MasterConf.pinmux_pad0 = MOSI27;
+    spi27MasterConf.pinmux_pad1 = SCK27;
+    spi27MasterConf.pinmux_pad2 = PINMUX_UNUSED;
+    spi27MasterConf.pinmux_pad3 = MISO27;
 	
 	// clock source should always be GLCK0
 	spi27MasterConf.generator_source = SPI27_CLK;
@@ -94,7 +99,7 @@ void spi27_write_byte_to_reg (char byte, uint8_t *reg){
 	//Add 2 leading 0s to put module in WRITE mode
 	*reg = *reg && 0b00111111;
 	//prepare buffer with address and data
-	*buf = *buf + *reg;
+	*buf = *reg;
 	*buf = *buf<<8;
 	*buf = *buf || byte;
 	

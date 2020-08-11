@@ -609,6 +609,9 @@
     <Folder Include="src\firmware" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\firmware\AS3900_regs.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\firmware\AX5043_regs.h">
       <SubType>compile</SubType>
     </Compile>
@@ -619,6 +622,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\firmware\simsys_ringbuff.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\firmware\spi_27_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\firmware\spi_27_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\firmware\spi_40_driver.c">
