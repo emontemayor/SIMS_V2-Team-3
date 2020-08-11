@@ -326,6 +326,7 @@
       <Value>../src/firmware</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
+  <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
   <armgcc.compiler.optimization.DebugLevel>Default (-g2)</armgcc.compiler.optimization.DebugLevel>

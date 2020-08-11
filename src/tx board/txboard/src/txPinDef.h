@@ -13,7 +13,7 @@
 /******************pin out for transceiver module**********/
 /* 2.45 GHz module defines */
 #define UART245			SERCOM0
-#define PAEN245			PIN_PA01
+#define PAEN245			PIN_PA05
 #define CONFIG245		PIN_PA06
 #define RESET245		PIN_PA07
 #define UTX245			PINMUX_PA08C_SERCOM0_PAD0
@@ -30,8 +30,8 @@
 #define UART915			SERCOM2
 #define UTX915			PINMUX_PA12C_SERCOM2_PAD0 
 #define URX915			PINMUX_PA13C_SERCOM2_PAD1 
-#define RTS915			PIN_PA14
-#define CTS915			PIN_PA15
+#define RTS915			PINMUX_PA14C_SERCOM2_PAD2 //PIN_PA14
+#define CTS915			PINMUX_PA15C_SERCOM2_PAD3 //PIN_PA15
 #define WAKE915			PIN_PB15
 #define UART915_BAUD    115200
 #define UART915_PINMUX  USART_RX_1_TX_0_RTS_2_CTS_3
@@ -46,36 +46,29 @@
 #define MISO169			PINMUX_PA18C_SERCOM1_PAD2
 #define IRQ169			PIN_PB16
 
-
-
 // SPI clock source
 #define SPI169_CLK	    GCLK_GENERATOR_0
+
 // Define the SPI max clock
 #define SPI169MAXCLK     1000000//4000000
 
 //27 module
 #define SPI27			SERCOM3
 #define SPI27_PINXMUX   SPI_SIGNAL_MUX_SETTING_D
-#define MISO27			PINMUX_PA22C_SERCOM3_PAD0
-#define SCK27			PINMUX_PA25C_SERCOM3_PAD3
-#define SS27			PIN_PA23
-#define MOSI27			PINMUX_PA24C_SERCOM3_PAD2
+#define MOSI27			PINMUX_PA22C_SERCOM3_PAD0
+#define SCK27			PINMUX_PA23C_SERCOM3_PAD1
+#define SS27			PIN_PA24
+#define MISO27			PINMUX_PA25C_SERCOM3_PAD3
 #define IRQ27			PIN_PA27
 #define SEN				PIN_PA28
 
 // SPI clock source
-
 #define SPI169_CLK	    GCLK_GENERATOR_0
 #define SPI27_CLK	    GCLK_GENERATOR_0
 
 
 // Define the SPI max clock
 #define SPI169MAXCLK     1000000//4000000
-
-#define SPI27_CLK	    GCLK_GENERATOR_0
-
-// Define the SPI max clock
-
 #define SPI27MAXCLK     1000000//4000000
 
 #endif /* SIM_PIN_DEF_H_ */

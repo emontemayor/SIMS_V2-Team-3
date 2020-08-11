@@ -68,12 +68,7 @@ void uart915_init(void)
     // configure the callback(s) for this module
     configure_uart915_callbacks();
 	
-
 	uart915_preconnect();
-
-	 uart915_network_config();
-	
-
 }
 
 
@@ -120,8 +115,6 @@ void configure_uart915_callbacks(void)
  */
 static void uart915_read_callback(struct usart_module *const usart_module)
 {
-	 usart_read_buffer_job(usart_module, &uart915_rx_read, 1);
-	 
     // put the received byte into the ring buffer
     ringbuff_put(&uart915_ringbuff, uart915_rx_read);
     
@@ -212,6 +205,30 @@ static bool uart915_parse_response(uint8_t next_char)
     return false;
 }
 
+/* Function Name    : uart915_network_config
+ * Parameters       : void
+ * Return Values(s) : void
+ * Description      : Configuration for network between Tx and Rx MTXDOTs
+ *  AT command sequence obtained from MTXDOT Developer Guide pg. 121 
+ */
+
+
+void uart915_network_config()
+{
+	uart915_write_cmd("AT\r\n");
+	uart915_write_cmd("AT+NJM=3\r\n");
+	uart915_write_cmd("AT+NA=00112233\r\n");
+	uart915_write_cmd("AT+NSK=00112233001122330011223300112233\r\n");
+	uart915_write_cmd("AT+DSK=33221100332211003322110033221100\r\n");
+	uart915_write_cmd("AT+TXDR=DR8\r\n");
+	uart915_write_cmd("AT+TXF=915500000\r\n");
+	uart915_write_cmd("AT&W\r\n");
+	uart915_write_cmd("ATZ\r\n");
+	uart915_write_cmd("AT+NJM=3\r\n");
+	uart915_write_cmd("AT+SD\r\n");
+	
+}
+
 
 /* Function Name    : uart915_write_cmd
  * Parameters       : cmd_str (command string sent to MTXDOT)
@@ -233,7 +250,6 @@ void uart915_write_cmd(const char* cmd_str)
     // write the AT command
     usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
     
-
     while(!flag_ok_received){
 		usart_write_buffer_wait(&uart915_inst, (const uint8_t*) cmd_str, strlen(cmd_str));
 		delay_ms(10);
@@ -241,32 +257,12 @@ void uart915_write_cmd(const char* cmd_str)
 }
 
 
-
-
-/* Function Name    : uart915_network_config
+/* Function Name    : uart915_get_rssi
  * Parameters       : void
- * Return Values(s) : void
- * Description      : Configuration for network between Tx and Rx MTXDOTs
- *  AT command sequence obtained from MTXDOT Developer Guide pg. 121 
+ * Return Values(s) : int16_t
+ * Description      : Gets the RSSI value from the MTXDOT and returns it as a
+ *  2 byte int.
  */
-
-void uart915_network_config()
-{
-	uart915_write_cmd("AT\r\n");
-	uart915_write_cmd("AT+NJM=3\r\n");
-	uart915_write_cmd("AT+NA=00112233\r\n");
-	uart915_write_cmd("AT+NSK=00112233001122330011223300112233\r\n");
-	uart915_write_cmd("AT+DSK=33221100332211003322110033221100\r\n");
-	uart915_write_cmd("AT+TXDR=DR8\r\n");
-	uart915_write_cmd("AT+TXF=915500000\r\n");
-	uart915_write_cmd("AT&W\r\n");
-	uart915_write_cmd("ATZ\r\n");
-	uart915_write_cmd("AT+NJM=3\r\n");
-	uart915_write_cmd("AT+SD\r\n");
-	
-}
-
-
 int16_t uart915_get_rssi(void)
 {
     uint8_t rspns_buff[64] = {0};
@@ -307,7 +303,7 @@ uart915_preconnect(void){
      * between the receiver and transmitter */
     for(; i < 10; i++)
     {
-        uart915_write_cmd("AT+SEND\r\n");
-       // uart915_write_cmd("AT+SEND\r\n");  
+        uart915_write_cmd("AT\r\n");
+        uart915_write_cmd("AT+SEND\r\n");  
     }
 }

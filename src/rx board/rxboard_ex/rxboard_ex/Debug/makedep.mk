@@ -4,6 +4,8 @@
 
 src\firmware\simsys_ringbuff.c
 
+src\firmware\spi_27_driver.c
+
 src\firmware\spi_40_driver.c
 
 src\firmware\uart_245_driver.c

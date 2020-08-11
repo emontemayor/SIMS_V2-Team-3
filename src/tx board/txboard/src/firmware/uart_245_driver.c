@@ -108,9 +108,7 @@ status_code_genare_t uart245_wait_prompt(void)
 status_code_genare_t uart245_enter_config(void)
 {
     status_code_genare_t stat_val;
-        
-
-		
+    
     // pull the CONFIG pin low to begin configuration mode
     port_pin_set_output_level(CONFIG245, false);
     
