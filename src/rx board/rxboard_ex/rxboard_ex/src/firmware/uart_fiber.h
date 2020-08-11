@@ -21,11 +21,6 @@ struct measurement {
 	uint8_t MHz915RSSI;
 	uint8_t GHz24RSSI;
 };
-struct fiber_packet {
-	const uint8_t head = '$';
-	struct measurement data;
-	const uint8_t tail = '\r';
-};
 
 
 /* Function Name    : uartfiber_init

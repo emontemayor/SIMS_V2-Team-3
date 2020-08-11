@@ -35,16 +35,16 @@ int main (void)
     
     delay_ms(100);
     
-    // initialize the AX5043 (169 MHz) registers in preparation for RSSI reading
-   // spi40_rx_init();
+    //initialize the AX5043 (169 MHz) registers in preparation for RSSI reading
+    //spi40_rx_init();
     
-    // initialize the MTXDOT (915 MHz) in preparation for RSSI reading
+    //initialize the MTXDOT (915 MHz) in preparation for RSSI reading
     //uart915_preconnect();
     
     // initialize RC2500 in preparation for RSSI reading
     /* no functions */
     
-    // initialize the fiber uart's RSSI struct
+    //initialize the fiber uart's RSSI struct
     //uartfiber_init_rssi(&acquired_rssi);
 
     while (1)

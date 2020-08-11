@@ -21,6 +21,13 @@ static struct usart_module uartfiber_inst;
 static uint8_t uartfiber_rx_read;
 static rssi_vals* uartfiber_rssi;
 
+//struct for usart transmission
+struct fiber_packet {
+	uint8_t head;
+	struct measurement data;
+	uint8_t tail;
+};
+
 
 /************************************************************************/
 /*                                Functions                             */
@@ -219,6 +226,8 @@ void usart_fiber_write(struct measurement temp)
 {
 	struct fiber_packet pckt;
 	pckt.data = temp;
+	pckt.head = '$';
+	pckt.tail = '\r';
 	usart_write_buffer_job(&uartfiber_inst, (uint8_t*) &pckt, sizeof(pckt));
 };
 

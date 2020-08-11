@@ -94,9 +94,20 @@
 #define EEPROM_MOSI		PINMUX_PA14C_SERCOM2_PAD2
 #define EEPROM_CS		PINMUX_PA13C_SERCOM2_PAD1
 #define EEPROM_MISO		PINMUX_PA12C_SERCOM2_PAD0
+#define EEPROM_PINMUX	SPI_SIGNAL_MUX_SETTING_E
+// These signals are optional
 #define EEPROM_WP		PIN_PA16
 #define EEPROM_HOLD		PIN_PA17
-
-#define SPI_EEPROM_BAUD 69
+// EEPROM chip's max clock speed is 5MHz
+#define SPI_EEPROM_MAX_CLOCK 5000000
+#define SPI_EEPROM_CLOCK_SOURCE GCLK_GENERATOR_0
+// EEPROM chip operation codes
+#define WREN	0x06
+#define WRDI	0x04
+#define RDSR	0x05
+#define WRSR	0x01
+#define READ	0x03
+#define WRITE	0x02
+#define LPWP	0x08
 
 #endif /* SIM_PIN_DEF_H_ */
