@@ -102,11 +102,7 @@ void simSysInit(void)
 	system_init();
 	sys_clk_init();	
 	conf_port_pin();
-	
-	
-	
-    spi169_init();
-
+//    spi169_init();
   //  uart245_init();
     uart915_init();
 
@@ -115,7 +111,7 @@ void simSysInit(void)
 	
 	
 	//uart245_init();
-//	uart915_init();
+
 
 }
 
@@ -178,14 +174,14 @@ void conf_port_pin(void)
 	// rts
 	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
 	port_pin_set_config(RTS915, &config_port_pin);
-    port_pin_set_output_level(RTS915, true);
+	port_pin_set_output_level(RTS915, true);
     
 	// wake
 	// Wake up from low power modes on rising edge
 	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
 	config_port_pin.input_pull = PORT_PIN_PULL_DOWN;
-//	port_pin_set_config(WAKE915, &config_port_pin);	//turned off for 169MHz testing
-//    port_pin_set_output_level(WAKE915, true);
+	port_pin_set_config(WAKE915, &config_port_pin);	
+    port_pin_set_output_level(WAKE915, true);
 	
 
 	

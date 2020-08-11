@@ -240,12 +240,6 @@ void uart915_write_cmd(const char* cmd_str)
 		};
 }
 
-/* Function Name    : uart915_write_cmd
- * Parameters       : cmd_str (command string sent to MTXDOT)
- * Return Values(s) : void
- * Description      : Sends a string to the MTXDOT and waits for an 
- *  "OK\r\n" response.
- */
 
 
 
@@ -313,7 +307,7 @@ uart915_preconnect(void){
      * between the receiver and transmitter */
     for(; i < 10; i++)
     {
-        uart915_write_cmd("AT\r\n");
+        uart915_write_cmd("AT+SEND\r\n");
        // uart915_write_cmd("AT+SEND\r\n");  
     }
 }
