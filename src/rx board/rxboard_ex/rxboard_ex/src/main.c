@@ -46,7 +46,10 @@ int main (void)
     
     //initialize the fiber uart's RSSI struct
     //uartfiber_init_rssi(&acquired_rssi);
+	
 
+
+		
     while (1)
     {   
         //get the RSSI from all the modules

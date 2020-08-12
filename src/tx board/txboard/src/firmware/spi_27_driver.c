@@ -6,7 +6,7 @@
  * Capstone Project 2019 - 2020
  **********************************************/
 #include "spi_27_driver.h"
-
+#include "AS3900_regs.h"
 /*
 Note: The AS3900 needs a master and a client to transmit
 The transmitter board will function as the client. The
@@ -66,6 +66,55 @@ void spi27_init(void)
 	spi_attach_slave(&spi27Slave, &spi27SlaveConf);
     
     spi27InitComp = true;
+	
+	spi27_connect();
+}
+
+void spi27_connect(){
+	//register set up. Common data-rate, frequency deviation and communication mode must be configured in the MAIN Register of all devices which have to be paired
+	spi27_write_byte_to_reg(0x00, 0x00); //set transmitter unit as client
+	spi27_write_byte_to_reg(0x10, 0x04); //set wakecyc bits (wake cycle every 1 second) (pg. 25)
+	spi27_write_byte_to_reg(0x81, 0x0C); //set cyctim0 bits ( cycle every 1 second) (pg. 25) and mdpt0 random pointer 
+	spi27_write_byte_to_reg(0x00, 0x01); //DISABLE all timers
+	spi27_write_byte_to_reg(0x02, 0x06); //set bitrate to 53 kbit per sec
+	
+	//write client ID
+	spi27_write_byte_to_reg(0, 0x08);
+	spi27_write_byte_to_reg(0, 0x09);
+	spi27_write_byte_to_reg(0x02, 0x0A);
+	
+	//wake procedure
+	spi27_write_cmd(WAKE_RX_ON); //begin wakeup call
+	delay_s(1); //delay for 1 sec, listen for client
+	
+	//wait for wake_call interrupt, signaling wakeup signal has been identified
+	char *byte;
+	while(1){
+		spi27_read_byte_from_reg(*byte,0x2A);
+		char x = *byte;
+			if (x && 0b01000000){
+				break;
+			} 
+		};
+	//load data (0xFF) into dbuf
+	spi27_write_byte_to_reg (0xFF,0x38); 	
+	spi27_write_byte_to_reg(0x01,0x37); //set datalen to 1 in dlen
+	
+	//begin firstt transmission 
+	spi27_write_cmd(TRANSMIT);
+	
+	//wait for ack_rtx interrupt, signaling ack from master (ID approved)
+	while(1){
+		spi27_read_byte_from_reg(*byte,0x2B);
+		char y = *byte;
+		if (y && 0b00000001){
+			break;
+		}
+	};
+	
+	//if no ack is recieved, interrupt rxend is generated. The client can
+	//transmit again by issuing a TRANSMIT command after a bit of a delay.
+	//Otherwise if the end of this method is reached, boards are paired 
 }
 
 void spi27_write_cmd (char *cmd){

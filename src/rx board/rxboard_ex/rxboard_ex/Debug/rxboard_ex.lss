@@ -1860,6 +1860,11 @@ void usart_fiber_write(struct measurement temp)
      e18:	20000068 	.word	0x20000068
 
 00000e1c <system_board_init>:
+{
+	/* This function is meant to contain board-specific initialization code
+	 * for, e.g., the I/O pins. The initialization can rely on application-
+	 * specific board configuration, found in conf_board.h.
+	 */
      e1c:	4770      	bx	lr
 	...
 

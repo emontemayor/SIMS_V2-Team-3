@@ -346,7 +346,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/firmware/simsys_ringbuff.o
  .debug_macro   0x00000000       0x16 src/firmware/simsys_ringbuff.o
  .debug_macro   0x00000000      0x2c6 src/firmware/simsys_ringbuff.o
- .debug_macro   0x00000000       0xd0 src/firmware/simsys_ringbuff.o
+ .debug_macro   0x00000000      0x118 src/firmware/simsys_ringbuff.o
  .debug_macro   0x00000000       0x18 src/firmware/simsys_ringbuff.o
  .debug_macro   0x00000000       0x12 src/firmware/simsys_ringbuff.o
  .debug_macro   0x00000000       0x16 src/firmware/simsys_ringbuff.o
@@ -358,7 +358,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x35 src/firmware/simsys_ringbuff.o
  .debug_macro   0x00000000       0x49 src/firmware/simsys_ringbuff.o
  .debug_line    0x00000000      0xd7c src/firmware/simsys_ringbuff.o
- .debug_str     0x00000000    0x84181 src/firmware/simsys_ringbuff.o
+ .debug_str     0x00000000    0x84276 src/firmware/simsys_ringbuff.o
  .comment       0x00000000       0x5a src/firmware/simsys_ringbuff.o
  .debug_frame   0x00000000       0x80 src/firmware/simsys_ringbuff.o
  .ARM.attributes
@@ -497,7 +497,7 @@ Discarded input sections
  .text.spi27_write_byte_to_reg
                 0x00000000       0x38 src/firmware/spi_27_driver.o
  .text.spi27_connect
-                0x00000000       0x38 src/firmware/spi_27_driver.o
+                0x00000000       0x60 src/firmware/spi_27_driver.o
  .text.spi27_init
                 0x00000000      0x114 src/firmware/spi_27_driver.o
  .text.spi27_start_xfer
@@ -510,8 +510,8 @@ Discarded input sections
                 0x00000000        0x1 src/firmware/spi_27_driver.o
  .bss.spi27_status_bits
                 0x00000000        0x2 src/firmware/spi_27_driver.o
- .debug_info    0x00000000     0x3f7b src/firmware/spi_27_driver.o
- .debug_abbrev  0x00000000      0x419 src/firmware/spi_27_driver.o
+ .debug_info    0x00000000     0x3ff9 src/firmware/spi_27_driver.o
+ .debug_abbrev  0x00000000      0x424 src/firmware/spi_27_driver.o
  .debug_loc     0x00000000      0x403 src/firmware/spi_27_driver.o
  .debug_aranges
                 0x00000000       0x48 src/firmware/spi_27_driver.o
@@ -641,7 +641,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x83b src/firmware/spi_27_driver.o
  .debug_macro   0x00000000       0x16 src/firmware/spi_27_driver.o
  .debug_macro   0x00000000       0xa6 src/firmware/spi_27_driver.o
- .debug_line    0x00000000      0xdf3 src/firmware/spi_27_driver.o
+ .debug_line    0x00000000      0xdf9 src/firmware/spi_27_driver.o
  .debug_str     0x00000000    0x87d72 src/firmware/spi_27_driver.o
  .comment       0x00000000       0x5a src/firmware/spi_27_driver.o
  .debug_frame   0x00000000       0xb4 src/firmware/spi_27_driver.o
@@ -933,7 +933,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/firmware/spi_40_driver.o
  .debug_macro   0x00000000       0x16 src/firmware/spi_40_driver.o
  .debug_macro   0x00000000      0x2c6 src/firmware/spi_40_driver.o
- .debug_macro   0x00000000       0xd0 src/firmware/spi_40_driver.o
+ .debug_macro   0x00000000      0x118 src/firmware/spi_40_driver.o
  .debug_macro   0x00000000       0x18 src/firmware/spi_40_driver.o
  .debug_macro   0x00000000       0x12 src/firmware/spi_40_driver.o
  .debug_macro   0x00000000       0x16 src/firmware/spi_40_driver.o
@@ -947,7 +947,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x83b src/firmware/spi_40_driver.o
  .debug_macro   0x00000000       0x16 src/firmware/spi_40_driver.o
  .debug_line    0x00000000      0xf48 src/firmware/spi_40_driver.o
- .debug_str     0x00000000    0x87bde src/firmware/spi_40_driver.o
+ .debug_str     0x00000000    0x87cd3 src/firmware/spi_40_driver.o
  .comment       0x00000000       0x5a src/firmware/spi_40_driver.o
  .debug_frame   0x00000000      0x194 src/firmware/spi_40_driver.o
  .ARM.attributes
@@ -1223,7 +1223,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/firmware/uart_245_driver.o
  .debug_macro   0x00000000       0x16 src/firmware/uart_245_driver.o
  .debug_macro   0x00000000      0x2c6 src/firmware/uart_245_driver.o
- .debug_macro   0x00000000       0xd0 src/firmware/uart_245_driver.o
+ .debug_macro   0x00000000      0x118 src/firmware/uart_245_driver.o
  .debug_macro   0x00000000       0x18 src/firmware/uart_245_driver.o
  .debug_macro   0x00000000       0x12 src/firmware/uart_245_driver.o
  .debug_macro   0x00000000       0x16 src/firmware/uart_245_driver.o
@@ -1236,7 +1236,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x49 src/firmware/uart_245_driver.o
  .debug_macro   0x00000000       0x10 src/firmware/uart_245_driver.o
  .debug_line    0x00000000      0xe61 src/firmware/uart_245_driver.o
- .debug_str     0x00000000    0x85dfe src/firmware/uart_245_driver.o
+ .debug_str     0x00000000    0x85ef3 src/firmware/uart_245_driver.o
  .comment       0x00000000       0x5a src/firmware/uart_245_driver.o
  .debug_frame   0x00000000      0x118 src/firmware/uart_245_driver.o
  .ARM.attributes
@@ -1518,7 +1518,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/firmware/uart_915_driver.o
  .debug_macro   0x00000000       0x16 src/firmware/uart_915_driver.o
  .debug_macro   0x00000000      0x2c6 src/firmware/uart_915_driver.o
- .debug_macro   0x00000000       0xd0 src/firmware/uart_915_driver.o
+ .debug_macro   0x00000000      0x118 src/firmware/uart_915_driver.o
  .debug_macro   0x00000000       0x18 src/firmware/uart_915_driver.o
  .debug_macro   0x00000000       0x12 src/firmware/uart_915_driver.o
  .debug_macro   0x00000000       0x16 src/firmware/uart_915_driver.o
@@ -1531,7 +1531,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x49 src/firmware/uart_915_driver.o
  .debug_macro   0x00000000      0x111 src/firmware/uart_915_driver.o
  .debug_line    0x00000000      0xe7a src/firmware/uart_915_driver.o
- .debug_str     0x00000000    0x864b1 src/firmware/uart_915_driver.o
+ .debug_str     0x00000000    0x865a6 src/firmware/uart_915_driver.o
  .comment       0x00000000       0x5a src/firmware/uart_915_driver.o
  .debug_frame   0x00000000       0xd8 src/firmware/uart_915_driver.o
  .ARM.attributes
@@ -3977,7 +3977,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x16 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000      0x2c6 src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x00000000       0xd0 src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00000000      0x118 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x18 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x12 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x16 src/ASF/common2/boards/user_board/init.o
@@ -6964,7 +6964,7 @@ OUTPUT(rxboard_ex.elf elf32-littlearm)
  .debug_str     0x000864f9      0x158 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
                               0x83e47 (size before relaxing)
  .debug_str     0x00086651       0x3e src/ASF/common2/boards/user_board/init.o
-                              0x84051 (size before relaxing)
+                              0x84146 (size before relaxing)
  .debug_str     0x0008668f       0x66 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x828b9 (size before relaxing)
  .debug_str     0x000866f5     0x278e src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/clock.o

@@ -69,13 +69,28 @@ void spi27_connect (){
 	spi27_write_byte_to_reg(0x80, 0x00); //set reciever unit as master
 	spi27_write_byte_to_reg(0x12, 0x04); //set waketm bits (sequence b00010011 for waketm bits and to set long wake_tx bit 0x04 for REG.) (pg. 25)
 	spi27_write_byte_to_reg(0x00, 0x01); //DISABLE all timers
+	spi27_write_byte_to_reg(0x02, 0x06); //set bitrate to 53 kbit per sec
+	
+	//write client ID
+	spi27_write_byte_to_reg(0, 0x08);
+	spi27_write_byte_to_reg(0, 0x09);
+	spi27_write_byte_to_reg(0x02, 0x0A);
 	
 	//wake procedure
 	spi27_write_cmd(WAKE_TX); //begin wakeup call 
 	delay_s(1); //delay for 1 sec, listen for client
 	
 	//pairing procedure
-	spi27_write_byte_to_reg(0x02, 0x06); //set bitrate to 53 kbit per sec
+	
+	//wait for dat_rtx interrupt, signaling signaling data has been succesfully transmitted and can be read.
+	char *byte;
+	while(1){
+		spi27_read_byte_from_reg(*byte,0x2A);
+		char y = *byte;
+		if (y && 0b01000000){
+			break;
+		}
+	};
 	 
 	 
 }
