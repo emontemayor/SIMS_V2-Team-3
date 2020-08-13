@@ -24,7 +24,7 @@ static uint16_t spi27_status_bits = 0;
  * Return Values(s) : void
  * Description      : Initialize the SPI SERCOM for the 27 MHz module
  */
-void spi27_init(void)
+void spi27_initialize(void)
 {
 	if (spi27InitComp == true)
 		return;
@@ -45,12 +45,14 @@ void spi27_init(void)
     spi27MasterConf.pinmux_pad2 = PINMUX_UNUSED;
     spi27MasterConf.pinmux_pad3 = MISO27;
 	
+	
 	// clock source should always be GLCK0
 	spi27MasterConf.generator_source = SPI27_CLK;
 	spi27MasterConf.mode_specific.master.baudrate = SPI27MAXCLK;
 
 	// enable the master
 	spi_init(&spi27Master, SPI27, &spi27MasterConf);
+	//Note: commented out SPI call back mode in spi_enable to avoid falling into dummy handler
 	spi_enable(&spi27Master);
 
 	// get default configs for slave
@@ -87,7 +89,7 @@ void spi27_connect (){
 	while(1){
 		spi27_read_byte_from_reg(*byte,0x2A);
 		char y = *byte;
-		if (y && 0b01000000){
+		if (y & 0b01000000){
 			break;
 		}
 	};
@@ -99,7 +101,7 @@ void spi27_write_cmd (char *cmd){
 	status_code_genare_t write_status;
 
 	//Add 1s to put module in COMMAND mode
-	*cmd = *cmd || 0b11000000;
+	*cmd = *cmd | 0b11000000;
 	
 	//read byte from address
 	write_status = spi_write_buffer_wait(&spi27Master, *cmd, 1);
@@ -122,13 +124,14 @@ void spi27_read_byte_from_reg (char *read_byte, uint8_t *reg){
 void spi27_write_byte_to_reg (char byte, uint8_t *reg){
 	 status_code_genare_t write_status;
 	 uint16_t *buf;
-	 
+	 char val; 
+	 val = *reg;
 	//Add 2 leading 0s to put module in WRITE mode
-	*reg = *reg && 0b00111111;
+	val = val & 0x3F;
 	//prepare buffer with address and data
-	*buf = *reg;
-	*buf = *buf<<8;
-	*buf = *buf || byte;
+	*buf = val;
+	*buf = *buf<8;
+	*buf = *buf | byte;
 	
 	//write byte to address
 	write_status = spi_write_buffer_wait(&spi27Master, *buf, 2);

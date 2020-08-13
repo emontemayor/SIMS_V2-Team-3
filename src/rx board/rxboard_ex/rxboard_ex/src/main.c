@@ -7,6 +7,7 @@
  **********************************************/
 #include <RX_PIN_DEF.h>
 #include <asf.h>
+#include <spi_27_driver.h>
 #include <spi_40_driver.h>
 #include <uart_245_driver.h>
 #include <uart_915_driver.h>
@@ -78,6 +79,8 @@ void simSysInit(void)
 	system_init();
 	sys_clk_init();
 	conf_port_pin();
+	//__disable_irq(); //disable interrupts for debugging purposes
+	//spi27_initialize();
 	//spi40_init();
 	//uart245_init();
     //uart915_init();
@@ -170,6 +173,14 @@ void conf_port_pin(void)
 	// irq
 	config_port_pin.direction = PORT_PIN_DIR_INPUT;
 	port_pin_set_config(IRQ40, &config_port_pin);
+	
+	
+	/**************config pin for 27*************/
+	// ss (cs)
+	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
+	config_port_pin.input_pull = PORT_PIN_PULL_UP;
+	port_pin_set_config(SS27, &config_port_pin);
+	port_pin_set_output_level(SS27, true);	
 } // end conf_port_pin(void)
 
 
