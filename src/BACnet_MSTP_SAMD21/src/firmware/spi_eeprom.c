@@ -63,6 +63,7 @@ void spieeprom_init();
 	
 }
 
+
 void eeprom_write_data(uint8_t* data[sizeof(shield_data)], uint32_t address)
 {
 	for(uint8_t i = 0; i < sizeof(shield_data), i++)
@@ -72,7 +73,8 @@ void eeprom_write_data(uint8_t* data[sizeof(shield_data)], uint32_t address)
 	}
 }
 
-struct shield_data eeprom_read_data(uint32_t address)
+//returns the latest shield reading
+struct shield_data eeprom_read_most_recent(uint32_t address)
 {
 	//prepare a struct to receive the return data
 	union shield_data_union ret_data;
