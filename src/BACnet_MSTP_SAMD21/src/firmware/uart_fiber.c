@@ -20,23 +20,17 @@
 static struct usart_module uartfiber_inst1; // this is the leftmost fiber module when looking into the fiber holes
 static struct usart_module uartfiber_inst2; // this is the rightmost fiber module when looking into the fiber holes
 
-//Since the ASF buffer code seems too unnecessarily complicated we will manage our own data buffers
-//This union of data types allows easy access of our struct's data as separate bytes
-union fiber_data {
-	volatile struct measurement data;
-	volatile uint8_t bytes[sizeof(struct measurement)];
-};
-enum fiber_data_status {data_not_ready, data_ready, data_being_processed};
-
-//Buffer and supporting variables for fiber 1
-volatile union fiber_data fiber1_data;
-volatile uint8_t fiber1_pointer;
-volatile enum fiber_data_status fiber1_data_status;
+	//Buffer and supporting variables for fiber 1
+	volatile union fiber_data fiber1_data;
+	volatile uint8_t fiber1_pointer;
+	volatile enum fiber_data_status fiber1_data_status;
 	
-//Buffer and supporting variables for fiber 2
-volatile union fiber_data fiber2_data;
-volatile uint8_t fiber2_pointer;
-volatile enum fiber_data_status fiber2_data_status;
+	//Buffer and supporting variables for fiber 2
+	volatile union fiber_data fiber2_data;
+	volatile uint8_t fiber2_pointer;
+	volatile enum fiber_data_status fiber2_data_status;
+
+
 
 void uartfiber_init(void)
 {
@@ -99,7 +93,7 @@ void fiber1_callback()
 			fiber1_pointer = 0;
 			fiber1_data_status = data_being_processed;
 		}
-		else if(tempdata == '\r' && fiber1_data_status == data_being_processed)
+		else if(tempdata == '%' && fiber1_data_status == data_being_processed)
 		{
 			fiber1_data_status = data_ready;
 		}
@@ -121,7 +115,7 @@ void fiber2_callback()
 			fiber2_pointer = 0;
 			fiber2_data_status = data_being_processed;
 		}
-		else if(tempdata == '\r' && fiber2_data_status == data_being_processed)
+		else if(tempdata == '%' && fiber2_data_status == data_being_processed)
 		{
 			fiber2_data_status = data_ready;
 		}
@@ -131,6 +125,16 @@ void fiber2_callback()
 		}
 	}
 }
+
+struct measurement get_fiber1_data()
+{
+	return fiber1_data.data;
+}
+
+enum fiber_data_status get_fiber1_status()
+{
+	return fiber1_data_status;
+};
 
 /*
 

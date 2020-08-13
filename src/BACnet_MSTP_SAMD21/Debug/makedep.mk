@@ -100,6 +100,8 @@ src\bacnet-stack\src\bacnet\iam.c
 
 src\bacnet-stack\src\bacnet\ihave.c
 
+src\firmware\spi_eeprom.c
+
 src\firmware\uart_fiber.c
 
 src\firmware\uart_ib.c

@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdbool.h>	
 #include <math.h>
+#include <uart_fiber.h>
 #include <sim_system_glcd_software.h>
 #include <ff.h>
 #include <sim_gui.h>
@@ -50,6 +51,9 @@ static struct mstimer Blink_Timer;
 /* LED toggle tracker */
 static bool LED_Status;
 
+//current rssi values
+extern struct shield_data current_fiber1_data;
+
 /************************************************************************/
 /*                                Main                                  */
 /************************************************************************/
@@ -71,10 +75,12 @@ int main(void){
 	
 	delay_ms(2000);
 	
+	/*
 	//put static portions into ram_g/*
 	appAttn();
 	appRssi();
 	appHist();
+	*/
 
 	cpu_irq_enable();
 
@@ -85,17 +91,26 @@ int main(void){
 	rs485_baud_rate_set(38400);
 	rs485_init();
 	/* initialize the BACnet stack */
-	bacnet_init();
+	//bacnet_init();
 	mstimer_set(&Blink_Timer, 125);
 
 
 
 	//main home menu and GUI
 	while(1){
+		delay_ms(1);
+		/*
+		if(get_fiber1_status() == data_ready)
+		{
+			current_fiber1_data.rssi_values = get_fiber1_data();
+		}
+		*/
 		
-	bacnet_task();
+		//commented to test fiber
+		/*
+		bacnet_task();
 	
-	tag = 0;
+		tag = 0;
 		disStart();
 		//set background
 		Ft_Gpu_CoCmd_Gradient(phost, 0, 0x060A39, 0, disWid, disHei, 0x0A4F7A);
@@ -132,8 +147,8 @@ int main(void){
 			//else if(tempTag == rssi)		rssiOp();
 			tempTag = 0;
 			delay_ms(50);
-
 		}
+		*/
 	}
 }//end main
 
@@ -163,7 +178,7 @@ void sim_system_init(void){
 	configure_ext_int_callback();
 
 	// initialize the LCD
-	lcd_init_seq(); 
+	//lcd_init_seq(); 
 	
 	
 	// set the interrupt masks for the LCD interrupts
@@ -172,7 +187,7 @@ void sim_system_init(void){
 	lcd_int_enable();
     
     uartfiber_init();
-    uartib_init();
+    //uartib_init();
 }//end sim_system_init
 
 

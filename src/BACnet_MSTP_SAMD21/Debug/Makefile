@@ -186,6 +186,7 @@ C_SRCS +=  \
 ../src/dlmstp.c \
 ../src/bacnet-stack/src/bacnet/iam.c \
 ../src/bacnet-stack/src/bacnet/ihave.c \
+../src/firmware/spi_eeprom.c \
 ../src/firmware/uart_fiber.c \
 ../src/firmware/uart_ib.c \
 ../src/GLCD_hal/FT_CoPro_Cmds.c \
@@ -289,6 +290,7 @@ src/device.o \
 src/dlmstp.o \
 src/bacnet-stack/src/bacnet/iam.o \
 src/bacnet-stack/src/bacnet/ihave.o \
+src/firmware/spi_eeprom.o \
 src/firmware/uart_fiber.o \
 src/firmware/uart_ib.o \
 src/GLCD_hal/FT_CoPro_Cmds.o \
@@ -385,6 +387,7 @@ src/device.o \
 src/dlmstp.o \
 src/bacnet-stack/src/bacnet/iam.o \
 src/bacnet-stack/src/bacnet/ihave.o \
+src/firmware/spi_eeprom.o \
 src/firmware/uart_fiber.o \
 src/firmware/uart_ib.o \
 src/GLCD_hal/FT_CoPro_Cmds.o \
@@ -481,6 +484,7 @@ src/device.d \
 src/dlmstp.d \
 src/bacnet-stack/src/bacnet/iam.d \
 src/bacnet-stack/src/bacnet/ihave.d \
+src/firmware/spi_eeprom.d \
 src/firmware/uart_fiber.d \
 src/firmware/uart_ib.d \
 src/GLCD_hal/FT_CoPro_Cmds.d \
@@ -577,6 +581,7 @@ src/device.d \
 src/dlmstp.d \
 src/bacnet-stack/src/bacnet/iam.d \
 src/bacnet-stack/src/bacnet/ihave.d \
+src/firmware/spi_eeprom.d \
 src/firmware/uart_fiber.d \
 src/firmware/uart_ib.d \
 src/GLCD_hal/FT_CoPro_Cmds.d \
@@ -975,6 +980,13 @@ src/bacnet-stack/src/bacnet/iam.o: ../src/bacnet-stack/src/bacnet/iam.c
 	
 
 src/bacnet-stack/src/bacnet/ihave.o: ../src/bacnet-stack/src/bacnet/ihave.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD21J18A__ -DBOARD=USER_BOARD -DARM_MATH_CM0PLUS=true -DADC_CALLBACK_MODE=true -DUSART_CALLBACK_MODE=true -DTC_ASYNC=true -DWDT_CALLBACK_MODE=true -DBACDL_MSTP=1 -DMAX_TSM_TRANSACTIONS=0 -DDEBUG -DEXTINT_CALLBACK_MODE=true -DSPI_CALLBACK_MODE=true -DSYSTICK_MODE -DRTC_CALENDAR_ASYNC=false  -I"../src/ASF/common/boards" -I"../src/ASF/sam0/utils" -I"../src/ASF/sam0/utils/header_files" -I"../src/ASF/sam0/utils/preprocessor" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/common/utils" -I"../src/ASF/sam0/utils/cmsis/samd21/include" -I"../src/ASF/sam0/utils/cmsis/samd21/source" -I"../src/ASF/sam0/drivers/system" -I"../src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1" -I"../src/ASF/sam0/drivers/system/clock" -I"../src/ASF/sam0/drivers/system/interrupt" -I"../src/ASF/sam0/drivers/system/interrupt/system_interrupt_samd21" -I"../src/ASF/sam0/drivers/system/pinmux" -I"../src/ASF/sam0/drivers/system/power" -I"../src/ASF/sam0/drivers/system/power/power_sam_d_r_h" -I"../src/ASF/sam0/drivers/system/reset" -I"../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h" -I"../src/ASF/common2/boards/user_board" -I"../src" -I"../src/config" -I"../src/ASF/sam0/drivers/nvm" -I"../src/ASF/sam0/drivers/port" -I"../src/ASF/sam0/services/eeprom/emulator/main_array" -I"../src/ASF/common/services/serial" -I"../src/ASF/sam0/drivers/adc" -I"../src/ASF/sam0/drivers/adc/adc_sam_d_r_h" -I"../src/ASF/sam0/drivers/bod" -I"../src/ASF/sam0/drivers/bod/bod_sam_d_r_h" -I"../src/ASF/sam0/drivers/sercom" -I"../src/ASF/sam0/drivers/sercom/usart" -I"../src/ASF/sam0/drivers/tc" -I"../src/ASF/sam0/drivers/tc/tc_sam_d_r_h" -I"../src/ASF/sam0/drivers/wdt" -I"../src/GLCD_hal" -I"../src/bacnet-stack/src" -I"../src/firmware" -I"../src/ASF/sam0/drivers/sercom/spi_master_vec" -I"../src/ASF/sam0/drivers/extint" -I"../src/ASF/sam0/drivers/extint/extint_sam_d_r_h" -I"../src/ASF/sam0/drivers/sercom/spi" -I"../src/ASF/common2/components/memory/sd_mmc" -I"../src/ASF/common2/services/delay" -I"../src/ASF/common2/services/delay/sam0" -I"../src/chanlib" -I"../src/ASF/sam0/drivers/rtc" -I"../src/ASF/sam0/drivers/rtc/rtc_sam_d_r_h" -I"../src/ASF/sam0/utils/cmsis/samd21/include/pio"  -Og -fdata-sections -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/firmware/spi_eeprom.o: ../src/firmware/spi_eeprom.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD21J18A__ -DBOARD=USER_BOARD -DARM_MATH_CM0PLUS=true -DADC_CALLBACK_MODE=true -DUSART_CALLBACK_MODE=true -DTC_ASYNC=true -DWDT_CALLBACK_MODE=true -DBACDL_MSTP=1 -DMAX_TSM_TRANSACTIONS=0 -DDEBUG -DEXTINT_CALLBACK_MODE=true -DSPI_CALLBACK_MODE=true -DSYSTICK_MODE -DRTC_CALENDAR_ASYNC=false  -I"../src/ASF/common/boards" -I"../src/ASF/sam0/utils" -I"../src/ASF/sam0/utils/header_files" -I"../src/ASF/sam0/utils/preprocessor" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/common/utils" -I"../src/ASF/sam0/utils/cmsis/samd21/include" -I"../src/ASF/sam0/utils/cmsis/samd21/source" -I"../src/ASF/sam0/drivers/system" -I"../src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1" -I"../src/ASF/sam0/drivers/system/clock" -I"../src/ASF/sam0/drivers/system/interrupt" -I"../src/ASF/sam0/drivers/system/interrupt/system_interrupt_samd21" -I"../src/ASF/sam0/drivers/system/pinmux" -I"../src/ASF/sam0/drivers/system/power" -I"../src/ASF/sam0/drivers/system/power/power_sam_d_r_h" -I"../src/ASF/sam0/drivers/system/reset" -I"../src/ASF/sam0/drivers/system/reset/reset_sam_d_r_h" -I"../src/ASF/common2/boards/user_board" -I"../src" -I"../src/config" -I"../src/ASF/sam0/drivers/nvm" -I"../src/ASF/sam0/drivers/port" -I"../src/ASF/sam0/services/eeprom/emulator/main_array" -I"../src/ASF/common/services/serial" -I"../src/ASF/sam0/drivers/adc" -I"../src/ASF/sam0/drivers/adc/adc_sam_d_r_h" -I"../src/ASF/sam0/drivers/bod" -I"../src/ASF/sam0/drivers/bod/bod_sam_d_r_h" -I"../src/ASF/sam0/drivers/sercom" -I"../src/ASF/sam0/drivers/sercom/usart" -I"../src/ASF/sam0/drivers/tc" -I"../src/ASF/sam0/drivers/tc/tc_sam_d_r_h" -I"../src/ASF/sam0/drivers/wdt" -I"../src/GLCD_hal" -I"../src/bacnet-stack/src" -I"../src/firmware" -I"../src/ASF/sam0/drivers/sercom/spi_master_vec" -I"../src/ASF/sam0/drivers/extint" -I"../src/ASF/sam0/drivers/extint/extint_sam_d_r_h" -I"../src/ASF/sam0/drivers/sercom/spi" -I"../src/ASF/common2/components/memory/sd_mmc" -I"../src/ASF/common2/services/delay" -I"../src/ASF/common2/services/delay/sam0" -I"../src/chanlib" -I"../src/ASF/sam0/drivers/rtc" -I"../src/ASF/sam0/drivers/rtc/rtc_sam_d_r_h" -I"../src/ASF/sam0/utils/cmsis/samd21/include/pio"  -Og -fdata-sections -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

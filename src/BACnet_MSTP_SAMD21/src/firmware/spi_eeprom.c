@@ -17,13 +17,13 @@ static struct spi_module spieeprom_inst; // ASF instance of SPI SERCOM module
 
 //structs to represent the arrangement of the the SPI frame
 struct write_frame{
-	uint8_t cmd = 0x2; //command to write to memory
+	uint8_t cmd; //command to write to memory is 0x02
 	uint8_t addr_high; //top 6 bits are truncated, only the lower 2 bits will be considered
 	uint16_t addr_low;
 	uint8_t data;
 	};
 struct read_frame{
-	uint8_t cmd = 0x3; //command to read from memory
+	uint8_t cmd; //command to read from memory is 0x03
 	uint8_t addr_high; //top 6 bits are truncated, only the lower 2 bits will be considered
 	uint16_t addr_low;
 	};
@@ -31,18 +31,18 @@ struct read_frame{
 //union types to make feeding the buffer function easier
 union write_frame_union{
 	struct write_frame frame;
-	uint8_t databytes[sizeof(frame)];
+	uint8_t databytes[sizeof(struct write_frame)];
 	};
 union read_frame_union{
 	struct read_frame frame;
-	uint8_t databytes[sizeof(frame)];
+	uint8_t databytes[sizeof(struct read_frame)];
 	};
 union shield_data_union{
 	struct shield_data data;
-	uint8_t databytes[sizeof(data)];
+	uint8_t databytes[sizeof(struct shield_data)];
 	};
 
-void spieeprom_init();
+void spieeprom_init()
 {
 	struct spi_config config_spi;
 	
@@ -64,13 +64,15 @@ void spieeprom_init();
 }
 
 
-void eeprom_write_data(uint8_t* data[sizeof(shield_data)], uint32_t address)
+void eeprom_write_data(uint8_t* data[sizeof(struct shield_data)], uint32_t address)
 {
+	/*
 	for(uint8_t i = 0; i < sizeof(shield_data), i++)
 	{
 		spi_write(&spieeprom_inst, WREN);
 		spi_write_buffer_job(&spieeprom_inst, )
 	}
+	*/
 }
 
 //returns the latest shield reading
@@ -81,6 +83,7 @@ struct shield_data eeprom_read_most_recent(uint32_t address)
 	
 	//prepare the read data frame
 	struct read_frame read_instructions;
+	read_instructions.cmd = EEPROM_READ;
 	read_instructions.addr_high = (address & 0xFF00) << 8;
 	read_instructions.addr_low = address & 0xFF;
 	
@@ -90,5 +93,5 @@ struct shield_data eeprom_read_most_recent(uint32_t address)
 	
 	//begin the transceiver function
 	spi_transceive_buffer_wait(&spieeprom_inst, &read_instr.databytes, &ret_data.databytes, sizeof(ret_data));
-	return ret_data;
+	return ret_data.data;
 }

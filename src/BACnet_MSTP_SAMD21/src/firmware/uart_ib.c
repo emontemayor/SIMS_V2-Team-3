@@ -22,6 +22,7 @@ static struct usart_module uartib_inst;
  */
 void uartib_init(void)
 {
+	/*
     struct usart_config config_usart;
     usart_get_config_defaults(&config_usart);
     
@@ -38,6 +39,7 @@ void uartib_init(void)
     
     // enable the uart
     usart_enable(&uartib_inst);
+	*/
 }
 
 
