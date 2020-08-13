@@ -38,7 +38,7 @@ typedef enum xferDirType27{
  * Return Values(s) : void
  * Description      : Initialize the SPI SERCOM for the 27 MHz module
  */
-void spi27_init(void);
+void spi27_initialize(void);
 
 
 /* Function Name    : spi27_deinit

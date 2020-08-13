@@ -224,11 +224,12 @@ static void uartfiber_parse_cmd(uint8_t cmd_char)
  */
 void usart_fiber_write(struct measurement temp)
 {
+	
 	struct fiber_packet pckt;
 	pckt.data = temp;
 	pckt.head = '$';
-	pckt.tail = '\r';
-	usart_write_buffer_job(&uartfiber_inst, (uint8_t*) &pckt, sizeof(pckt));
+	pckt.tail = '%';
+	usart_write_buffer_wait(&uartfiber_inst, (uint8_t*) &pckt, sizeof(pckt));
 };
 
 

@@ -136,8 +136,9 @@ src/main.d src/main.o: ../src/main.c ../src/RX_PIN_DEF.h ../src/asf.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart_interrupt.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
- ../src/firmware/spi_40_driver.h ../src/firmware/AX5043_regs.h \
- ../src/firmware/uart_245_driver.h ../src/firmware/uart_915_driver.h \
+ ../src/firmware/spi_27_driver.h ../src/firmware/AX5043_regs.h \
+ ../src/firmware/spi_40_driver.h ../src/firmware/uart_245_driver.h \
+ ../src/firmware/uart_915_driver.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\ctype.h \
  ../src/firmware/uart_fiber.h ../src/firmware/rssi_mngr.h
 
@@ -425,9 +426,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/sercom/usart/usart.h:
 
-../src/firmware/spi_40_driver.h:
+../src/firmware/spi_27_driver.h:
 
 ../src/firmware/AX5043_regs.h:
+
+../src/firmware/spi_40_driver.h:
 
 ../src/firmware/uart_245_driver.h:
 
