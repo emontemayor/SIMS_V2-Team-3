@@ -1,5 +1,6 @@
-src/main.d src/main.o: ../src/main.c ../src/SIM_PIN_DEF.h ../src/asf.h \
- ../src/ASF/sam0/drivers/adc/adc.h ../src/ASF/sam0/utils/compiler.h \
+src/main.d src/main.o: ../src/main.c ../src/firmware/uart_fiber.h \
+ ../src/asf.h ../src/ASF/sam0/drivers/adc/adc.h \
+ ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
@@ -159,9 +160,10 @@ src/main.d src/main.o: ../src/main.c ../src/SIM_PIN_DEF.h ../src/asf.h \
  ../src/ASF/sam0/drivers/wdt/wdt.h \
  ../src/ASF/sam0/drivers/wdt/wdt_callback.h \
  ../src/ASF/sam0/drivers/wdt/wdt.h \
- ../src/ASF/sam0/drivers/wdt/wdt_callback.h \
+ ../src/ASF/sam0/drivers/wdt/wdt_callback.h ../src/firmware/rssi_mngr.h \
+ ../src/SIM_PIN_DEF.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- ../src/GLCD_hal/uart_fiber.h ../src/GLCD_hal/sim_system_glcd_software.h \
+ ../src/GLCD_hal/sim_system_glcd_software.h \
  ../src/GLCD_hal/sim_system_glcd_firmware.h ../src/GLCD_hal/FT_Platform.h \
  ../src/GLCD_hal/Ft_Esd.h ../src/GLCD_hal/FT_DataTypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\assert.h \
@@ -169,11 +171,11 @@ src/main.d src/main.o: ../src/main.c ../src/SIM_PIN_DEF.h ../src/asf.h \
  ../src/GLCD_hal/FT_CoPro_Cmds.h ../src/GLCD_hal/FT_Hal_Utils.h \
  ../src/chanlib/ff.h ../src/chanlib/integer.h ../src/chanlib/ffconf.h \
  ../src/GLCD_hal/sim_gui.h ../src/firmware/rssi_mngr.h \
- ../src/GLCD_hal/uart_ib.h ../src/bacnet.h ../src/rs485.h \
+ ../src/firmware/uart_ib.h ../src/bacnet.h ../src/rs485.h \
  ../src/bacnet-stack/src/bacnet/basic/sys/mstimer.h \
  ../src/bacnet-stack/src/bacnet/bacnet_stack_exports.h
 
-../src/SIM_PIN_DEF.h:
+../src/firmware/uart_fiber.h:
 
 ../src/asf.h:
 
@@ -511,9 +513,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/wdt/wdt_callback.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+../src/firmware/rssi_mngr.h:
 
-../src/GLCD_hal/uart_fiber.h:
+../src/SIM_PIN_DEF.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
 ../src/GLCD_hal/sim_system_glcd_software.h:
 
@@ -545,7 +549,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/firmware/rssi_mngr.h:
 
-../src/GLCD_hal/uart_ib.h:
+../src/firmware/uart_ib.h:
 
 ../src/bacnet.h:
 

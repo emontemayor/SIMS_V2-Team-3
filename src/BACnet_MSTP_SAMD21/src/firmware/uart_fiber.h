@@ -24,7 +24,7 @@ extern struct measurement {
 extern struct shield_data {
 	struct rtc_calendar_time timestamp;
 	struct measurement rssi_values;
-	};
+	}shield_data;
 	
 	//Since the ASF buffer code seems too unnecessarily complicated we will manage our own data buffers
 	//This union of data types allows easy access of our struct's data as separate bytes
@@ -32,7 +32,8 @@ union fiber_data {
 		volatile struct measurement data;
 		volatile uint8_t bytes[sizeof(struct measurement)];
 	};
-extern enum fiber_data_status {data_not_ready, data_ready, data_being_processed};
+	
+enum fiber_data_status {data_not_ready, data_ready, data_being_processed}fiber_data_status;
 
 
 
