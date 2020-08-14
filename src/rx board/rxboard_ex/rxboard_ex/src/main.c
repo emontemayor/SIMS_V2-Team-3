@@ -79,11 +79,11 @@ void simSysInit(void)
 	sys_clk_init();
 	conf_port_pin();
 	//__disable_irq(); //disable interrupts for debugging purposes
-	//spi27_initialize();
+	spi27_initialize();
 	//spi40_init();
 	//uart245_init();
     //uart915_init();
-    uartfiber_init();
+    //uartfiber_init();
 }
 
 
@@ -177,7 +177,6 @@ void conf_port_pin(void)
 	/**************config pin for 27*************/
 	// ss (cs)
 	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
-	config_port_pin.input_pull = PORT_PIN_PULL_UP;
 	port_pin_set_config(SS27, &config_port_pin);
 	port_pin_set_output_level(SS27, true);	
 } // end conf_port_pin(void)
