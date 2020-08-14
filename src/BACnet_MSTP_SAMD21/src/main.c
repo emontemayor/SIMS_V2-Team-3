@@ -55,6 +55,7 @@ static bool LED_Status;
 
 //current rssi values
 struct shield_data current_fiber1_data;
+struct shield_data current_fiber2_data;
 
 
 /************************************************************************/
@@ -102,16 +103,20 @@ int main(void){
 	//main home menu and GUI
 	while(1){
 		delay_ms(1);
-
+		
+		
 		if(get_fiber1_status() == data_ready)
 		{
 			current_fiber1_data.rssi_values = get_fiber1_data();
 		}
 		
+		if(get_fiber2_status() == data_ready)
+		{
+			current_fiber2_data.rssi_values = get_fiber2_data();
+		}		
 		
-		//commented to test fiber
-		/*
-		bacnet_task();
+
+		//bacnet_task();
 	
 		tag = 0;
 		disStart();
@@ -144,15 +149,16 @@ int main(void){
         //check tag value and determine further action
 		if(tag!=0)		tempTag = tag;
 		if (tempTag != tag && tag == 0 && tag!=back){
-			if(tempTag == attn)				attnOp(NULL);
+			if(tempTag == attn)				attnOp(current_fiber1_data, current_fiber2_data);
 			else if(tempTag == hist)		historyOp();
 			//else if(tempTag == sett)		settingOp();
 			//else if(tempTag == rssi)		rssiOp();
 			tempTag = 0;
 			delay_ms(50);
 		}
-		*/
+		
 	}
+	
 }//end main
 
 /****************************************************************************************************************************
@@ -181,7 +187,7 @@ void sim_system_init(void){
 	configure_ext_int_callback();
 
 	// initialize the LCD
-	//lcd_init_seq(); 
+	lcd_init_seq(); 
 	
 	
 	// set the interrupt masks for the LCD interrupts

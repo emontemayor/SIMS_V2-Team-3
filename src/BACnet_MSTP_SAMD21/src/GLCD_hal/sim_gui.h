@@ -53,7 +53,7 @@
 /*                                Prototypes                            */
 /************************************************************************/
 void mainMenu(void);
-void attnOp(rssi_vals* attn_vals);
+void attnOp(struct shield_data, struct shield_data);
 void manualOp(void);
 void historyOp(void);
 void settingOp(void);

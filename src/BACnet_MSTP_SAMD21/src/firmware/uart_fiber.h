@@ -15,7 +15,7 @@
 
 //Structs used to store shield data
 extern struct measurement {
-	uint8_t MHz70RSSI;
+	uint8_t MHz27RSSI;
 	uint8_t MHz169RSSI;
 	uint8_t MHz915RSSI;
 	uint8_t GHz24RSSI;
@@ -45,6 +45,9 @@ void fiber2_callback(void);
 
 struct measurement get_fiber1_data(void);
 enum fiber_data_status get_fiber1_status(void);
+
+struct measurement get_fiber2_data(void);
+enum fiber_data_status get_fiber2_status(void);
 
 
 status_code_genare_t uartfiber_get_169_rssi(rssi_t* new_rssi);

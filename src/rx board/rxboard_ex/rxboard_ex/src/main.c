@@ -49,7 +49,6 @@ int main (void)
     //uartfiber_init_rssi(&acquired_rssi);
 	
 
-
 		
     while (1)
     {   

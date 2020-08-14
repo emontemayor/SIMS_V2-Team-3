@@ -7,7 +7,7 @@
  **********************************************/
 
 #include "sim_gui.h"
-
+#include "uart_fiber.h"
 
 /************************************************************************/
 /*                                Globals                               */
@@ -51,8 +51,8 @@ int16_t history[10][10];
  *  record attenuation values every 30 minutes regardless of shield status
 */
 //attnOp
-/*
-void attnOp(rssi_vals* attn_vals){
+
+void attnOp(struct shield_data current_fiber1_data, struct shield_data current_fiber2_data){
 	//declare values for time checking and shield failure triggering
     static rssi_vals attenuation;
     char lastSec, lastMin=1, lastGood = time.second, trigger=0;
@@ -63,9 +63,10 @@ void attnOp(rssi_vals* attn_vals){
 		rtc_calendar_get_time(&rtc_instance, &time);
 
 		// get attenuation level
-		attenuation.rssi169 = uartib_get_169_rssi() - uartfiber_get_169_rssi() + 10;	//10 offset added based on testing 
-		attenuation.rssi915 = uartib_get_915_rssi() - uartfiber_get_915_rssi();				// approved by Dr. Nguyen
-		attenuation.rssi245 = uartib_get_245_rssi() - uartfiber_get_245_rssi();
+		attenuation.rssi27 =  current_fiber1_data.rssi_values.MHz27RSSI - current_fiber2_data.rssi_values.MHz27RSSI;
+		attenuation.rssi169 = current_fiber1_data.rssi_values.MHz169RSSI - current_fiber2_data.rssi_values.MHz169RSSI + 10;	//10 offset added based on testing 
+		attenuation.rssi915 = current_fiber1_data.rssi_values.MHz915RSSI - current_fiber2_data.rssi_values.MHz915RSSI;				// approved by Dr. Nguyen
+		attenuation.rssi245 = current_fiber1_data.rssi_values.GHz24RSSI - current_fiber2_data.rssi_values.GHz24RSSI;
 		
 		//display information on the screen
 		disStart();
@@ -92,7 +93,7 @@ void attnOp(rssi_vals* attn_vals){
 		
 		if (trigger == 1){
 			//record shield failure instances to history and SD Card (if one is inserted)
-			saveHist(uartib_get_169_rssi(), uartib_get_915_rssi(), uartib_get_245_rssi());
+			//saveHist(uartib_get_169_rssi(), uartib_get_915_rssi(), uartib_get_245_rssi());
 			//play sound when shield fail for more then 10 continous seconds
 			if (time.second%5 == 0 && time.second != lastSec && sound==1){
 				play();
@@ -101,7 +102,7 @@ void attnOp(rssi_vals* attn_vals){
 		}
 
 		if (time.minute%30 == 0 && time.minute != lastMin){
-			saveHist(uartib_get_169_rssi(), uartib_get_915_rssi(), uartib_get_245_rssi());
+			//saveHist(uartib_get_169_rssi(), uartib_get_915_rssi(), uartib_get_245_rssi());
 			lastMin = time.minute;
 		}
 
@@ -115,7 +116,7 @@ void attnOp(rssi_vals* attn_vals){
 		disEnd();
 	} while (tag != back);
 }// end attnOp
-*/
+
 
 /* Function Name    : historyOp
  * Parameters       : void
