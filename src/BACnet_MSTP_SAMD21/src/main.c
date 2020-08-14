@@ -115,6 +115,36 @@ int main(void){
 			current_fiber2_data.rssi_values = get_fiber2_data();
 		}		
 		
+		/*
+		//Sanders method for retrieving data from the EEPROM chip:
+		//begin a for loop to read from all possible memory locations
+		for(uint32_t i = 0; i < EEPROM_BYTE_TOTAL; i += sizeof(struct shield_data))
+		{
+			struct shield_data temp = eeprom_read_address(i);
+			//IDK exactly what we're doing with the LCD
+			lcd_print_a_single_item_of_shit(temp);
+		}
+		//at this point were done
+		
+		
+		//OR alternatively: code to retrieve only items from the last week
+		rtc_calendar_time test_time = rtc_get_current_calendar_time_or_whatever_this_function_would_be();
+		//set this time to be a week ago
+		test_time.week--;
+		
+		//begin a for loop to read from all possible memory locations
+		for(uint32_t i = 0; i < EEPROM_BYTE_TOTAL; i += sizeof(struct shield_data))
+		{
+			struct shield_data temp = eeprom_read_address(i);
+			//test to see if the time is later than the test time
+			if (is_timestamp_later(temp.timestamp, test_time))
+			{
+				//IDK exactly what we're doing with the LCD
+				lcd_print_a_single_item_of_shit(temp);
+			}
+		}
+		//at this point were done
+		*/
 
 		//bacnet_task();
 	
