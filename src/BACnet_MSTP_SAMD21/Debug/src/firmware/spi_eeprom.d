@@ -1,6 +1,6 @@
 src/firmware/spi_eeprom.d src/firmware/spi_eeprom.o: \
  ../src/firmware/spi_eeprom.c ../src/SIM_PIN_DEF.h \
- ../src/firmware/uart_fiber.h ../src/asf.h \
+ ../src/firmware/spi_eeprom.h ../src/asf.h \
  ../src/ASF/sam0/drivers/adc/adc.h ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
@@ -161,11 +161,12 @@ src/firmware/spi_eeprom.d src/firmware/spi_eeprom.o: \
  ../src/ASF/sam0/drivers/wdt/wdt.h \
  ../src/ASF/sam0/drivers/wdt/wdt_callback.h \
  ../src/ASF/sam0/drivers/wdt/wdt.h \
- ../src/ASF/sam0/drivers/wdt/wdt_callback.h ../src/firmware/rssi_mngr.h
+ ../src/ASF/sam0/drivers/wdt/wdt_callback.h ../src/firmware/uart_fiber.h \
+ ../src/firmware/rssi_mngr.h
 
 ../src/SIM_PIN_DEF.h:
 
-../src/firmware/uart_fiber.h:
+../src/firmware/spi_eeprom.h:
 
 ../src/asf.h:
 
@@ -502,5 +503,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/drivers/wdt/wdt.h:
 
 ../src/ASF/sam0/drivers/wdt/wdt_callback.h:
+
+../src/firmware/uart_fiber.h:
 
 ../src/firmware/rssi_mngr.h:
