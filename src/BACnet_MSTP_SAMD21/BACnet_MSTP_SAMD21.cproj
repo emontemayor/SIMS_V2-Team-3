@@ -910,6 +910,9 @@
     <None Include="src\ASF\sam0\drivers\sercom\spi\spi_interrupt.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\ASF\sam0\drivers\sercom\spi_master_vec\sercom.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\ASF\sam0\drivers\sercom\spi_master_vec\spi_master_vec.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1222,9 +1225,6 @@
     <Compile Include="src\ASF\sam0\drivers\sercom\usart\usart_interrupt.c">
       <SubType>compile</SubType>
     </Compile>
-    <None Include="src\ASF\sam0\drivers\sercom\sercom.h">
-      <SubType>compile</SubType>
-    </None>
     <Compile Include="src\ASF\sam0\drivers\sercom\sercom_interrupt.c">
       <SubType>compile</SubType>
     </Compile>

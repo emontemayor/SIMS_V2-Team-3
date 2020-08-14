@@ -139,10 +139,9 @@ src/chanlib/diskio.d src/chanlib/diskio.o: ../src/chanlib/diskio.c \
  ../src/ASF/sam0/drivers/port/port.h \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar.h ../src/config/conf_clocks.h \
  ../src/ASF/sam0/drivers/rtc/rtc_tamper.h \
- ../src/ASF/sam0/drivers/sercom/sercom.h \
+ ../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h \
  ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
  ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
- ../src/ASF/sam0/drivers/sercom/sercom.h \
  ../src/ASF/sam0/drivers/sercom/spi/spi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
@@ -464,13 +463,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/rtc/rtc_tamper.h:
 
-../src/ASF/sam0/drivers/sercom/sercom.h:
+../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom_pinout.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h:
-
-../src/ASF/sam0/drivers/sercom/sercom.h:
 
 ../src/ASF/sam0/drivers/sercom/spi/spi.h:
 

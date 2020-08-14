@@ -2,7 +2,8 @@ src/ASF/sam0/drivers/sercom/sercom_interrupt.d \
  src/ASF/sam0/drivers/sercom/sercom_interrupt.o: \
  ../src/ASF/sam0/drivers/sercom/sercom_interrupt.c \
  ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
- ../src/ASF/sam0/drivers/sercom/sercom.h ../src/ASF/sam0/utils/compiler.h \
+ ../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h \
+ ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
@@ -126,7 +127,7 @@ src/ASF/sam0/drivers/sercom/sercom_interrupt.d \
 
 ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h:
 
-../src/ASF/sam0/drivers/sercom/sercom.h:
+../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h:
 
 ../src/ASF/sam0/utils/compiler.h:
 
