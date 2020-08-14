@@ -40,11 +40,11 @@ void spi27_initialize(void)
 	spi_get_config_defaults(&spi27MasterConf);
     
     spi27MasterConf.mux_setting = SPI27_PINXMUX;
-    spi27MasterConf.pinmux_pad0 = MOSI27;
-    spi27MasterConf.pinmux_pad1 = SCK27;
-    spi27MasterConf.pinmux_pad2 = PINMUX_UNUSED;
-    spi27MasterConf.pinmux_pad3 = MISO27;
-	
+    spi27MasterConf.pinmux_pad0 = MISO27;
+    spi27MasterConf.pinmux_pad1 = PINMUX_UNUSED;
+    spi27MasterConf.pinmux_pad2 = MOSI27;
+    spi27MasterConf.pinmux_pad3 = SCK27;
+	spi27MasterConf.transfer_mode = SPI_TRANSFER_MODE_1;
 	
 	// clock source should always be GLCK0
 	spi27MasterConf.generator_source = SPI27_CLK;
@@ -52,7 +52,7 @@ void spi27_initialize(void)
 
 	// enable the master
 	spi_init(&spi27Master, SPI27, &spi27MasterConf);
-	//Note: commented out SPI call back mode in spi_enable to avoid falling into dummy handler
+	//Note: commented out SPI call back mode in spi_enable to avoid falling into dummy handler. note: undid that
 	spi_enable(&spi27Master);
 
 	// get default configs for slave
@@ -63,6 +63,11 @@ void spi27_initialize(void)
 	spi_attach_slave(&spi27Slave, &spi27SlaveConf);
     
     spi27InitComp = true;
+	     status_code_genare_t read_status;
+	do{
+        // select the slave
+        read_status = spi_select_slave(&spi27Master, &spi27Slave, true);
+    }while(read_status == STATUS_BUSY);
 	spi27_connect();
 }
 
@@ -74,7 +79,7 @@ void spi27_connect (){
 	spi27_write_byte_to_reg(0x02, 0x06); //set bitrate to 53 kbit per sec
 	
 	//write client ID
-	spi27_write_byte_to_reg(0, 0x08);
+		spi27_write_byte_to_reg(0, 0x08);
 	spi27_write_byte_to_reg(0, 0x09);
 	spi27_write_byte_to_reg(0x02, 0x0A);
 	
@@ -131,20 +136,23 @@ void spi27_read_byte_from_reg (char *read_byte, uint8_t *reg){
 	//set sen = 1; 
 }
 
-void spi27_write_byte_to_reg (char byte, uint8_t *reg){
+void spi27_write_byte_to_reg (char byte, uint8_t reg){
 	 status_code_genare_t write_status;
-	 uint16_t *buf;
-	 char val; 
-	 val = *reg;
+	 uint8_t *buf;
+	 uint16_t val; 
+	 val = reg;
 	//Add 2 leading 0s to put module in WRITE mode
 	val = val & 0x3F;
+	val = val<<8;
+	val = val| byte;
+	
 	//prepare buffer with address and data
 	*buf = val;
-	*buf = *buf<8;
-	*buf = *buf | byte;
 	
 	//write byte to address
+	port_pin_set_output_level(SS27, true);	
 	write_status = spi_write_buffer_wait(&spi27Master, &buf, 2);
+	port_pin_set_output_level(SS27, false);	
 		//set sen = 0;
 		//set sen = 1;
 	
