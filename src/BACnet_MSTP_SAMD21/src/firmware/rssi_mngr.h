@@ -22,6 +22,7 @@ typedef volatile struct RSSI_VAL_TYPE{
     rssi_t rssi169;
     rssi_t rssi915;
     rssi_t rssi245;
+	rssi_t rssi27;
 }rssi_vals;
 
 #endif /* RSSI_MNGR_H_ */

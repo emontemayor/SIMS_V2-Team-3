@@ -491,13 +491,15 @@ Discarded input sections
  .data          0x00000000        0x0 src/firmware/spi_27_driver.o
  .bss           0x00000000        0x0 src/firmware/spi_27_driver.o
  .text.spi27_write_cmd
-                0x00000000       0x20 src/firmware/spi_27_driver.o
+                0x00000000       0x28 src/firmware/spi_27_driver.o
  .text.spi27_read_byte_from_reg
+                0x00000000       0x24 src/firmware/spi_27_driver.o
+ .text.spi27_rssi
                 0x00000000       0x1c src/firmware/spi_27_driver.o
  .text.spi27_write_byte_to_reg
-                0x00000000       0x2c src/firmware/spi_27_driver.o
+                0x00000000       0x3c src/firmware/spi_27_driver.o
  .text.spi27_connect
-                0x00000000       0x60 src/firmware/spi_27_driver.o
+                0x00000000       0x70 src/firmware/spi_27_driver.o
  .text.spi27_initialize
                 0x00000000      0x114 src/firmware/spi_27_driver.o
  .text.spi27_start_xfer
@@ -510,12 +512,12 @@ Discarded input sections
                 0x00000000        0x1 src/firmware/spi_27_driver.o
  .bss.spi27_status_bits
                 0x00000000        0x2 src/firmware/spi_27_driver.o
- .debug_info    0x00000000     0x4005 src/firmware/spi_27_driver.o
+ .debug_info    0x00000000     0x40b8 src/firmware/spi_27_driver.o
  .debug_abbrev  0x00000000      0x433 src/firmware/spi_27_driver.o
- .debug_loc     0x00000000      0x426 src/firmware/spi_27_driver.o
+ .debug_loc     0x00000000      0x46b src/firmware/spi_27_driver.o
  .debug_aranges
-                0x00000000       0x48 src/firmware/spi_27_driver.o
- .debug_ranges  0x00000000       0x80 src/firmware/spi_27_driver.o
+                0x00000000       0x50 src/firmware/spi_27_driver.o
+ .debug_ranges  0x00000000       0x88 src/firmware/spi_27_driver.o
  .debug_macro   0x00000000      0x692 src/firmware/spi_27_driver.o
  .debug_macro   0x00000000      0x8bc src/firmware/spi_27_driver.o
  .debug_macro   0x00000000      0x16d src/firmware/spi_27_driver.o
@@ -641,10 +643,10 @@ Discarded input sections
  .debug_macro   0x00000000      0x83b src/firmware/spi_27_driver.o
  .debug_macro   0x00000000       0x16 src/firmware/spi_27_driver.o
  .debug_macro   0x00000000       0xa6 src/firmware/spi_27_driver.o
- .debug_line    0x00000000      0xde5 src/firmware/spi_27_driver.o
- .debug_str     0x00000000    0x87d78 src/firmware/spi_27_driver.o
+ .debug_line    0x00000000      0xdfb src/firmware/spi_27_driver.o
+ .debug_str     0x00000000    0x87d9a src/firmware/spi_27_driver.o
  .comment       0x00000000       0x5a src/firmware/spi_27_driver.o
- .debug_frame   0x00000000       0xb4 src/firmware/spi_27_driver.o
+ .debug_frame   0x00000000       0xd8 src/firmware/spi_27_driver.o
  .ARM.attributes
                 0x00000000       0x32 src/firmware/spi_27_driver.o
  COMMON         0x00000000       0x3f src/firmware/spi_27_driver.o
@@ -7296,6 +7298,7 @@ spi27Slave                                        src/firmware/spi_27_driver.o
 spi27_connect                                     src/firmware/spi_27_driver.o
 spi27_initialize                                  src/firmware/spi_27_driver.o
 spi27_read_byte_from_reg                          src/firmware/spi_27_driver.o
+spi27_rssi                                        src/firmware/spi_27_driver.o
 spi27_start_xfer                                  src/firmware/spi_27_driver.o
 spi27_write_byte_to_reg                           src/firmware/spi_27_driver.o
 spi27_write_cmd                                   src/firmware/spi_27_driver.o

@@ -115,6 +115,9 @@ void spi27_connect(){
 	//if no ack is recieved, interrupt rxend is generated. The client can
 	//transmit again by issuing a TRANSMIT command after a bit of a delay.
 	//Otherwise if the end of this method is reached, boards are paired 
+		
+		//Set the transmission mode to streaming (pg. 30)
+		spi27_write_byte_to_reg(0xBA,0x00);
 }
 
 void spi27_write_cmd (char *cmd){

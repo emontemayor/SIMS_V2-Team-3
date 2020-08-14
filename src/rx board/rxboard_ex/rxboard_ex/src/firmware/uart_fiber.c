@@ -59,6 +59,8 @@ void uartfiber_init(void)
     
     // configure the callback(s) for this module
     configure_uartfiber_callbacks();
+	
+
 }
 
 

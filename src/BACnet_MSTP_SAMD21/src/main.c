@@ -8,19 +8,21 @@
 /************************************************************************/
 /*                                include headers                       */
 /************************************************************************/
+#include "uart_fiber.h"
 #include <SIM_PIN_DEF.h>
 #include <asf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>	
 #include <math.h>
-#include <uart_fiber.h>
 #include <sim_system_glcd_software.h>
 #include <ff.h>
 #include <sim_gui.h>
 #include "bacnet.h"
 #include "rs485.h"
 #include "bacnet/basic/sys/mstimer.h"
+
+
 
 void sim_system_init(void);
 void sys_clock_init(void);
@@ -52,7 +54,9 @@ static struct mstimer Blink_Timer;
 static bool LED_Status;
 
 //current rssi values
-extern struct shield_data current_fiber1_data;
+struct shield_data current_fiber1_data;
+struct shield_data current_fiber2_data;
+
 
 /************************************************************************/
 /*                                Main                                  */
@@ -76,7 +80,7 @@ int main(void){
 	delay_ms(2000);
 	
 	/*
-	//put static portions into ram_g/*
+	//put static portions into ram_g
 	appAttn();
 	appRssi();
 	appHist();
@@ -99,16 +103,20 @@ int main(void){
 	//main home menu and GUI
 	while(1){
 		delay_ms(1);
-		/*
+		
+		
 		if(get_fiber1_status() == data_ready)
 		{
 			current_fiber1_data.rssi_values = get_fiber1_data();
 		}
-		*/
 		
-		//commented to test fiber
-		/*
-		bacnet_task();
+		if(get_fiber2_status() == data_ready)
+		{
+			current_fiber2_data.rssi_values = get_fiber2_data();
+		}		
+		
+
+		//bacnet_task();
 	
 		tag = 0;
 		disStart();
@@ -141,15 +149,16 @@ int main(void){
         //check tag value and determine further action
 		if(tag!=0)		tempTag = tag;
 		if (tempTag != tag && tag == 0 && tag!=back){
-			if(tempTag == attn)				attnOp(NULL);
+			if(tempTag == attn)				attnOp(current_fiber1_data, current_fiber2_data);
 			else if(tempTag == hist)		historyOp();
 			//else if(tempTag == sett)		settingOp();
 			//else if(tempTag == rssi)		rssiOp();
 			tempTag = 0;
 			delay_ms(50);
 		}
-		*/
+		
 	}
+	
 }//end main
 
 /****************************************************************************************************************************
@@ -178,7 +187,7 @@ void sim_system_init(void){
 	configure_ext_int_callback();
 
 	// initialize the LCD
-	//lcd_init_seq(); 
+	lcd_init_seq(); 
 	
 	
 	// set the interrupt masks for the LCD interrupts

@@ -87,14 +87,16 @@ void spi27_connect (){
 	//wait for dat_rtx interrupt, signaling signaling data has been succesfully transmitted and can be read.
 	char *byte;
 	while(1){
-		spi27_read_byte_from_reg(*byte,0x2A);
+		spi27_read_byte_from_reg(&byte,0x2A);
 		char y = *byte;
 		if (y & 0b01000000){
 			break;
 		}
 	};
-	 
-	 
+	//set the RSSI to record every time the reciever is active. If problems: find a way to set bit alone.
+	spi27_write_byte_to_reg(0x80, 0x20);
+	//Set the transmission mode to streaming (pg. 30)
+	spi27_write_byte_to_reg(0xBA,0x00);
 }
 
 void spi27_write_cmd (char *cmd){
@@ -104,9 +106,17 @@ void spi27_write_cmd (char *cmd){
 	*cmd = *cmd | 0b11000000;
 	
 	//read byte from address
-	write_status = spi_write_buffer_wait(&spi27Master, *cmd, 1);
+	write_status = spi_write_buffer_wait(&spi27Master, &cmd, 1);
 	//set sen = 0;
 	//set sen = 1;
+}
+
+int16_t spi27_rssi(){
+	int16_t rssi;
+	char *byte;
+	spi27_read_byte_from_reg(&byte, 0x23);
+	rssi = *byte & 0x0F;
+	return rssi;
 }
 
 void spi27_read_byte_from_reg (char *read_byte, uint8_t *reg){
@@ -116,7 +126,7 @@ void spi27_read_byte_from_reg (char *read_byte, uint8_t *reg){
 	*reg =+ 0b01000000;
 	
 	//read byte from address
-	read_status = spi_transceive_buffer_wait(&spi27Master, *reg, *read_byte,  2);
+	read_status = spi_transceive_buffer_wait(&spi27Master, &reg, &read_byte,  2);
 	//set sen = 0;
 	//set sen = 1; 
 }
@@ -134,7 +144,7 @@ void spi27_write_byte_to_reg (char byte, uint8_t *reg){
 	*buf = *buf | byte;
 	
 	//write byte to address
-	write_status = spi_write_buffer_wait(&spi27Master, *buf, 2);
+	write_status = spi_write_buffer_wait(&spi27Master, &buf, 2);
 		//set sen = 0;
 		//set sen = 1;
 	

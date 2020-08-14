@@ -70,10 +70,13 @@ void uartfiber_init(void)
     usart_enable(&uartfiber_inst2);
 	
 	//configure callbacks for data buffers
-	usart_register_callback(&uartfiber_inst1, &fiber1_callback, USART_CALLBACK_BUFFER_RECEIVED);
-	usart_register_callback(&uartfiber_inst2, &fiber2_callback, USART_CALLBACK_BUFFER_RECEIVED);
+	usart_register_callback(&uartfiber_inst1, fiber1_callback, USART_CALLBACK_BUFFER_RECEIVED);
+	usart_register_callback(&uartfiber_inst2, fiber2_callback, USART_CALLBACK_BUFFER_RECEIVED);
 	usart_enable_callback(&uartfiber_inst1, USART_CALLBACK_BUFFER_RECEIVED);
 	usart_enable_callback(&uartfiber_inst2, USART_CALLBACK_BUFFER_RECEIVED);
+	
+	usart_read_buffer_job(&uartfiber_inst1,(uint8_t *)fiber1_data.bytes, sizeof(fiber1_data));
+
 }
 
 void uartfiber_deinit(void)
@@ -84,10 +87,14 @@ void uartfiber_deinit(void)
 
 void fiber1_callback()
 {
+	system_interrupt_enter_critical_section();
+	
+	uint8_t *buf[6];
+	usart_read_buffer_job(&uartfiber_inst1, &buf, 6);
 	uint8_t tempdata = UART_FIBER1->USART.DATA.reg;
 	
-	if(fiber1_data_status =! data_ready)
-	{
+	//if(fiber1_data_status != data_not_ready)
+	//{
 		if (tempdata == '$')
 		{
 			fiber1_pointer = 0;
@@ -101,7 +108,8 @@ void fiber1_callback()
 		{
 			fiber1_data.bytes[fiber1_pointer++] = tempdata;
 		}
-	}
+	//}
+	system_interrupt_leave_critical_section();
 }
 
 void fiber2_callback()
@@ -130,11 +138,22 @@ struct measurement get_fiber1_data()
 {
 	return fiber1_data.data;
 }
+struct measurement get_fiber2_data()
+{
+	return fiber2_data.data;
+}
+
 
 enum fiber_data_status get_fiber1_status()
 {
 	return fiber1_data_status;
 };
+
+enum fiber_data_status get_fiber2_status()
+{
+	return fiber2_data_status;
+};
+
 
 /*
 
