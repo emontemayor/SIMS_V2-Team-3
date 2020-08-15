@@ -7,6 +7,7 @@
  **********************************************/
 #include <txPinDef.h>
 #include <asf.h>
+//#include "spi_27_driver.h"
 #include <spi_169_driver.h>
 #include <uart_245_driver.h>
 #include <uart_915_driver.h>
@@ -32,22 +33,20 @@ int main (void)
     simSysInit();
     
     // init registers for 169MHz
-     //spi169_tx_init();
+    // spi169_tx_init();
 
 	
-    // init registers for 169MHz
-    //spi27_tx_init();
 	   
     while(1)
     {
         // start a SPI transfer to the FIFO
-        //spi169_start_xfer(AX5043_FIFODATA, WRT);
-        
-        // write the preamble
-       // spi169_write(tx_preamble, 4);
-
-        // stop the SPI transfer to the FIFO
-       // spi169_stop_xfer();
+       //spi169_start_xfer(AX5043_FIFODATA, WRT);
+       //
+       //// write the preamble
+       //spi169_write(tx_preamble, 4);
+	   //
+       //// stop the SPI transfer to the FIFO
+       //pi169_stop_xfer();
         
 		
 	
@@ -79,9 +78,10 @@ void simSysInit(void)
 	system_init();
 	sys_clk_init();
 	conf_port_pin();
-    //spi169_init();
+    spi169_init();
     uart245_init();
     //uart915_init();
+	//spi27_init();
 }
 
 

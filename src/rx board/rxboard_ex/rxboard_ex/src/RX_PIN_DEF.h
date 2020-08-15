@@ -13,13 +13,13 @@
 /******************pin out for transceiver module**********/
 /* 2.45 GHz module defines */
 #define UART245			SERCOM0
-#define PAEN245			PIN_PA01
-#define CONFIG245		PIN_PA02
-#define RESET245		PIN_PA03
-#define UTX245			PINMUX_PA04D_SERCOM0_PAD0
-#define URX245			PINMUX_PA05D_SERCOM0_PAD1
-#define RTS245			PIN_PA06 
-#define CTS245			PIN_PA07
+#define PAEN245			PIN_PA05
+#define CONFIG245		PIN_PA06
+#define RESET245		PIN_PA07
+#define UTX245			PINMUX_PA08C_SERCOM0_PAD0
+#define URX245			PINMUX_PA09C_SERCOM0_PAD1
+#define RTS245			PIN_PA10
+#define CTS245			PIN_PA11
 #define UART245_BAUD    19200
 #define UART245_PINMUX  USART_RX_1_TX_0_RTS_2_CTS_3
 // UART245 clock source

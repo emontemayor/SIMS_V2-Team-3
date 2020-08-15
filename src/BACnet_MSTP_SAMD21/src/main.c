@@ -69,16 +69,16 @@ int main(void){
 	// config and setup calendar
 	configure_rtc_calendar();
     
-    //// setup display
-	//phost = &host;
-	////open display host
-	//Ft_Gpu_Hal_Open(phost);
-	//// enable the dislay interrupt
-	//Ft_Gpu_Hal_Wr8(phost, REG_INT_EN, 1);
-	//// mask all interrupt but TAG
-	//Ft_Gpu_Hal_Wr8(phost, REG_INT_MASK, 6);
-	//
-	//delay_ms(2000);
+    // setup display
+	phost = &host;
+	//open display host
+	Ft_Gpu_Hal_Open(phost);
+	// enable the dislay interrupt
+	Ft_Gpu_Hal_Wr8(phost, REG_INT_EN, 1);
+	// mask all interrupt but TAG
+	Ft_Gpu_Hal_Wr8(phost, REG_INT_MASK, 6);
+	
+	delay_ms(2000);
 	
 	/*
 	//put static portions into ram_g
@@ -87,84 +87,84 @@ int main(void){
 	appHist();
 	*/
 	
-	//cpu_irq_enable();
-	//
-	////enable our hardware
-	//mstimer_init();
-	////led_init();
-	//// set baud before init
-	//rs485_baud_rate_set(38400);
-	//rs485_init();
-	////initialize the BACnet stack
-	////bacnet_init();
-	//mstimer_set(&Blink_Timer, 125);
+	cpu_irq_enable();
+	
+	//enable our hardware
+	mstimer_init();
+	//led_init();
+	// set baud before init
+	rs485_baud_rate_set(38400);
+	rs485_init();
+	//initialize the BACnet stack
+	//bacnet_init();
+	mstimer_set(&Blink_Timer, 125);
 
 
-
+	struct rssi_vals *test = {10,20,30,40};
 	//main home menu and GUI
 	while(1){
-		delay_ms(1);
-		union shield_data_union test;
+		//delay_ms(1);
+		//union shield_data_union test;
 		struct measurement readings = {10,20,30,40};
-		test.data.rssi_values= readings;
-		test.data.timestamp.day = 29;
-		test.data.timestamp.year = 2020;
-		struct shield_data rxbuff;
+		//test.data.rssi_values= readings;
+		//test.data.timestamp.day = 29;
+		//test.data.timestamp.year = 2020;
+		//struct shield_data rxbuff;
+		//
+		//eeprom_write_data(test.databytes);
+		//rxbuff = eeprom_read_address(0);
 		
-		eeprom_write_data(test.databytes);
-		rxbuff = eeprom_read_address(0);
+		if(get_fiber1_status() == data_ready)
+		{
+			current_fiber1_data.rssi_values = readings;//get_fiber1_data();
+		}
 		
-		//if(get_fiber1_status() == data_ready)
-		//{
-		//	current_fiber1_data.rssi_values = get_fiber1_data();
-		//}
-		//
-		//if(get_fiber2_status() == data_ready)
-		//{
-		//	current_fiber2_data.rssi_values = get_fiber2_data();
-		//}		
-		//
-		//
-		////bacnet_task();
-		//
-		//tag = 0;
-		//disStart();
-		////set background
-		//Ft_Gpu_CoCmd_Gradient(phost, 0, 0x060A39, 0, disWid, disHei, 0x0A4F7A);
-		////get time and put it on display
-		//Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(0,0,0));
-		//printTime();
-		//
-		//// store value to tag
-		//Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(255,255,255));
-		//tag = Ft_Gpu_Hal_Rd8(phost,REG_TOUCH_TAG);
-		//
-		////assign tag value to each button and display it
-		//Ft_Gpu_Hal_WrCmd32(phost,TAG(attn));
-		//Ft_Gpu_CoCmd_Button(phost, disWid*.23,disHei*0.23,(disWid*0.25),(disHei*0.25),30, (tag == attn)? OPT_FLAT:0,"  Attenuation  ");
-		//    
-		//Ft_Gpu_Hal_WrCmd32(phost,TAG(hist));
-		//Ft_Gpu_CoCmd_Button(phost, disWid*.52,disHei*0.23,(disWid*0.25),(disHei*0.25),30, (tag == hist)? OPT_FLAT:0,"  History  ");
-		//    
-		//Ft_Gpu_Hal_WrCmd32(phost,TAG(rssi));
-		//Ft_Gpu_CoCmd_Button(phost, disWid*.23,disHei*0.52, disWid*0.25,disHei*0.25,30, (tag == rssi)? OPT_FLAT:0,"  RSSI  ");
-		//    
-		//Ft_Gpu_Hal_WrCmd32(phost,TAG(sett));
-		//Ft_Gpu_CoCmd_Button(phost, disWid*.52,(disHei*0.52),(disWid*0.25),(disHei*0.25),30, (tag == sett)? OPT_FLAT:0,"  Settings  ");
-	    //
-		//disEnd();
-		//
-		//
-        ////check tag value and determine further action
-		//if(tag!=0)		tempTag = tag;
-		//if (tempTag != tag && tag == 0 && tag!=back){
-		//	if(tempTag == attn)				attnOp(current_fiber1_data, current_fiber2_data);
-		//	else if(tempTag == hist)		historyOp();
-		//	//else if(tempTag == sett)		settingOp();
-		//	//else if(tempTag == rssi)		rssiOp();
-		//	tempTag = 0;
-		//	delay_ms(50);
-		//}
+		if(get_fiber2_status() == data_ready)
+		{
+			current_fiber2_data.rssi_values = readings; //get_fiber2_data();
+		}		
+		
+		
+		//bacnet_task();
+		
+		tag = 0;
+		disStart();
+		//set background
+		Ft_Gpu_CoCmd_Gradient(phost, 0, 0x060A39, 0, disWid, disHei, 0x0A4F7A);
+		//get time and put it on display
+		Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(0,0,0));
+		printTime();
+		
+		// store value to tag
+		Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(255,255,255));
+		tag = Ft_Gpu_Hal_Rd8(phost,REG_TOUCH_TAG);
+		
+		//assign tag value to each button and display it
+		Ft_Gpu_Hal_WrCmd32(phost,TAG(attn));
+		Ft_Gpu_CoCmd_Button(phost, disWid*.23,disHei*0.23,(disWid*0.25),(disHei*0.25),30, (tag == attn)? OPT_FLAT:0,"  Attenuation  ");
+		    
+		Ft_Gpu_Hal_WrCmd32(phost,TAG(hist));
+		Ft_Gpu_CoCmd_Button(phost, disWid*.52,disHei*0.23,(disWid*0.25),(disHei*0.25),30, (tag == hist)? OPT_FLAT:0,"  History  ");
+		    
+		Ft_Gpu_Hal_WrCmd32(phost,TAG(rssi));
+		Ft_Gpu_CoCmd_Button(phost, disWid*.23,disHei*0.52, disWid*0.25,disHei*0.25,30, (tag == rssi)? OPT_FLAT:0,"  RSSI  ");
+		    
+		Ft_Gpu_Hal_WrCmd32(phost,TAG(sett));
+		Ft_Gpu_CoCmd_Button(phost, disWid*.52,(disHei*0.52),(disWid*0.25),(disHei*0.25),30, (tag == sett)? OPT_FLAT:0,"  Settings  ");
+	    
+		disEnd();
+		
+		
+        //check tag value and determine further action
+		if(tag!=0)		tempTag = tag;
+		if (tempTag != tag && tag == 0 && tag!=back){
+			if(tempTag == attn)			    attnOp();	//attnOp(current_fiber1_data, current_fiber2_data);
+			else if(tempTag == hist)		historyOp();
+			else if(tempTag == sett)		settingOp();
+			else if(tempTag == rssi)		rssiOp();
+			tempTag = 0;
+			delay_ms(50);
+		}
 		
 	}
 	
@@ -196,7 +196,7 @@ void sim_system_init(void){
 	configure_ext_int_callback();
 
 	// initialize the LCD
-	//lcd_init_seq(); 
+	lcd_init_seq(); 
 	
 	
 	// set the interrupt masks for the LCD interrupts
@@ -204,9 +204,9 @@ void sim_system_init(void){
 	// write 1 to the LCD REG_INT_EN register to enable it
 	lcd_int_enable();
     
-	spieeprom_init();
+	//spieeprom_init();
 	
-    uartfiber_init();
+    //uartfiber_init();
     //uartib_init();
 }//end sim_system_init
 

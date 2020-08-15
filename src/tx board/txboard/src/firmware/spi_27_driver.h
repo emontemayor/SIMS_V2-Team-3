@@ -150,9 +150,10 @@ void spi27_tx_init(void);
  * Description      : Initializes a 27 MHz module for transmitting.
  */
 void spi27_connect(void);
-void spi27_write_cmd (char *cmd);
-void spi27_read_byte_from_reg (char *read_byte, uint8_t *reg);
-void spi27_write_byte_to_reg (char byte, uint8_t *reg);
 
+void spi27_write_byte_to_reg (char byte, uint8_t reg);
+uint8_t spi27_read_byte_from_reg (uint8_t reg);
 
+uint16_t spi27_rssi(void);
+void spi27_write_cmd (char cmd);
 #endif /* DRIVER_H_ */

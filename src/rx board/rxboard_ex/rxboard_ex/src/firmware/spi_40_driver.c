@@ -152,7 +152,7 @@ status_code_genare_t spi40_read(uint8_t* read_buff, \
     
     // data read
     read_status = spi_read_buffer_wait(&spi40Master, \
-                    read_buff, amount_bytes, 0x0000);
+    read_buff, amount_bytes, 0x0000);
     
     return read_status;
 }
@@ -485,10 +485,10 @@ uint8_t spi40_rollavg(uint8_t new_val)
  * Description      : Gets the RSSI value from the AX5043 and performs
  *  a rolling average on it. Returns the averaged RSSI as a 2 byte int.
  */
-int16_t spi40_rssi(void)
+uint16_t spi40_rssi(void)
 {
     /* read the RSSI register, put it in the rolling average, and
      * return the new average */
-    return ((int16_t) ((int8_t) spi40_rollavg(spi40_rd8(AX5043_RSSI))));
+    return ((uint16_t) ((int8_t) spi40_rollavg(spi40_rd8(AX5043_RSSI))));
 }
 
