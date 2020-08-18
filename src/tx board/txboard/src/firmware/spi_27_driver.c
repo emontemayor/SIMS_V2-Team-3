@@ -49,6 +49,8 @@ void spi27_init(void)
     spi27MasterConf.pinmux_pad1 = SCK27;
     spi27MasterConf.pinmux_pad2 = PINMUX_UNUSED;
     spi27MasterConf.pinmux_pad3 = MISO27;
+	spi27MasterConf.transfer_mode = SPI_TRANSFER_MODE_1;
+	spi27MasterConf.data_order = SPI_DATA_ORDER_MSB;
 	
 	// clock source should always be GLCK0
 	spi27MasterConf.generator_source = SPI27_CLK;
@@ -71,6 +73,8 @@ void spi27_init(void)
 }
 
 void spi27_connect(){
+	spi27_write_cmd(CHIP_RESET); //Reset the chip
+	
 	//register set up. Common data-rate, frequency deviation and communication mode must be configured in the MAIN Register of all devices which have to be paired
 	spi27_write_byte_to_reg(0x00, 0x00); //set transmitter unit as client
 	spi27_write_byte_to_reg(0x10, 0x04); //set wakecyc bits (wake cycle every 1 second) (pg. 25)
@@ -83,16 +87,19 @@ void spi27_connect(){
 	spi27_write_byte_to_reg(0, 0x09);
 	spi27_write_byte_to_reg(0x02, 0x0A);
 	
+		int8_t test;
+	test = spi27_read_byte_from_reg(0x04);
+	test = spi27_read_byte_from_reg(0x06);
+	
+	
 	//wake procedure
 	spi27_write_cmd(WAKE_RX_ON); //begin wakeup call
 	delay_s(1); //delay for 1 sec, listen for client
 	
 	//wait for wake_call interrupt, signaling wakeup signal has been identified
-	char *byte;
 	while(1){
-		spi27_read_byte_from_reg(*byte,0x2A);
-		char x = *byte;
-			if (x && 0b01000000){
+		uint8_t x = spi27_read_byte_from_reg(0x2A);
+			if (x & 0b01000000){
 				break;
 			} 
 		};
@@ -105,9 +112,8 @@ void spi27_connect(){
 	
 	//wait for ack_rtx interrupt, signaling ack from master (ID approved)
 	while(1){
-		spi27_read_byte_from_reg(*byte,0x2B);
-		char y = *byte;
-		if (y && 0b00000001){
+		uint8_t y = spi27_read_byte_from_reg(0x2B);
+		if (y & 0b00000001){
 			break;
 		}
 	};
@@ -120,43 +126,70 @@ void spi27_connect(){
 		spi27_write_byte_to_reg(0xBA,0x00);
 }
 
-void spi27_write_cmd (char *cmd){
-	status_code_genare_t write_status;
-
-	//Add 1s to put module in COMMAND mode
-	*cmd = *cmd || 0b11000000;
+uint8_t spi27_read_byte_from_reg (uint8_t reg){
+	uint8_t arr = 0;
+	int *read_byte = &arr;
+	int value;
 	
-	//read byte from address
-	write_status = spi_write_buffer_wait(&spi27Master, *cmd, 1);
-	//set sen = 0;
-	//set sen = 1;
-}
-
-void spi27_read_byte_from_reg (char *read_byte, uint8_t *reg){
 	status_code_genare_t read_status;
-
+	int8_t *val;
 	//Add 1 leading 0s to put module in READ mode
-	*reg =+ 0b01000000;
+	reg = reg | 0b01000000;
+	val = &reg;
+	
 	
 	//read byte from address
-	read_status = spi_transceive_buffer_wait(&spi27Master, *reg, *read_byte,  2);
+	port_pin_set_output_level(SS27, true);
+	//Note: added a line to ASF module to assign recieved value to buffer. 
+	//ASF implementation was not working.
+	read_status = spi_transceive_buffer_wait(&spi27Master, val, read_byte, 2);
+	port_pin_set_output_level(SS27, false);
+	return arr;
 	//set sen = 0;
 	//set sen = 1; 
 }
 
-void spi27_write_byte_to_reg (char byte, uint8_t *reg){
+void spi27_write_cmd (char cmd){
+	status_code_genare_t write_status;
+	int8_t *val;
+	//Add 1s to put module in COMMAND mode
+	cmd = cmd | 0b11000000;
+	val = &cmd;
+	//read byte from address
+	port_pin_set_output_level(SS27, true);	
+	write_status = spi_write_buffer_wait(&spi27Master,val,1);
+	port_pin_set_output_level(SS27, false);	
+	//set sen = 0;
+	//set sen = 1;
+}
+
+uint16_t spi27_rssi(){
+	uint16_t rssi;
+	char *byte;
+	rssi = spi27_read_byte_from_reg(0x23);
+	rssi = rssi & 0x0F;
+	return rssi;
+}
+
+void spi27_write_byte_to_reg (char byte, uint8_t reg){
+	//address on the right, data on the left.
+	
 	 status_code_genare_t write_status;
 	 uint16_t *buf;
-	 
-	//Add 2 leading 0s to put module in WRITE mode
-	*reg = *reg && 0b00111111;
-	//prepare buffer with address and data
-	*buf = *reg;
-	*buf = *buf<<8;
-	*buf = *buf || byte;
+	 uint16_t val; 
+	 val = 0;
 	
+	//Add 2 leading 0s to put module in WRITE mode
+	reg &= 0x3F;
+	val = (byte<<8) | reg;
+	
+	//val = 0x5ABF;
+	//prepare buffer with address and data
+	buf = &val;
 	//write byte to address
-	write_status = spi_write_buffer_wait(&spi27Master, *buf, 2);
+	port_pin_set_output_level(SS27, true);	
+		spi_write_buffer_wait(&spi27Master, buf, 2);
+	port_pin_set_output_level(SS27, false);	
 		//set sen = 0;
 		//set sen = 1;
 	

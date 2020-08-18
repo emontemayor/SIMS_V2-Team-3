@@ -136,10 +136,10 @@ src/main.d src/main.o: ../src/main.c ../src/firmware/uart_fiber.h \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar.h ../src/config/conf_clocks.h \
  ../src/ASF/sam0/drivers/rtc/rtc_tamper.h \
  ../src/ASF/common2/components/memory/sd_mmc/sd_mmc.h \
- ../src/config/conf_sd_mmc.h ../src/ASF/sam0/drivers/sercom/sercom.h \
+ ../src/config/conf_sd_mmc.h \
+ ../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h \
  ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
  ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
- ../src/ASF/sam0/drivers/sercom/sercom.h \
  ../src/ASF/sam0/drivers/sercom/spi/spi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
@@ -173,7 +173,8 @@ src/main.d src/main.o: ../src/main.c ../src/firmware/uart_fiber.h \
  ../src/GLCD_hal/sim_gui.h ../src/firmware/rssi_mngr.h \
  ../src/firmware/uart_ib.h ../src/bacnet.h ../src/rs485.h \
  ../src/bacnet-stack/src/bacnet/basic/sys/mstimer.h \
- ../src/bacnet-stack/src/bacnet/bacnet_stack_exports.h
+ ../src/bacnet-stack/src/bacnet/bacnet_stack_exports.h \
+ ../src/firmware/spi_eeprom.h ../src/firmware/uart_fiber.h
 
 ../src/firmware/uart_fiber.h:
 
@@ -463,13 +464,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/config/conf_sd_mmc.h:
 
-../src/ASF/sam0/drivers/sercom/sercom.h:
+../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom_pinout.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h:
-
-../src/ASF/sam0/drivers/sercom/sercom.h:
 
 ../src/ASF/sam0/drivers/sercom/spi/spi.h:
 
@@ -558,3 +557,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/bacnet-stack/src/bacnet/basic/sys/mstimer.h:
 
 ../src/bacnet-stack/src/bacnet/bacnet_stack_exports.h:
+
+../src/firmware/spi_eeprom.h:
+
+../src/firmware/uart_fiber.h:

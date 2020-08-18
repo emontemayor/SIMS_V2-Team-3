@@ -138,7 +138,8 @@ src/firmware/spi_27_driver.d src/firmware/spi_27_driver.o: \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart_interrupt.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
- ../src/firmware/AX5043_regs.h ../src/firmware/AS3900_regs.h
+ ../src/firmware/AX5043_regs.h ../src/firmware/AS3900_regs.h \
+ ../src/firmware/spi_40_driver.h
 
 ../src/firmware/spi_27_driver.h:
 
@@ -429,3 +430,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/firmware/AX5043_regs.h:
 
 ../src/firmware/AS3900_regs.h:
+
+../src/firmware/spi_40_driver.h:

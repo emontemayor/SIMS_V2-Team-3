@@ -1213,7 +1213,8 @@ enum status_code spi_transceive_buffer_wait(
 
 		/* Read value will be at least 8-bits long */
 		rx_data[rx_pos++] = received_data;
-
+		*rx_data = received_data;
+		
 		/* If 9-bit data, write next received byte to the buffer */
 		if (module->character_size == SPI_CHARACTER_SIZE_9BIT) {
 			rx_data[rx_pos++] = (received_data >> 8);
@@ -1253,7 +1254,7 @@ enum status_code spi_transceive_buffer_wait(
 			}
 			/* Read value will be at least 8-bits long */
 			rx_data[rx_pos++] = received_data;
-
+			*rx_data = received_data;
 			/* If 9-bit data, write next received byte to the buffer */
 			if (module->character_size == SPI_CHARACTER_SIZE_9BIT) {
 				rx_data[rx_pos++] = (received_data >> 8);

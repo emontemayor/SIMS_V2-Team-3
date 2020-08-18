@@ -21,6 +21,7 @@
 #include "bacnet.h"
 #include "rs485.h"
 #include "bacnet/basic/sys/mstimer.h"
+#include "spi_eeprom.h"
 
 
 
@@ -85,69 +86,47 @@ int main(void){
 	appRssi();
 	appHist();
 	*/
-
+	
 	cpu_irq_enable();
-
-	/* enable our hardware */
+	
+	//enable our hardware
 	mstimer_init();
 	//led_init();
-	/* set baud before init */
+	// set baud before init
 	rs485_baud_rate_set(38400);
 	rs485_init();
-	/* initialize the BACnet stack */
+	//initialize the BACnet stack
 	//bacnet_init();
 	mstimer_set(&Blink_Timer, 125);
 
 
-
+	struct rssi_vals *test = {10,20,30,40};
 	//main home menu and GUI
 	while(1){
-		delay_ms(1);
-		
+		//delay_ms(1);
+		//union shield_data_union test;
+		struct measurement readings = {10,20,30,40};
+		//test.data.rssi_values= readings;
+		//test.data.timestamp.day = 29;
+		//test.data.timestamp.year = 2020;
+		//struct shield_data rxbuff;
+		//
+		//eeprom_write_data(test.databytes);
+		//rxbuff = eeprom_read_address(0);
 		
 		if(get_fiber1_status() == data_ready)
 		{
-			current_fiber1_data.rssi_values = get_fiber1_data();
+			current_fiber1_data.rssi_values = readings;//get_fiber1_data();
 		}
 		
 		if(get_fiber2_status() == data_ready)
 		{
-			current_fiber2_data.rssi_values = get_fiber2_data();
+			current_fiber2_data.rssi_values = readings; //get_fiber2_data();
 		}		
 		
-		/*
-		//Sanders method for retrieving data from the EEPROM chip:
-		//begin a for loop to read from all possible memory locations
-		for(uint32_t i = 0; i < EEPROM_BYTE_TOTAL; i += sizeof(struct shield_data))
-		{
-			struct shield_data temp = eeprom_read_address(i);
-			//IDK exactly what we're doing with the LCD
-			lcd_print_a_single_item_of_shit(temp);
-		}
-		//at this point were done
 		
-		
-		//OR alternatively: code to retrieve only items from the last week
-		rtc_calendar_time test_time = rtc_get_current_calendar_time_or_whatever_this_function_would_be();
-		//set this time to be a week ago
-		test_time.week--;
-		
-		//begin a for loop to read from all possible memory locations
-		for(uint32_t i = 0; i < EEPROM_BYTE_TOTAL; i += sizeof(struct shield_data))
-		{
-			struct shield_data temp = eeprom_read_address(i);
-			//test to see if the time is later than the test time
-			if (is_timestamp_later(temp.timestamp, test_time))
-			{
-				//IDK exactly what we're doing with the LCD
-				lcd_print_a_single_item_of_shit(temp);
-			}
-		}
-		//at this point were done
-		*/
-
 		//bacnet_task();
-	
+		
 		tag = 0;
 		disStart();
 		//set background
@@ -155,7 +134,7 @@ int main(void){
 		//get time and put it on display
 		Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(0,0,0));
 		printTime();
-
+		
 		// store value to tag
 		Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(255,255,255));
 		tag = Ft_Gpu_Hal_Rd8(phost,REG_TOUCH_TAG);
@@ -175,14 +154,14 @@ int main(void){
 	    
 		disEnd();
 		
-
+		
         //check tag value and determine further action
 		if(tag!=0)		tempTag = tag;
 		if (tempTag != tag && tag == 0 && tag!=back){
-			if(tempTag == attn)				attnOp(current_fiber1_data, current_fiber2_data);
+			if(tempTag == attn)			    attnOp();	//attnOp(current_fiber1_data, current_fiber2_data);
 			else if(tempTag == hist)		historyOp();
-			//else if(tempTag == sett)		settingOp();
-			//else if(tempTag == rssi)		rssiOp();
+			else if(tempTag == sett)		settingOp();
+			else if(tempTag == rssi)		rssiOp();
 			tempTag = 0;
 			delay_ms(50);
 		}
@@ -225,7 +204,9 @@ void sim_system_init(void){
 	// write 1 to the LCD REG_INT_EN register to enable it
 	lcd_int_enable();
     
-    uartfiber_init();
+	//spieeprom_init();
+	
+    //uartfiber_init();
     //uartib_init();
 }//end sim_system_init
 
@@ -321,6 +302,9 @@ void configure_port_pins(void){
 	port_pin_set_config(LCD_PD, &config_port_pin);
 	
 	port_pin_set_output_level(LCD_PD, LCD_PD_DIS);
+	
+	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
+	port_pin_set_config(EEPROM_CS,&config_port_pin);
 	
 /*
 

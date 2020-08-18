@@ -160,7 +160,7 @@ uint8_t spi40_rollavg(uint8_t new_val);
  * Description      : Gets the RSSI value from the AX5043 and performs
  *  a rolling average on it. Returns the averaged RSSI as a 2 byte int.
  */
-int16_t spi40_rssi(void);
+uint16_t spi40_rssi(void);
 
 
 #endif /* DRIVER_H_ */

@@ -137,10 +137,10 @@ src/firmware/spi_eeprom.d src/firmware/spi_eeprom.o: \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar.h ../src/config/conf_clocks.h \
  ../src/ASF/sam0/drivers/rtc/rtc_tamper.h \
  ../src/ASF/common2/components/memory/sd_mmc/sd_mmc.h \
- ../src/config/conf_sd_mmc.h ../src/ASF/sam0/drivers/sercom/sercom.h \
+ ../src/config/conf_sd_mmc.h \
+ ../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h \
  ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
  ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
- ../src/ASF/sam0/drivers/sercom/sercom.h \
  ../src/ASF/sam0/drivers/sercom/spi/spi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\xlocale.h \
@@ -454,13 +454,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/config/conf_sd_mmc.h:
 
-../src/ASF/sam0/drivers/sercom/sercom.h:
+../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom_pinout.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h:
-
-../src/ASF/sam0/drivers/sercom/sercom.h:
 
 ../src/ASF/sam0/drivers/sercom/spi/spi.h:
 

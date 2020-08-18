@@ -53,7 +53,9 @@
 /*                                Prototypes                            */
 /************************************************************************/
 void mainMenu(void);
-void attnOp(struct shield_data, struct shield_data);
+void attnOp(void);
+
+//void attnOp(struct shield_data, struct shield_data);
 void manualOp(void);
 void historyOp(void);
 void settingOp(void);

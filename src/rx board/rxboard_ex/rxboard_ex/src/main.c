@@ -7,7 +7,7 @@
  **********************************************/
 #include <RX_PIN_DEF.h>
 #include <asf.h>
-#include <spi_27_driver.h>
+//#include <spi_27_driver.h>
 #include <spi_40_driver.h>
 #include <uart_245_driver.h>
 #include <uart_915_driver.h>
@@ -29,7 +29,7 @@ void clk_gclk0_init(void);
 int main (void)
 {
     rssi_vals acquired_rssi = {10, 20, 30};
-    
+ 
 	struct measurement test_data = {40, 10, 30, 40};
 	
     simSysInit();
@@ -37,7 +37,7 @@ int main (void)
     delay_ms(100);
     
     //initialize the AX5043 (169 MHz) registers in preparation for RSSI reading
-    //spi40_rx_init();
+   // spi40_rx_init();
     
     //initialize the MTXDOT (915 MHz) in preparation for RSSI reading
     //uart915_preconnect();
@@ -53,11 +53,11 @@ int main (void)
     while (1)
     {   
         //get the RSSI from all the modules
-		//acquired_rssi.rssi169 = spi40_rssi();
+		acquired_rssi.rssi169 = spi40_rssi();
         //acquired_rssi.rssi915 = uart915_get_rssi();
-        //acquired_rssi.rssi245 = uart245_rssi();
+        acquired_rssi.rssi245 = uart245_rssi();
         
-		usart_fiber_write(test_data);
+		//usart_fiber_write(test_data);
 		
         delay_ms(100);
     }
@@ -79,9 +79,9 @@ void simSysInit(void)
 	sys_clk_init();
 	conf_port_pin();
 	//__disable_irq(); //disable interrupts for debugging purposes
-	spi27_initialize();
+	//spi27_initialize();
 	//spi40_init();
-	//uart245_init();
+	uart245_init();
     //uart915_init();
     //uartfiber_init();
 }
@@ -177,6 +177,7 @@ void conf_port_pin(void)
 	/**************config pin for 27*************/
 	// ss (cs)
 	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
+	//config_port_pin.input_pull = PORT_PIN_PULL_UP;
 	port_pin_set_config(SS27, &config_port_pin);
 	port_pin_set_output_level(SS27, true);	
 } // end conf_port_pin(void)

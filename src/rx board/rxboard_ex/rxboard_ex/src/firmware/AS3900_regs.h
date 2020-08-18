@@ -31,6 +31,7 @@
 #define WAKE_RX_OFF	0x14
 #define WAKE_RX_ON	0x15
 #define STREAM_OFF	0x16
+#define STREAM_ON	0x17
 #define CLEAR_TIMER0	0x20
 #define CLEAR_TIMER1	0x21
 #define CLEAR_TIMER2	0x22

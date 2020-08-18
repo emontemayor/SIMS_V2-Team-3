@@ -117,7 +117,7 @@ src/ASF/sam0/drivers/sercom/spi_master_vec/spi_master_vec.d \
  ../src/ASF/sam0/drivers/port/port.h \
  ../src/ASF/sam0/drivers/system/pinmux/pinmux.h \
  ../src/ASF/sam0/drivers/sercom/spi/spi.h \
- ../src/ASF/sam0/drivers/sercom/sercom.h \
+ ../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h \
  ../src/ASF/sam0/drivers/system/system.h \
  ../src/ASF/sam0/drivers/system/clock/clock.h \
  ../src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da_ha1/clock_feature.h \
@@ -131,7 +131,6 @@ src/ASF/sam0/drivers/sercom/spi_master_vec/spi_master_vec.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  ../src/config/conf_spi.h \
  ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
- ../src/ASF/sam0/drivers/sercom/sercom.h \
  ../src/config/conf_spi_master_vec.h
 
 ../src/ASF/sam0/drivers/sercom/spi_master_vec/spi_master_vec.h:
@@ -368,7 +367,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/sercom/spi/spi.h:
 
-../src/ASF/sam0/drivers/sercom/sercom.h:
+../src/ASF/sam0/drivers/sercom/spi_master_vec/sercom.h:
 
 ../src/ASF/sam0/drivers/system/system.h:
 
@@ -395,7 +394,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/config/conf_spi.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h:
-
-../src/ASF/sam0/drivers/sercom/sercom.h:
 
 ../src/config/conf_spi_master_vec.h:

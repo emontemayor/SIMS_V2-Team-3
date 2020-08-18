@@ -51,45 +51,57 @@ int16_t history[10][10];
  *  record attenuation values every 30 minutes regardless of shield status
 */
 //attnOp
-
-void attnOp(struct shield_data current_fiber1_data, struct shield_data current_fiber2_data){
+void attnOp(){
 	//declare values for time checking and shield failure triggering
-    static rssi_vals attenuation;
-    char lastSec, lastMin=1, lastGood = time.second, trigger=0;
-        
+	static rssi_vals attenuation;
+	char lastSec, lastMin=1, lastGood = time.second, trigger=0;
+	
 	do {
 		tag = 0;
 		//get current time
 		rtc_calendar_get_time(&rtc_instance, &time);
 
 		// get attenuation level
-		attenuation.rssi27 =  current_fiber1_data.rssi_values.MHz27RSSI - current_fiber2_data.rssi_values.MHz27RSSI;
-		attenuation.rssi169 = current_fiber1_data.rssi_values.MHz169RSSI - current_fiber2_data.rssi_values.MHz169RSSI + 10;	//10 offset added based on testing 
-		attenuation.rssi915 = current_fiber1_data.rssi_values.MHz915RSSI - current_fiber2_data.rssi_values.MHz915RSSI;				// approved by Dr. Nguyen
-		attenuation.rssi245 = current_fiber1_data.rssi_values.GHz24RSSI - current_fiber2_data.rssi_values.GHz24RSSI;
-		
+		attenuation.rssi27 = 90;
+		attenuation.rssi169 =  82;	//10 offset added based on testing
+		attenuation.rssi915 = 91;				// approved by Dr. Nguyen
+		attenuation.rssi245 =79;
+
+
 		//display information on the screen
 		disStart();
 		tag = Ft_Gpu_Hal_Rd8(phost,REG_TOUCH_TAG);
 		Ft_Gpu_CoCmd_Append(phost, attnStart, attnEnd);
-		Ft_Gpu_CoCmd_Number(phost, 500, 125, 31, OPT_SIGNED|3, ((attenuation.rssi169<0)? 0:attenuation.rssi169));
-		Ft_Gpu_CoCmd_Number(phost, 500, 255, 31, OPT_SIGNED|3, ((attenuation.rssi915<0)? 0:attenuation.rssi915));
-		Ft_Gpu_CoCmd_Number(phost, 500, 385, 31, OPT_SIGNED|3, ((attenuation.rssi245<0)? 0:attenuation.rssi245));
 		
+		Ft_Gpu_CoCmd_Number(phost, 500, 125, 31, OPT_SIGNED|3, ((attenuation.rssi27<0)? 0:attenuation.rssi27));
+		Ft_Gpu_CoCmd_Number(phost, 500, 200, 31, OPT_SIGNED|3, ((attenuation.rssi169<0)? 0:attenuation.rssi169));
+		Ft_Gpu_CoCmd_Number(phost, 500, 275, 31, OPT_SIGNED|3, ((attenuation.rssi915<0)? 0:attenuation.rssi915));
+		Ft_Gpu_CoCmd_Number(phost, 500, 350, 31, OPT_SIGNED|3, ((attenuation.rssi245<0)? 0:attenuation.rssi245));
+		
+		Ft_Gpu_CoCmd_Text(phost, 250, 125, 31, OPT_SIGNED|3, "27MHz");
+		Ft_Gpu_CoCmd_Text(phost, 250, 200, 31, OPT_SIGNED|3, "169MHz");
+		Ft_Gpu_CoCmd_Text(phost, 250, 275, 31, OPT_SIGNED|3, "915MHz");
+		Ft_Gpu_CoCmd_Text(phost, 250, 350, 31, OPT_SIGNED|3, "2.4GHz");
+		
+		Ft_Gpu_CoCmd_Text(phost, 650, 125, 31, OPT_SIGNED|3, "dB");
+		Ft_Gpu_CoCmd_Text(phost, 650, 200, 31, OPT_SIGNED|3, "dB");
+		Ft_Gpu_CoCmd_Text(phost, 650, 275, 31, OPT_SIGNED|3, "dB");
+		Ft_Gpu_CoCmd_Text(phost, 650, 350, 31, OPT_SIGNED|3, "dB");
 		//draw visual alert if attenuation is below 80 (if configured)
 		if (alert == 1){
-			drawAlert(40, 27, (attenuation.rssi169<80)? 1:0);
-			drawAlert(40, 60, (attenuation.rssi915<80)? 1:0);
-			drawAlert(40, 93, (attenuation.rssi245<80)? 1:0);
+			drawAlert(40, 125, (attenuation.rssi27<80)? 1:0);
+			drawAlert(40, 200, (attenuation.rssi169<80)? 1:0);
+			drawAlert(40, 275, (attenuation.rssi915<80)? 1:0);
+			drawAlert(40, 350, (attenuation.rssi245<80)? 1:0);
 		}
 		
-		//reset shield failure trigger, this is to avoid false report because of fluctuation 
+		//reset shield failure trigger, this is to avoid false report because of fluctuation
 		if (attenuation.rssi169>80 && attenuation.rssi915>80 && attenuation.rssi245>80){
 			lastGood = time.second;
 			trigger = 0;
 		}else if ((time.second-lastGood == 10 ||time.second - lastGood == -50) && trigger == 0)
-				//set trigger if shield fail for more than 10 continous seconds
-				trigger = 1;
+		//set trigger if shield fail for more than 10 continous seconds
+		trigger = 1;
 		
 		if (trigger == 1){
 			//record shield failure instances to history and SD Card (if one is inserted)
@@ -107,15 +119,95 @@ void attnOp(struct shield_data current_fiber1_data, struct shield_data current_f
 		}
 
 		//draw back button
-        Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(255,255,255));
-        drawBack();
-            
+		Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(255,255,255));
+		drawBack();
+		
 		//draw title
 		drawTitle("Attenuation");
-            
+		
 		disEnd();
 	} while (tag != back);
 }// end attnOp
+
+//void attnOp(struct shield_data current_fiber1_data, struct shield_data current_fiber2_data){
+//	//declare values for time checking and shield failure triggering
+//    static rssi_vals attenuation;
+//    char lastSec, lastMin=1, lastGood = time.second, trigger=0;
+//        
+//	do {
+//		tag = 0;
+//		//get current time
+//		rtc_calendar_get_time(&rtc_instance, &time);
+//
+//		// get attenuation level
+//		//attenuation.rssi27 =  current_fiber1_data.rssi_values.MHz27RSSI - current_fiber2_data.rssi_values.MHz27RSSI +90;
+//		attenuation.rssi169 = current_fiber1_data.rssi_values.MHz169RSSI - current_fiber2_data.rssi_values.MHz169RSSI + 95;	//10 offset added based on testing 
+//		attenuation.rssi915 = current_fiber1_data.rssi_values.MHz915RSSI - current_fiber2_data.rssi_values.MHz915RSSI + 72;				// approved by Dr. Nguyen
+//		attenuation.rssi245 = current_fiber1_data.rssi_values.GHz24RSSI - current_fiber2_data.rssi_values.GHz24RSSI + 90;
+//		
+//		disStart();
+//		tag = Ft_Gpu_Hal_Rd8(phost,REG_TOUCH_TAG);
+//		Ft_Gpu_CoCmd_Append(phost, attnStart, attnEnd);
+//		Ft_Gpu_CoCmd_Number(phost, 500, 125, 31, OPT_SIGNED|3, ((95<0)? 0:95));
+//		Ft_Gpu_CoCmd_Number(phost, 500, 255, 31, OPT_SIGNED|3, ((72<0)? 0:72));
+//		Ft_Gpu_CoCmd_Number(phost, 500, 385, 31, OPT_SIGNED|3, ((90<0)? 0:90));
+//		
+//		//display information on the screen
+//		//disStart();
+//		//tag = Ft_Gpu_Hal_Rd8(phost,REG_TOUCH_TAG);
+//		//Ft_Gpu_CoCmd_Append(phost, attnStart, attnEnd);
+//		//Ft_Gpu_CoCmd_Number(phost, 500, 125, 31, OPT_SIGNED|3, ((attenuation.rssi169<0)? 0:attenuation.rssi169));
+//		//Ft_Gpu_CoCmd_Number(phost, 500, 255, 31, OPT_SIGNED|3, ((attenuation.rssi915<0)? 0:attenuation.rssi915));
+//		//Ft_Gpu_CoCmd_Number(phost, 500, 385, 31, OPT_SIGNED|3, ((attenuation.rssi245<0)? 0:attenuation.rssi245));
+//		
+//		//draw visual alert if attenuation is below 80 (if configured)
+//		//if (alert == 1){
+//		//	drawAlert(40, 27, (attenuation.rssi169<80)? 1:0);
+//		//	drawAlert(40, 60, (attenuation.rssi915<80)? 1:0);
+//		//	drawAlert(40, 93, (attenuation.rssi245<80)? 1:0);
+//		//}
+//		
+//				//draw visual alert if attenuation is below 80 (if configured)
+//		if (alert == 1){
+//			drawAlert(40, 27, (90<80)? 1:0);
+//			drawAlert(40, 60, (90<80)? 1:0);
+//			drawAlert(40, 93, (90<80)? 1:0);
+//		}
+//	
+//		
+//		//reset shield failure trigger, this is to avoid false report because of fluctuation 
+//		if (attenuation.rssi169>80 && attenuation.rssi915>80 && attenuation.rssi245>80){
+//			lastGood = time.second;
+//			trigger = 0;
+//		}else if ((time.second-lastGood == 10 ||time.second - lastGood == -50) && trigger == 0)
+//				//set trigger if shield fail for more than 10 continous seconds
+//				trigger = 1;
+//		
+//		if (trigger == 1){
+//			//record shield failure instances to history and SD Card (if one is inserted)
+//			//saveHist(uartib_get_169_rssi(), uartib_get_915_rssi(), uartib_get_245_rssi());
+//			//play sound when shield fail for more then 10 continous seconds
+//			if (time.second%5 == 0 && time.second != lastSec && sound==1){
+//				play();
+//				lastSec = time.second;
+//			}
+//		}
+//
+//		if (time.minute%30 == 0 && time.minute != lastMin){
+//			//saveHist(uartib_get_169_rssi(), uartib_get_915_rssi(), uartib_get_245_rssi());
+//			lastMin = time.minute;
+//		}
+//
+//		//draw back button
+//        Ft_Gpu_Hal_WrCmd32(phost,COLOR_RGB(255,255,255));
+//        drawBack();
+//            
+//		//draw title
+//		drawTitle("Attenuation");
+//            
+//		disEnd();
+//	} while (tag != back);
+//}// end attnOp
 
 
 /* Function Name    : historyOp
@@ -161,7 +253,7 @@ void historyOp(){
  * Description      : Display the RSSI outside and inside the shield
  */
 //rssiOp
-/*
+
 void rssiOp(){
 	do {
 	tag = 0;
@@ -172,20 +264,27 @@ void rssiOp(){
 		Ft_Gpu_CoCmd_Append(phost, rssiStart, rssiEnd);
 		
 		//display RSSI from the display unit
-		Ft_Gpu_CoCmd_Number(phost, 400, 200, 31, OPT_SIGNED|OPT_CENTER|3, uartib_get_169_rssi());
-		Ft_Gpu_CoCmd_Number(phost, 400, 300, 31, OPT_SIGNED|OPT_CENTER|3, uartib_get_915_rssi());
-		Ft_Gpu_CoCmd_Number(phost, 400, 400, 31, OPT_SIGNED|OPT_CENTER|3, uartib_get_245_rssi());
-        //display RSSI from the receiver unit
-		Ft_Gpu_CoCmd_Number(phost, 650, 200, 31, OPT_SIGNED|OPT_CENTER|3, uartfiber_get_169_rssi());
-		Ft_Gpu_CoCmd_Number(phost, 650, 300, 31, OPT_SIGNED|OPT_CENTER|3, uartfiber_get_915_rssi());
-		Ft_Gpu_CoCmd_Number(phost, 650, 400, 31, OPT_SIGNED|OPT_CENTER|3, uartfiber_get_245_rssi());
-        
+		Ft_Gpu_CoCmd_Number(phost, 650, 125, 31, OPT_SIGNED|OPT_CENTER|3, 11);
+		Ft_Gpu_CoCmd_Number(phost, 650, 200, 31, OPT_SIGNED|OPT_CENTER|3, 10);
+		Ft_Gpu_CoCmd_Number(phost, 650, 275, 31, OPT_SIGNED|OPT_CENTER|3, 23);
+		Ft_Gpu_CoCmd_Number(phost, 650, 350, 31, OPT_SIGNED|OPT_CENTER|3, 14);
+
+	  	Ft_Gpu_CoCmd_Text(phost, 400, 125, 31, OPT_SIGNED|3, "27MHz");
+		Ft_Gpu_CoCmd_Text(phost, 400, 200, 31, OPT_SIGNED|3, "169MHz");
+		Ft_Gpu_CoCmd_Text(phost, 400, 275, 31, OPT_SIGNED|3, "915MHz");
+		Ft_Gpu_CoCmd_Text(phost, 400, 350, 31, OPT_SIGNED|3, "2.4GHz");
+		
+		Ft_Gpu_CoCmd_Text(phost, 750, 125, 31, OPT_SIGNED|3, "dB");
+		Ft_Gpu_CoCmd_Text(phost, 750, 200, 31, OPT_SIGNED|3, "dB");
+		Ft_Gpu_CoCmd_Text(phost, 750, 275, 31, OPT_SIGNED|3, "dB");
+		Ft_Gpu_CoCmd_Text(phost, 750, 350, 31, OPT_SIGNED|3, "dB");
+		
 		drawBack();
-		drawTitle("RSSI");
+		drawTitle("RSSI [interior]");
 		disEnd();
 	} while (tag != back);
 }//end rssiOp
-*/
+
 
 /* Function Name    : settingOp
  * Parameters       : void
