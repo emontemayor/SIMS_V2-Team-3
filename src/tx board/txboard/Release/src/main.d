@@ -1,5 +1,5 @@
-src/main.d src/main.o: ../src/main.c ../src/txPinDef.h ../src/asf.h \
- ../src/ASF/sam0/utils/compiler.h \
+src/main.d src/main.o: ../src/main.c ../src/firmware/spi_27_driver.h \
+ ../src/asf.h ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
@@ -110,7 +110,8 @@ src/main.d src/main.o: ../src/main.c ../src/txPinDef.h ../src/asf.h \
  ../src/ASF/common/utils/interrupt.h \
  ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h \
  ../src/ASF/common2/boards/user_board/user_board.h \
- ../src/config/conf_board.h ../src/ASF/common2/services/delay/delay.h \
+ ../src/config/conf_board.h ../src/txPinDef.h \
+ ../src/ASF/common2/services/delay/delay.h \
  ../src/ASF/common2/services/delay/sam0/systick_counter.h \
  ../src/ASF/sam0/drivers/system/clock/clock.h \
  ../src/ASF/sam0/drivers/system/clock/gclk.h \
@@ -136,11 +137,11 @@ src/main.d src/main.o: ../src/main.c ../src/txPinDef.h ../src/asf.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart_interrupt.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
- ../src/firmware/spi_169_driver.h ../src/firmware/AX5043_regs.h \
- ../src/firmware/uart_245_driver.h ../src/firmware/uart_915_driver.h \
+ ../src/firmware/AX5043_regs.h ../src/firmware/uart_245_driver.h \
+ ../src/firmware/uart_915_driver.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\ctype.h
 
-../src/txPinDef.h:
+../src/firmware/spi_27_driver.h:
 
 ../src/asf.h:
 
@@ -370,6 +371,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/config/conf_board.h:
 
+../src/txPinDef.h:
+
 ../src/ASF/common2/services/delay/delay.h:
 
 ../src/ASF/common2/services/delay/sam0/systick_counter.h:
@@ -423,8 +426,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/drivers/sercom/usart/usart_interrupt.h:
 
 ../src/ASF/sam0/drivers/sercom/usart/usart.h:
-
-../src/firmware/spi_169_driver.h:
 
 ../src/firmware/AX5043_regs.h:
 
