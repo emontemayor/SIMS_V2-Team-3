@@ -7,8 +7,10 @@
  **********************************************/
 #include <RX_PIN_DEF.h>
 #include <asf.h>
-#include <spi_27_driver.h>
+//#include <spi_27_driver.h>
 #include <spi_40_driver.h>
+#include <AX5043_regs.h>
+
 #include <uart_245_driver.h>
 #include <uart_915_driver.h>
 #include <uart_fiber.h>
@@ -37,7 +39,7 @@ int main (void)
     delay_ms(100);
     
     //initialize the AX5043 (169 MHz) registers in preparation for RSSI reading
-   // spi40_rx_init();
+    spi40_rx_init();
     
     //initialize the MTXDOT (915 MHz) in preparation for RSSI reading
     //uart915_preconnect();
@@ -49,17 +51,17 @@ int main (void)
     //uartfiber_init_rssi(&acquired_rssi);
 	
 
-		
+	char buf;
     while (1)
     {   
-        acquired_rssi.rssi27 = spi27_rssi();
+        //acquired_rssi.rssi27 = spi27_rssi();
 		//get the RSSI from all the modules
-		//acquired_rssi.rssi169 = spi40_rssi();
+		buf = spi40_rd8(AX5043_FIFODATA);
+		acquired_rssi.rssi169 = spi40_rssi();
         //acquired_rssi.rssi915 = uart915_get_rssi();
-        acquired_rssi.rssi245 = uart245_rssi();
+      //  acquired_rssi.rssi245 = uart245_rssi();
         
 		//usart_fiber_write(test_data);
-		
         delay_ms(100);
     }
 	
@@ -80,9 +82,9 @@ void simSysInit(void)
 	sys_clk_init();
 	conf_port_pin();
 	//__disable_irq(); //disable interrupts for debugging purposes
-	spi27_initialize();
-	//spi40_init();
-	uart245_init();
+	//spi27_initialize();
+	spi40_init();
+	//uart245_init();
     //uart915_init();
     //uartfiber_init();
 }

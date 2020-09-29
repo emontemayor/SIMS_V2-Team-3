@@ -5,8 +5,8 @@
  * Author : Dan Filbey and Khang Vu
  * Capstone Project 2017 - 2018
  **********************************************/
-//#include <spi_27_driver.h>
-#include <spi_169_driver.h>
+#include <spi_27_driver.h>
+//#include <spi_169_driver.h>
 #include <uart_245_driver.h>
 #include <uart_915_driver.h>
 #include <txPinDef.h>
@@ -28,30 +28,29 @@ void clk_gclk0_init(void);
 /************************************************************************/
 int main (void)
 {
-    uint8_t tx_preamble[4] = {FIFO_REPEATDATA, 0x38, 8, 0xaa};
+    uint8_t tx_preamble[4] = {FIFO_REPEATDATA, 0x38, 8, 0xAA};
 
     // initialize all the subsystems on the MCU
     simSysInit();
     
     // init registers for 169MHz
-    spi169_tx_init();
+    //spi169_tx_init();
 
 	
 	   
     while(1)
     {
-       // start a SPI transfer to the FIFO
-     spi169_start_xfer(AX5043_FIFODATA, WRT);
-      
-      // write the preamble
-      spi169_write(tx_preamble, 4);
-	  
-      // stop the SPI transfer to the FIFO
-	  spi169_stop_xfer();
 
+     ////start a SPI transfer to the FIFO
+     // spi169_start_xfer(AX5043_FIFODATA, WRT);
+     // //write the preamble
+     // spi169_write(tx_preamble, 4);
+     // //stop the SPI transfer to the FIFO
+	 // spi169_stop_xfer();
+	 //
 
      //   // send an AT command to the 915 MHz module
-     //   uart915_write_cmd("AT+SEND=test\r\n");
+    //    uart915_write_cmd("AT+SEND=test\r\n");
 	//	
 	//	
      //   
@@ -78,8 +77,8 @@ void simSysInit(void)
 	system_init();
 	sys_clk_init();
 	conf_port_pin();
-	//spi27_init();
-    spi169_init();
+	spi27_init();
+    //spi169_init();
    // uart245_init();
    // uart915_init();
 
