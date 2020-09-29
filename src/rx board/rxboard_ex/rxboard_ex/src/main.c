@@ -35,7 +35,6 @@ int main (void)
 	struct measurement test_data = {40, 10, 30, 40};
 	
     simSysInit();
-    
     delay_ms(100);
     
     //initialize the AX5043 (169 MHz) registers in preparation for RSSI reading
@@ -61,7 +60,7 @@ int main (void)
         //acquired_rssi.rssi915 = uart915_get_rssi();
       //  acquired_rssi.rssi245 = uart245_rssi();
         
-		//usart_fiber_write(test_data);
+		usart_fiber_write(test_data);
         delay_ms(100);
     }
 	

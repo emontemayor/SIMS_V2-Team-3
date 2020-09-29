@@ -204,7 +204,7 @@ void sim_system_init(void){
 	// write 1 to the LCD REG_INT_EN register to enable it
 	lcd_int_enable();
     
-	spieeprom_init();
+	//spieeprom_init();
 	
     //uartfiber_init();
     //uartib_init();
