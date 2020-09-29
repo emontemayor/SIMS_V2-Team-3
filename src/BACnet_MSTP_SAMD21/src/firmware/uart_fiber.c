@@ -70,8 +70,8 @@ void uartfiber_init(void)
     usart_enable(&uartfiber_inst2);
 	
 	//configure callbacks for data buffers
-	usart_register_callback(&uartfiber_inst1, fiber1_callback, USART_CALLBACK_BUFFER_RECEIVED);
-	usart_register_callback(&uartfiber_inst2, fiber2_callback, USART_CALLBACK_BUFFER_RECEIVED);
+	usart_register_callback(&uartfiber_inst1, &fiber1_callback, USART_CALLBACK_BUFFER_RECEIVED);
+	usart_register_callback(&uartfiber_inst2, &fiber2_callback, USART_CALLBACK_BUFFER_RECEIVED);
 	usart_enable_callback(&uartfiber_inst1, USART_CALLBACK_BUFFER_RECEIVED);
 	usart_enable_callback(&uartfiber_inst2, USART_CALLBACK_BUFFER_RECEIVED);
 	
