@@ -99,20 +99,20 @@ void spi27_connect (){
 	//pairing procedure
 	
 	//wait for dat_rtx interrupt, signaling signaling data has been succesfully transmitted and can be read.
-	while(1){
-		char y = spi27_read_byte_from_reg(0x2A);
-		if (y & 0b01000000){
-			break;
-		}
-	};
+	//while(1){
+	//	char y = spi27_read_byte_from_reg(0x2A);
+	//	if (y & 0b01000000){
+	//		break;
+	//	}
+	//};
 
 	//set the RSSI to record every time the reciever is active. If problems: find a way to set bit alone.
 	spi27_write_byte_to_reg(0x80, 0x20);
 	//Set the transmission mode to streaming (pg. 30)
 	spi27_write_cmd(STREAM_ON);	
-		while(1){
-		uint16_t y = spi27_rssi();
-		}
+		//while(1){
+		//uint16_t y = spi27_rssi();
+		//}
 
 }
 

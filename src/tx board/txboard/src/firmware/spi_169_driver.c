@@ -194,8 +194,7 @@ uint8_t spi169_rd16(spiAddr169 read_addr)
     
     spi169_stop_xfer();
     
-    return read_byte;
-    
+    return read_byte; 
 }
 
 
@@ -205,14 +204,11 @@ uint8_t spi169_rd16(spiAddr169 read_addr)
  * Description      : Writes a number of bytes specified by amount_bytes to
  *  the 169 MHz module. Used with spi169_start_xfer and spi169_stop_xfer().
  */
-status_code_genare_t spi169_write(uint8_t* wrt_buff, \
-    uint16_t amount_bytes)
+status_code_genare_t spi169_write(uint8_t* wrt_buff, uint16_t amount_bytes)
 {
     status_code_genare_t wrt_status;
     
-    // write to the LCD
-    wrt_status = spi_write_buffer_wait(&spi169Master, \
-                        wrt_buff, amount_bytes);
+    wrt_status = spi_write_buffer_wait(&spi169Master, wrt_buff, amount_bytes);
     
     return wrt_status;
 }
@@ -431,8 +427,8 @@ void spi169_tx_init(void)
     spi169_wr8(AX5043_FREQA2, 0x90);
     spi169_wr8(AX5043_FREQA3, 0x0A);
     
-    // wait for crystal to start
-    while((spi169_rd8(AX5043_XTALSTATUS) & 0x01) != 1);
+    // wait for crystal to start COMMENTED OUT FOR DEBUG PURPOSESSS AAHAHHHHH
+//    while((spi169_rd8(AX5043_XTALSTATUS) & 0x01) != 1);
     
     // autorange the PLL once crystal has settled
     spi169_autorange();

@@ -7,7 +7,7 @@
  **********************************************/
 #include <RX_PIN_DEF.h>
 #include <asf.h>
-//#include <spi_27_driver.h>
+#include <spi_27_driver.h>
 #include <spi_40_driver.h>
 #include <uart_245_driver.h>
 #include <uart_915_driver.h>
@@ -52,8 +52,9 @@ int main (void)
 		
     while (1)
     {   
-        //get the RSSI from all the modules
-		acquired_rssi.rssi169 = spi40_rssi();
+        acquired_rssi.rssi27 = spi27_rssi();
+		//get the RSSI from all the modules
+		//acquired_rssi.rssi169 = spi40_rssi();
         //acquired_rssi.rssi915 = uart915_get_rssi();
         acquired_rssi.rssi245 = uart245_rssi();
         
@@ -79,7 +80,7 @@ void simSysInit(void)
 	sys_clk_init();
 	conf_port_pin();
 	//__disable_irq(); //disable interrupts for debugging purposes
-	//spi27_initialize();
+	spi27_initialize();
 	//spi40_init();
 	uart245_init();
     //uart915_init();

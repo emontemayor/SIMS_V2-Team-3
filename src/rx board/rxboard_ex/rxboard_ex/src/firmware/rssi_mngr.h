@@ -18,6 +18,7 @@ typedef volatile int16_t rssi_t;
 
 // new struct type for managing RSSI values
 typedef volatile struct RSSI_VAL_TYPE{
+	rssi_t rssi27;
     rssi_t rssi169;
     rssi_t rssi915;
     rssi_t rssi245;
