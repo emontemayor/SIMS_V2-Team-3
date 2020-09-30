@@ -421,11 +421,16 @@ void spi169_tx_init(void)
     spi169_wr8(AX5043_0xF00, 0x0F);
     spi169_wr8(AX5043_0xF18, 0x06);
     
-    //set the freqeuency (169 MHz)
+    //set the freqeuency (169 MHz) according to calculation pg.46 AX5043 programmers guide
     spi169_wr8(AX5043_FREQA0, 0x01);
     spi169_wr8(AX5043_FREQA1, 0x00);
-    spi169_wr8(AX5043_FREQA2, 0x90);
-    spi169_wr8(AX5043_FREQA3, 0x0A);
+    spi169_wr8(AX5043_FREQA2, 0x00);
+    spi169_wr8(AX5043_FREQA3, 0x1F);
+
+    //spi169_wr8(AX5043_FREQA0, 0x01);
+    //spi169_wr8(AX5043_FREQA1, 0x00);
+    //spi169_wr8(AX5043_FREQA2, 0x90);
+    //spi169_wr8(AX5043_FREQA3, 0x0A);
     
     // wait for crystal to start COMMENTED OUT FOR DEBUG PURPOSESSS AAHAHHHHH
 //    while((spi169_rd8(AX5043_XTALSTATUS) & 0x01) != 1);

@@ -168,7 +168,7 @@ uint8_t spi40_rd8(spiAddr40 read_addr)
     uint8_t read_byte = 0;
     
     spi40_start_xfer(read_addr, READ);
-    
+  
     // read one byte
     spi40_read(&read_byte, 1);
     
@@ -489,6 +489,11 @@ uint16_t spi40_rssi(void)
 {
     /* read the RSSI register, put it in the rolling average, and
      * return the new average */
-    return ((uint16_t) ((int8_t) spi40_rollavg(spi40_rd8(AX5043_RSSI))));
+	
+	// 9/22/20 edit for testing. removed roll avg. 
+ //   return ((uint16_t) ((int8_t) spi40_rollavg(spi40_rd8(AX5043_RSSI))));
+	return spi40_rd8(AX5043_RSSI);
+ 
+ 
 }
 

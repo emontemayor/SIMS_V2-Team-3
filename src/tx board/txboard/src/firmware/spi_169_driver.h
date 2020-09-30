@@ -17,8 +17,11 @@
 /************************************************************************/
 // checks that the addresses of a and b are different before XOR-ing
 #define XORSWAP(a, b)   ((&(a) == &(b)) ? (a) : ((a)^=(b),(b)^=(a),(a)^=(b)))
-#define TXPWR1  0x0F
-#define TXPWR0  0xFF
+#define TXPWR1  0x0A
+#define TXPWR0  0xAA
+
+//#define TXPWR1  0x0F
+//#define TXPWR0  0xFF
 
 /************************************************************************/
 /*                                typedefs                              */
