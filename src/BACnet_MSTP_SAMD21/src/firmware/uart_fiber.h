@@ -49,6 +49,9 @@ enum fiber_data_status get_fiber1_status(void);
 struct measurement get_fiber2_data(void);
 enum fiber_data_status get_fiber2_status(void);
 
+void reset_fiber1_status(void);
+void reset_fiber2_status(void);
+
 
 status_code_genare_t uartfiber_get_169_rssi(rssi_t* new_rssi);
 status_code_genare_t uartfiber_get_915_rssi(rssi_t* new_rssi);

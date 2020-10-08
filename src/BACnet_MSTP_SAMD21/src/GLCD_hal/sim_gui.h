@@ -53,7 +53,7 @@
 /*                                Prototypes                            */
 /************************************************************************/
 void mainMenu(void);
-void attnOp(void);
+void attnOp(struct shield_data *receiver_data);
 
 //void attnOp(struct shield_data, struct shield_data);
 void manualOp(void);

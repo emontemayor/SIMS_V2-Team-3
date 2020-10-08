@@ -32,7 +32,7 @@ int main (void)
 {
     rssi_vals acquired_rssi = {10, 20, 30};
  
-	struct measurement test_data = {40, 10, 30, 40};
+	struct measurement test_data = {69, 47, 82, 112};
 	
     simSysInit();
     delay_ms(100);
@@ -85,7 +85,7 @@ void simSysInit(void)
 	spi40_init();
 	//uart245_init();
     //uart915_init();
-    //uartfiber_init();
+    uartfiber_init();
 }
 
 

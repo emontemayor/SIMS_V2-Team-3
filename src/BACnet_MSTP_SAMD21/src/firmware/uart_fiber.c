@@ -30,11 +30,13 @@ static struct usart_module uartfiber_inst2; // this is the rightmost fiber modul
 	volatile uint8_t fiber2_pointer;
 	volatile enum fiber_data_status fiber2_data_status;
 
+//Dumb char to store dumb data in
+volatile char dummyChar;
 
 
 void uartfiber_init(void)
 {
-	//needs to be done twice, once for each fiber module
+	//code below needs to be done twice, once for each fiber module
     struct usart_config config_usart;
     usart_get_config_defaults(&config_usart);
     
@@ -74,9 +76,9 @@ void uartfiber_init(void)
 	usart_register_callback(&uartfiber_inst2, &fiber2_callback, USART_CALLBACK_BUFFER_RECEIVED);
 	usart_enable_callback(&uartfiber_inst1, USART_CALLBACK_BUFFER_RECEIVED);
 	usart_enable_callback(&uartfiber_inst2, USART_CALLBACK_BUFFER_RECEIVED);
-	
-	usart_read_buffer_job(&uartfiber_inst1,(uint8_t *)fiber1_data.bytes, sizeof(fiber1_data));
 
+	usart_read_buffer_job(&uartfiber_inst1, &dummyChar, 1);
+	usart_read_buffer_job(&uartfiber_inst2, &dummyChar, 1);
 }
 
 void uartfiber_deinit(void)
@@ -87,14 +89,10 @@ void uartfiber_deinit(void)
 
 void fiber1_callback()
 {
-	system_interrupt_enter_critical_section();
-	
-	uint8_t *buf[6];
-	usart_read_buffer_job(&uartfiber_inst1, &buf, 6);
 	uint8_t tempdata = UART_FIBER1->USART.DATA.reg;
 	
-	//if(fiber1_data_status != data_not_ready)
-	//{
+	if(fiber1_data_status != data_ready)
+	{
 		if (tempdata == '$')
 		{
 			fiber1_pointer = 0;
@@ -108,15 +106,15 @@ void fiber1_callback()
 		{
 			fiber1_data.bytes[fiber1_pointer++] = tempdata;
 		}
-	//}
-	system_interrupt_leave_critical_section();
+	}
+	usart_read_buffer_job(&uartfiber_inst1, &dummyChar, 1);
+	usart_read_buffer_job(&uartfiber_inst2, &dummyChar, 1);
 }
-
 void fiber2_callback()
 {
 	uint8_t tempdata = UART_FIBER2->USART.DATA.reg;
 	
-	if(fiber2_data_status =! data_ready)
+	if(fiber2_data_status != data_ready)
 	{
 		if (tempdata == '$')
 		{
@@ -129,9 +127,11 @@ void fiber2_callback()
 		}
 		else
 		{
-			fiber2_data.bytes[fiber1_pointer++] = tempdata;
+			fiber2_data.bytes[fiber2_pointer++] = tempdata;
 		}
 	}
+	usart_read_buffer_job(&uartfiber_inst1, &dummyChar, 1);
+	usart_read_buffer_job(&uartfiber_inst2, &dummyChar, 1);
 }
 
 struct measurement get_fiber1_data()
@@ -143,16 +143,23 @@ struct measurement get_fiber2_data()
 	return fiber2_data.data;
 }
 
-
 enum fiber_data_status get_fiber1_status()
 {
 	return fiber1_data_status;
-};
-
+}
 enum fiber_data_status get_fiber2_status()
 {
 	return fiber2_data_status;
-};
+}
+
+void reset_fiber1_status()
+{
+	fiber1_data_status = data_not_ready;
+}
+void reset_fiber2_status()
+{
+	fiber2_data_status = data_not_ready;
+}
 
 
 /*

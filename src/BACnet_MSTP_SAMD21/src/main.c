@@ -116,12 +116,14 @@ int main(void){
 		
 		if(get_fiber1_status() == data_ready)
 		{
-			current_fiber1_data.rssi_values = readings;//get_fiber1_data();
+			current_fiber1_data.rssi_values = get_fiber1_data();
+			reset_fiber1_status();
 		}
 		
 		if(get_fiber2_status() == data_ready)
 		{
-			current_fiber2_data.rssi_values = readings; //get_fiber2_data();
+			current_fiber2_data.rssi_values = get_fiber2_data();
+			reset_fiber2_status();
 		}		
 		
 		
@@ -158,7 +160,7 @@ int main(void){
         //check tag value and determine further action
 		if(tag!=0)		tempTag = tag;
 		if (tempTag != tag && tag == 0 && tag!=back){
-			if(tempTag == attn)			    attnOp();	//attnOp(current_fiber1_data, current_fiber2_data);
+			if(tempTag == attn)			    attnOp(&current_fiber1_data);	//attnOp(current_fiber1_data, current_fiber2_data);
 			else if(tempTag == hist)		historyOp();
 			else if(tempTag == sett)		settingOp();
 			else if(tempTag == rssi)		rssiOp();
@@ -206,7 +208,7 @@ void sim_system_init(void){
     
 	//spieeprom_init();
 	
-    //uartfiber_init();
+    uartfiber_init();
     //uartib_init();
 }//end sim_system_init
 
