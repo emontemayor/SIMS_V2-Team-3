@@ -124,6 +124,16 @@ int main(void){
 			current_fiber2_data.rssi_values = readings; //get_fiber2_data();
 		}		
 		
+;
+		port_pin_set_output_level(PIN_PB16, 1);
+		delay_ms(1);
+		port_pin_set_output_level(PIN_PB16, 0);
+		delay_ms(1);
+		port_pin_set_output_level(PIN_PA19, 1);
+		delay_ms(1);
+		port_pin_set_output_level(PIN_PA19, 0);
+		
+		
 		
 		//bacnet_task();
 		
@@ -206,7 +216,7 @@ void sim_system_init(void){
     
 	//spieeprom_init();
 	
-    //uartfiber_init();
+   // uartfiber_init();
     //uartib_init();
 }//end sim_system_init
 
@@ -295,6 +305,13 @@ void configure_port_pins(void){
 	struct port_config config_port_pin;
 	port_get_config_defaults(&config_port_pin);
 
+	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
+	port_pin_set_config(PIN_PB16, &config_port_pin);
+	port_pin_set_output_level(PIN_PB16, 1);
+
+	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;
+	port_pin_set_config(PIN_PA19, &config_port_pin);
+	port_pin_set_output_level(PIN_PA19, 1);
 
 	// configure outputs
 	config_port_pin.direction = PORT_PIN_DIR_OUTPUT;

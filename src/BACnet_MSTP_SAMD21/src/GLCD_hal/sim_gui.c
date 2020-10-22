@@ -65,7 +65,7 @@ void attnOp(){
 		attenuation.rssi27 = 90;
 		attenuation.rssi169 =  82;	//10 offset added based on testing
 		attenuation.rssi915 = 91;				// approved by Dr. Nguyen
-		attenuation.rssi245 =79;
+		attenuation.rssi245 =69;
 
 
 		//display information on the screen
