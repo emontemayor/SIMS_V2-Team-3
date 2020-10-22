@@ -14,12 +14,12 @@
 uint32_t eeprom_data_pointer;
 
 static struct spi_module spieeprom_inst; // ASF instance of SPI SERCOM module
-struct spi_slave_inst spiEEPROMSlave;
+struct spi_slave_inst spieeprom_slave;
 
 void spieeprom_init()
 {
 	struct spi_config config_spi;
-	struct spi_slave_inst_config spiEEPROMSlaveConf;
+	struct spi_slave_inst_config config_spi_slave;
 	
 	spi_get_config_defaults(&config_spi);
 	config_spi.mux_setting = EEPROM_PINMUX;
@@ -35,17 +35,16 @@ void spieeprom_init()
 	spi_init(&spieeprom_inst, SPI_EEPROM, &config_spi);
 	spi_enable(&spieeprom_inst);
 	
-	// get default configs for slave
-	spi_slave_inst_get_config_defaults(&spiEEPROMSlaveConf);
-	// change configs as necessary
-	spiEEPROMSlaveConf.ss_pin = EEPROM_CS;
-	// attach the slave configs to the slave
-	spi_attach_slave(&spiEEPROMSlave, &spiEEPROMSlaveConf);
+	// Configure the slave with no address
+	config_spi_slave.address_enabled = false;
+	config_spi_slave.ss_pin = EEPROM_CS;
+	// attach the slave settings to the slave
+	spi_attach_slave(&spieeprom_slave, &config_spi_slave);
 
     status_code_genare_t read_status;		
 	    do{
         // select the slave
-        read_status = spi_select_slave(&spieeprom_inst, &spiEEPROMSlave, true);
+        read_status = spi_select_slave(&spieeprom_inst, &spieeprom_slave, true);
     }while(read_status == STATUS_BUSY);
 	
 	//update pointer with most recent data address
