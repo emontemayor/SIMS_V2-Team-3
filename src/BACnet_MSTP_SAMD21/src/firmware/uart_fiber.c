@@ -1,8 +1,8 @@
 /*
  * uart_fiber.c
  *
- * Created: 4/8/2018 4:54:00 PM
- *  Author: Dan
+ * Created: Spring 2020
+ *  Author: Sander Sieglaff
  */ 
 
 #include "uart_fiber.h"
@@ -20,18 +20,19 @@
 static struct usart_module uartfiber_inst1; // this is the leftmost fiber module when looking into the fiber holes
 static struct usart_module uartfiber_inst2; // this is the rightmost fiber module when looking into the fiber holes
 
-	//Buffer and supporting variables for fiber 1
-	volatile union fiber_data fiber1_data;
-	volatile uint8_t fiber1_pointer;
-	volatile enum fiber_data_status fiber1_data_status;
-	
-	//Buffer and supporting variables for fiber 2
-	volatile union fiber_data fiber2_data;
-	volatile uint8_t fiber2_pointer;
-	volatile enum fiber_data_status fiber2_data_status;
+//Buffer and supporting variables for fiber 1
+volatile union fiber_data fiber1_data;
+volatile uint8_t fiber1_pointer;
+volatile enum fiber_data_status fiber1_data_status;
 
-//Dumb char to store dumb data in
-volatile char dummyChar;
+//Buffer and supporting variables for fiber 2
+volatile union fiber_data fiber2_data;
+volatile uint8_t fiber2_pointer;
+volatile enum fiber_data_status fiber2_data_status;
+
+//Data buffers used to store fresh data
+volatile char fiber1_buffer;
+volatile char fiber2_buffer;
 
 
 void uartfiber_init(void)
@@ -77,8 +78,8 @@ void uartfiber_init(void)
 	usart_enable_callback(&uartfiber_inst1, USART_CALLBACK_BUFFER_RECEIVED);
 	usart_enable_callback(&uartfiber_inst2, USART_CALLBACK_BUFFER_RECEIVED);
 
-	usart_read_buffer_job(&uartfiber_inst1, &dummyChar, 1);
-	usart_read_buffer_job(&uartfiber_inst2, &dummyChar, 1);
+	usart_read_buffer_job(&uartfiber_inst1, &fiber1_buffer, 1);
+	usart_read_buffer_job(&uartfiber_inst2, &fiber2_buffer, 1);
 }
 
 void uartfiber_deinit(void)
@@ -89,7 +90,7 @@ void uartfiber_deinit(void)
 
 void fiber1_callback()
 {
-	uint8_t tempdata = UART_FIBER1->USART.DATA.reg;
+	uint8_t tempdata = fiber1_buffer;
 	
 	if(fiber1_data_status != data_ready)
 	{
@@ -107,12 +108,11 @@ void fiber1_callback()
 			fiber1_data.bytes[fiber1_pointer++] = tempdata;
 		}
 	}
-	usart_read_buffer_job(&uartfiber_inst1, &dummyChar, 1);
-	usart_read_buffer_job(&uartfiber_inst2, &dummyChar, 1);
+	usart_read_buffer_job(&uartfiber_inst1, &fiber1_buffer, 1);
 }
 void fiber2_callback()
 {
-	uint8_t tempdata = UART_FIBER2->USART.DATA.reg;
+	uint8_t tempdata = fiber2_buffer;
 	
 	if(fiber2_data_status != data_ready)
 	{
@@ -130,8 +130,7 @@ void fiber2_callback()
 			fiber2_data.bytes[fiber2_pointer++] = tempdata;
 		}
 	}
-	usart_read_buffer_job(&uartfiber_inst1, &dummyChar, 1);
-	usart_read_buffer_job(&uartfiber_inst2, &dummyChar, 1);
+	usart_read_buffer_job(&uartfiber_inst2, &fiber2_buffer, 1);
 }
 
 struct measurement get_fiber1_data()

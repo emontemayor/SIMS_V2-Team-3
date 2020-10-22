@@ -1,8 +1,8 @@
 /*
  * uart_fiber.h
  *
- * Created: 4/8/2018 4:54:14 PM
- *  Author: Dan
+ * Created: Spring 2020
+ *  Author: Sander Sieglaff
  */ 
 
 
