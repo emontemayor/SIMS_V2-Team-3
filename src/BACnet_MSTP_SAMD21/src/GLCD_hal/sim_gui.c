@@ -51,7 +51,7 @@ int16_t history[10][10];
  *  record attenuation values every 30 minutes regardless of shield status
 */
 //attnOp
-void attnOp(){
+void attnOp(struct shield_data *receiver_data){
 	//declare values for time checking and shield failure triggering
 	static rssi_vals attenuation;
 	char lastSec, lastMin=1, lastGood = time.second, trigger=0;
@@ -62,10 +62,17 @@ void attnOp(){
 		rtc_calendar_get_time(&rtc_instance, &time);
 
 		// get attenuation level
+<<<<<<< HEAD
 		attenuation.rssi27 = 90;
 		attenuation.rssi169 =  82;	//10 offset added based on testing
 		attenuation.rssi915 = 91;				// approved by Dr. Nguyen
 		attenuation.rssi245 =69;
+=======
+		attenuation.rssi27  = receiver_data->rssi_values.MHz27RSSI;
+		attenuation.rssi169 = receiver_data->rssi_values.MHz169RSSI;	//10 offset added based on testing
+		attenuation.rssi915 = receiver_data->rssi_values.MHz915RSSI;	// approved by Dr. Nguyen
+		attenuation.rssi245 = receiver_data->rssi_values.GHz24RSSI;
+>>>>>>> 8fd586c066329d48a3491bfef5531e1cc7afaec4
 
 
 		//display information on the screen
