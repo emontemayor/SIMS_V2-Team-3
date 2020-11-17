@@ -12,30 +12,35 @@
 #define SPI_EEPROM_H_
 
 //structs to represent the arrangement of the the SPI frame
-struct write_frame{
+typedef struct {
 	uint8_t cmd; //command to write to memory is 0x02
 	uint8_t addr_high; //top 6 bits are truncated, only the lower 2 bits will be considered
-	uint16_t addr_low;
+	uint8_t addr_mid;
+	uint8_t addr_low;
 	uint8_t data;
-};
-struct read_frame{
-	uint8_t cmd; //command to read from memory is 0x03
+} write_frame;
+typedef struct {
+	uint8_t cmd; //EEPROM commands are written 
 	uint8_t addr_high; //top 6 bits are truncated, only the lower 2 bits will be considered
-	uint16_t addr_low;
-};
+	uint8_t addr_mid;
+	uint8_t addr_low;
+	uint8_t;
+} read_frame;
 
 //union types to make feeding the buffer function easier
-union write_frame_union{
-	struct write_frame frame;
-	uint8_t databytes[sizeof(struct write_frame)];
-};
-union read_frame_union{
-	struct read_frame frame;
-	uint8_t databytes[sizeof(struct read_frame)];
-};
+
+typedef union{
+	write_frame frame;
+	uint8_t databytes[sizeof(write_frame)];
+} write_frame_union;
+typedef union{
+	read_frame frame;
+	uint8_t databytes[sizeof(read_frame)];
+} read_frame_union;
+
 union shield_data_union{
 	struct shield_data data;
-	uint8_t databytes[sizeof(struct shield_data)];
+	uint8_t databytes[sizeof(shield_data)];
 };
 
 /************************************************************************/
@@ -46,7 +51,11 @@ void spieeprom_init();
 
 //writes a single byte to the eeprom chip
 //writes a byte at a time to avoid encountering the page wrap "feature" of the eeprom chip
-void eeprom_write_data(uint8_t* data[sizeof(struct shield_data)]);
+void eeprom_write_data(struct shield_data* data);
+
+void eeprom_write_byte(uint32_t address, uint8_t data);
+
+uint8_t eeprom_read_byte(uint32_t address);
 
 //returns data from an address
 struct shield_data eeprom_read_address(uint32_t address);

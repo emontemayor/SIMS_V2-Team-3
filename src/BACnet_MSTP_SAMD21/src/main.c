@@ -98,6 +98,9 @@ int main(void){
 	//initialize the BACnet stack
 	//bacnet_init();
 	mstimer_set(&Blink_Timer, 125);
+	
+	//testing eeprom writing
+	//eeprom_write_byte(5, 0x5A);
 
 
 	struct rssi_vals *test = {10,20,30,40};
@@ -126,7 +129,9 @@ int main(void){
 			reset_fiber2_status();
 		}		
 		
-;
+		//uint32_t test_meme = eeprom_write_byte(0x69);
+		uint8_t eeprom_test_data = eeprom_read_byte(5);
+		
 		port_pin_set_output_level(PIN_PB16, 1);
 		delay_ms(1);
 		port_pin_set_output_level(PIN_PB16, 0);
@@ -136,9 +141,13 @@ int main(void){
 		port_pin_set_output_level(PIN_PA19, 0);
 		
 		
-		
+		if(eeprom_test_data)
+		{
+			delay_ms(1);
+		}
 		//bacnet_task();
 		
+		/*
 		tag = 0;
 		disStart();
 		//set background
@@ -177,7 +186,7 @@ int main(void){
 			tempTag = 0;
 			delay_ms(50);
 		}
-		
+		*/
 	}
 	
 }//end main
@@ -208,21 +217,18 @@ void sim_system_init(void){
 	configure_ext_int_callback();
 
 	// initialize the LCD
-	lcd_init_seq(); 
+	//lcd_init_seq(); 
 	
 	
 	// set the interrupt masks for the LCD interrupts
-	lcd_int_mask(LCD_DEFAULT_MASK);
+	//lcd_int_mask(LCD_DEFAULT_MASK);
 	// write 1 to the LCD REG_INT_EN register to enable it
-	lcd_int_enable();
+	//lcd_int_enable();
     
-	//spieeprom_init();
+	spieeprom_init();
 	
-<<<<<<< HEAD
-   // uartfiber_init();
-=======
     uartfiber_init();
->>>>>>> 8fd586c066329d48a3491bfef5531e1cc7afaec4
+
     //uartib_init();
 }//end sim_system_init
 
