@@ -17,7 +17,7 @@ typedef struct {
 	uint8_t addr_high; //top 6 bits are truncated, only the lower 2 bits will be considered
 	uint8_t addr_mid;
 	uint8_t addr_low;
-	uint8_t data;
+	struct shield_data data;
 } write_frame;
 typedef struct {
 	uint8_t cmd; //EEPROM commands are written 
@@ -53,9 +53,9 @@ void spieeprom_init();
 //writes a byte at a time to avoid encountering the page wrap "feature" of the eeprom chip
 void eeprom_write_data(struct shield_data* data);
 
-void eeprom_write_byte(uint32_t address, uint8_t data);
+void spi_eeprom_write_address(uint32_t address, struct shield_data *data);
 
-uint8_t eeprom_read_byte(uint32_t address);
+struct shield_data spi_eeprom_read_address(uint32_t address);
 
 //returns data from an address
 struct shield_data eeprom_read_address(uint32_t address);

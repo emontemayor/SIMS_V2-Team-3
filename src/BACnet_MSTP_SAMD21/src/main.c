@@ -100,7 +100,14 @@ int main(void){
 	mstimer_set(&Blink_Timer, 125);
 	
 	//testing eeprom writing
-	//eeprom_write_byte(5, 0x5A);
+	/*
+	current_fiber1_data.rssi_values.GHz24RSSI = 0x69;
+	current_fiber1_data.rssi_values.MHz169RSSI = 0x33;
+	current_fiber1_data.rssi_values.MHz27RSSI = 0x66;
+	current_fiber1_data.rssi_values.MHz915RSSI = 0x99;
+	rtc_calendar_get_time(&rtc_instance, &current_fiber1_data.timestamp);
+	eeprom_write_byte(5, &current_fiber1_data);
+	*/
 
 
 	struct rssi_vals *test = {10,20,30,40};
@@ -130,7 +137,7 @@ int main(void){
 		}		
 		
 		//uint32_t test_meme = eeprom_write_byte(0x69);
-		uint8_t eeprom_test_data = eeprom_read_byte(5);
+		current_fiber2_data = spi_eeprom_read_address(5);
 		
 		port_pin_set_output_level(PIN_PB16, 1);
 		delay_ms(1);
@@ -140,8 +147,7 @@ int main(void){
 		delay_ms(1);
 		port_pin_set_output_level(PIN_PA19, 0);
 		
-		
-		if(eeprom_test_data)
+		if(current_fiber2_data.rssi_values.GHz24RSSI == 0)
 		{
 			delay_ms(1);
 		}
