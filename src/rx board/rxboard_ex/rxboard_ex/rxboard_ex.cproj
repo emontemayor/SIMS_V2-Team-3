@@ -246,9 +246,16 @@
         <board id="board.user_board.samd21e" value="Add" config="" content-id="Atmel.ASF" />
       </framework-data>
     </AsfFrameworkConfig>
+<<<<<<< Updated upstream
     <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
     <avrtoolserialnumber>J42700014656</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x10010300</avrdeviceexpectedsignature>
+=======
+    <avrtool>
+    </avrtool>
+    <avrtoolserialnumber>J41800092216</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0x1001030A</avrdeviceexpectedsignature>
+>>>>>>> Stashed changes
     <avrtoolinterface>SWD</avrtoolinterface>
     <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
