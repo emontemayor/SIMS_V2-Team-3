@@ -47,23 +47,25 @@ union shield_data_union{
 /*                           Functions                                  */
 /************************************************************************/
 
-void spieeprom_init();
+void spieeprom_init(void);
 
-//writes a single byte to the eeprom chip
-//writes a byte at a time to avoid encountering the page wrap "feature" of the eeprom chip
+void spi_eeprom_clear(void);
+
+void spi_eeprom_enable_write(uint8_t *data, uint8_t size);
+
+void spi_eeprom_wait(void);
+
+void spi_eeprom_write_address(struct shield_data *address, struct shield_data *data);
+
+struct shield_data spi_eeprom_read_address(struct shield_data *address);
+
+bool is_timestamp_later(struct rtc_calendar_time *time1, struct rtc_calendar_time *time2);
+
+void eeprom_find_latest_data(void);
+
+//Writes a single shield_data instance to eeprom.
+//This is the function that should be used in other files
+//to put data in eeprom memory. The data will order itself.
 void eeprom_write_data(struct shield_data* data);
-
-void spi_eeprom_write_address(uint32_t address, struct shield_data *data);
-
-struct shield_data spi_eeprom_read_address(uint32_t address);
-
-//returns data from an address
-struct shield_data eeprom_read_address(uint32_t address);
-
-//returns true if time1 is later than time2
-bool is_timestamp_later(struct rtc_calendar_time time1, struct rtc_calendar_time time2);
-
-//returns the address of the first byte of the newest shield_data
-uint32_t eeprom_find_latest_data();
 
 #endif /* SPI_EEPROM_H_ */

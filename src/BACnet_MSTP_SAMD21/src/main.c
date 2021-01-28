@@ -99,15 +99,90 @@ int main(void){
 	//bacnet_init();
 	mstimer_set(&Blink_Timer, 125);
 	
-	//testing eeprom writing
-	/*
-	current_fiber1_data.rssi_values.GHz24RSSI = 0x69;
-	current_fiber1_data.rssi_values.MHz169RSSI = 0x33;
-	current_fiber1_data.rssi_values.MHz27RSSI = 0x66;
-	current_fiber1_data.rssi_values.MHz915RSSI = 0x99;
-	rtc_calendar_get_time(&rtc_instance, &current_fiber1_data.timestamp);
-	eeprom_write_byte(5, &current_fiber1_data);
-	*/
+	//testing eeprom funcitons
+	
+	struct shield_data data1, data2, data3, data4;
+	
+	data1.rssi_values.GHz24RSSI = 0x77;
+	data1.rssi_values.MHz169RSSI = 0x42;
+	data1.rssi_values.MHz27RSSI = 0x02;
+	data1.rssi_values.MHz915RSSI = 0xFA;
+	data1.timestamp.year = 2021;
+	data1.timestamp.month = 3;
+	data1.timestamp.day = 12;
+	data1.timestamp.pm = true;
+	data1.timestamp.hour = 4;
+	data1.timestamp.minute = 20;
+	
+	data2.rssi_values.GHz24RSSI = 0x10;
+	data2.rssi_values.MHz169RSSI = 0x20;
+	data2.rssi_values.MHz27RSSI = 0x30;
+	data2.rssi_values.MHz915RSSI = 0x40;
+	data2.timestamp.year = 2015;
+	data2.timestamp.month = 4;
+	data2.timestamp.day = 20;
+	data2.timestamp.pm = true;
+	data2.timestamp.hour = 6;
+	data2.timestamp.minute = 9;
+	
+	data3.rssi_values.GHz24RSSI = 0x69;
+	data3.rssi_values.MHz169RSSI = 0x55;
+	data3.rssi_values.MHz27RSSI = 0x69;
+	data3.rssi_values.MHz915RSSI = 0xAA;
+	data3.timestamp.year = 2021;
+	data3.timestamp.month = 3;
+	data3.timestamp.day = 12;
+	data3.timestamp.pm = true;
+	data3.timestamp.hour = 4;
+	data3.timestamp.minute = 21;
+	
+	data4.rssi_values.GHz24RSSI = 0x96;
+	data4.rssi_values.MHz169RSSI = 0x69;
+	data4.rssi_values.MHz27RSSI = 0x3D;
+	data4.rssi_values.MHz915RSSI = 0xD3;
+	data4.timestamp.year = 2021;
+	data4.timestamp.month = 3;
+	data4.timestamp.day = 12;
+	data4.timestamp.pm = true;
+	data4.timestamp.hour = 4;
+	data4.timestamp.minute = 20;
+	
+	//rtc_calendar_get_time(&rtc_instance, &current_fiber1_data.timestamp);
+	
+	spi_eeprom_write_address(0x40, &data1);
+	spi_eeprom_clear();
+	spi_eeprom_read_address(0x40);
+	spi_eeprom_write_address(sizeof(struct shield_data) * 8, &data1);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	if(is_timestamp_later(&midTime, &oldTime))
+	{
+		delay_ms(1);
+	}
+	
+	if(is_timestamp_later(&futureTime, &midTime))
+	{
+		delay_ms(1);
+	}
+	
+	if(is_timestamp_later(&oldTime, &futureTime))
+	{
+		delay_ms(1);
+	}
+	
+	//TEST THIS BY MAKING FUTURE TIME AND SEARCH FOR IT
+	
+	eeprom_write_data(&current_fiber1_data);
+	
+	
 
 
 	struct rssi_vals *test = {10,20,30,40};
@@ -137,7 +212,8 @@ int main(void){
 		}		
 		
 		//uint32_t test_meme = eeprom_write_byte(0x69);
-		current_fiber2_data = spi_eeprom_read_address(5);
+		
+		struct shield_data newData = spi_eeprom_read_address(0xF0);
 		
 		port_pin_set_output_level(PIN_PB16, 1);
 		delay_ms(1);
@@ -147,7 +223,7 @@ int main(void){
 		delay_ms(1);
 		port_pin_set_output_level(PIN_PA19, 0);
 		
-		if(current_fiber2_data.rssi_values.GHz24RSSI == 0)
+		if(newData.rssi_values.GHz24RSSI == 0)
 		{
 			delay_ms(1);
 		}
