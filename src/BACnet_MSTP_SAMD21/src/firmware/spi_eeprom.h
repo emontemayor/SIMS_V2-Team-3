@@ -49,6 +49,8 @@ union shield_data_union{
 
 void spieeprom_init(void);
 
+struct shield_data *get_eeprom_data_pointer(void);
+
 void spi_eeprom_clear(void);
 
 void spi_eeprom_enable_write(uint8_t *data, uint8_t size);

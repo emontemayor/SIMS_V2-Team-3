@@ -23,6 +23,7 @@ void spieeprom_init()
 	config_spi.pinmux_pad1 = PINMUX_UNUSED;
 	config_spi.pinmux_pad2 = EEPROM_MOSI;
 	config_spi.pinmux_pad3 = EEPROM_SCK;
+	config_spi.transfer_mode = SPI_TRANSFER_MODE_3;
 	config_spi.generator_source = SPI_EEPROM_CLOCK_SOURCE;
 	config_spi.mode_specific.master.baudrate = SPI_EEPROM_MAX_CLOCK;
 	
@@ -45,6 +46,11 @@ void spieeprom_init()
 	
 	//update pointer with most recent write address
 	//eeprom_data_pointer = eeprom_find_latest_data();
+}
+
+struct shield_data *get_eeprom_data_pointer(void)
+{
+	return eeprom_data_pointer;
 }
 
 //zeros out the memory in the eeprom chip
@@ -78,6 +84,8 @@ void spi_eeprom_enable_write(uint8_t *data, uint8_t size)
 	spi_write_buffer_wait(&spieeprom_inst, &command, 1);
 	port_pin_set_output_level(EEPROM_CS, 1);
 	
+	spi_eeprom_wait();
+	
 	port_pin_set_output_level(EEPROM_CS, 0);
 	spi_write_buffer_wait(&spieeprom_inst, data, size);
 	port_pin_set_output_level(EEPROM_CS, 1);
@@ -92,13 +100,13 @@ void spi_eeprom_wait()
 		uint8_t data;
 	};
 	struct command_frame command_data;
-	command_data.command = EEPROM_LPWP;
+	command_data.command = EEPROM_RDSR;
 	do
 	{
 		port_pin_set_output_level(EEPROM_CS, 0);
 		spi_transceive_buffer_wait(&spieeprom_inst, &command_data, &command_data, sizeof(struct command_frame));
 		port_pin_set_output_level(EEPROM_CS, 1);
-	} while(command_data.data != 0);
+	} while((command_data.data & 1) == 1);
 }
 
 //writes shield data to a specific address
@@ -122,6 +130,7 @@ struct shield_data spi_eeprom_read_address(struct shield_data *address)
 	curr_frame.frame.addr_high = (((uint32_t) address) >> 16) & 0x3;
 	curr_frame.frame.addr_mid = (((uint32_t) address) >> 8) & 0xFF;
 	curr_frame.frame.addr_low = ((uint32_t) address) & 0xFF;
+	spi_eeprom_wait();
 	port_pin_set_output_level(EEPROM_CS, 0);
 	spi_transceive_buffer_wait(&spieeprom_inst, &curr_frame.databytes, &curr_frame.databytes, sizeof(write_frame_union));
 	port_pin_set_output_level(EEPROM_CS, 1);
@@ -155,7 +164,7 @@ bool is_timestamp_later(struct rtc_calendar_time *time1, struct rtc_calendar_tim
 void eeprom_find_latest_data()
 {
 	struct shield_data *latest_data = 0;
-	for(uint16_t i = 0; i < EEPROM_BYTE_TOTAL/sizeof(struct shield_data); i++)
+	for(uint16_t i = 0; i < 20/*EEPROM_BYTE_TOTAL/sizeof(struct shield_data)*/; i++)
 	{
 		struct shield_data temp = spi_eeprom_read_address(latest_data++);
 		if(is_timestamp_later(&temp.timestamp, &latest_data->timestamp))

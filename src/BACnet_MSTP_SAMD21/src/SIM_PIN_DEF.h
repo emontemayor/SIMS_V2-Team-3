@@ -110,6 +110,6 @@
 #define EEPROM_WRSR		0x01
 #define EEPROM_LPWP		0x08
 //EEPROM chip byte count
-#define EEPROM_BYTE_TOTAL 262144 //(2Mbit / 8)
+#define EEPROM_BYTE_TOTAL 0x40000 //(2Mbit / 8)
 
 #endif /* SIM_PIN_DEF_H_ */

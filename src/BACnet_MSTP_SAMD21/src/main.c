@@ -101,7 +101,8 @@ int main(void){
 	
 	//testing eeprom funcitons
 	
-	struct shield_data data1, data2, data3, data4;
+	struct shield_data data1, data2, data3, data4, temp;
+	struct shield_data zerodout = {0};
 	
 	data1.rssi_values.GHz24RSSI = 0x77;
 	data1.rssi_values.MHz169RSSI = 0x42;
@@ -149,31 +150,46 @@ int main(void){
 	
 	//rtc_calendar_get_time(&rtc_instance, &current_fiber1_data.timestamp);
 	
+	//spi_eeprom_write_address(0x40, &data1);
 	spi_eeprom_write_address(0x40, &data1);
-	spi_eeprom_clear();
-	spi_eeprom_read_address(0x40);
+	//spi_eeprom_write_address(0x40, &zerodout);
+
+	//spi_eeprom_clear();
+	temp = spi_eeprom_read_address(0x40);
+	if(is_timestamp_later(&data1.timestamp, &temp.timestamp))
+	{
+		delay_ms(1);
+	}
+	
 	spi_eeprom_write_address(sizeof(struct shield_data) * 8, &data1);
+	eeprom_find_latest_data();
+	struct shield_data *eeprom_pointer = get_eeprom_data_pointer();
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	if(is_timestamp_later(&midTime, &oldTime))
+	eeprom_write_data(&data2);
+	temp = spi_eeprom_read_address(sizeof(struct shield_data) * 8);
+	if(is_timestamp_later(&data1.timestamp, &temp.timestamp))
+	{
+		delay_ms(1);
+	}
+	temp = spi_eeprom_read_address(sizeof(struct shield_data) * 9);
+	if(is_timestamp_later(&data1.timestamp, &temp.timestamp))
 	{
 		delay_ms(1);
 	}
 	
-	if(is_timestamp_later(&futureTime, &midTime))
+	
+	
+	if(is_timestamp_later(&data1.timestamp, &data2.timestamp))
 	{
 		delay_ms(1);
 	}
 	
-	if(is_timestamp_later(&oldTime, &futureTime))
+	if(is_timestamp_later(&data3.timestamp, &data4.timestamp))
+	{
+		delay_ms(1);
+	}
+	
+	if(eeprom_pointer)
 	{
 		delay_ms(1);
 	}
