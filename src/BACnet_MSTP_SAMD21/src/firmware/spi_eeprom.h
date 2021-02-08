@@ -53,7 +53,7 @@ struct shield_data *get_eeprom_data_pointer(void);
 
 void spi_eeprom_clear(void);
 
-void spi_eeprom_enable_write(uint8_t *data, uint8_t size);
+void spi_eeprom_enable_write(uint8_t *data, uint16_t size);
 
 void spi_eeprom_wait(void);
 
@@ -69,5 +69,10 @@ void eeprom_find_latest_data(void);
 //This is the function that should be used in other files
 //to put data in eeprom memory. The data will order itself.
 void eeprom_write_data(struct shield_data* data);
+
+//Retrieves the most recent data entry from the EEPROM chip.
+//This behavior is undefined if eeprom_find_latest_data()
+//was not called at some point before this function.
+struct shield_data eeprom_read_latest_data(void);
 
 #endif /* SPI_EEPROM_H_ */

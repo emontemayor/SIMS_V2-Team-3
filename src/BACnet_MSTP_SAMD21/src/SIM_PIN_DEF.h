@@ -102,12 +102,12 @@
 #define SPI_EEPROM_MAX_CLOCK 1000000
 #define SPI_EEPROM_CLOCK_SOURCE GCLK_GENERATOR_0
 // EEPROM chip operation codes
-#define EEPROM_READ		0x03
+#define EEPROM_WRSR		0x01
 #define EEPROM_WRITE	0x02
-#define EEPROM_WREN		0x06
+#define EEPROM_READ		0x03
 #define EEPROM_WRDI		0x04
 #define EEPROM_RDSR		0x05
-#define EEPROM_WRSR		0x01
+#define EEPROM_WREN		0x06
 #define EEPROM_LPWP		0x08
 //EEPROM chip byte count
 #define EEPROM_BYTE_TOTAL 0x40000 //(2Mbit / 8)

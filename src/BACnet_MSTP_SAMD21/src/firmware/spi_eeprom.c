@@ -75,7 +75,7 @@ void spi_eeprom_clear()
 }
 
 //writes data of size to the eeprom chip following the chip's data write enable procedure
-void spi_eeprom_enable_write(uint8_t *data, uint8_t size)
+void spi_eeprom_enable_write(uint8_t *data, uint16_t size)
 {
 	spi_eeprom_wait();
 	
@@ -83,8 +83,6 @@ void spi_eeprom_enable_write(uint8_t *data, uint8_t size)
 	port_pin_set_output_level(EEPROM_CS, 0);
 	spi_write_buffer_wait(&spieeprom_inst, &command, 1);
 	port_pin_set_output_level(EEPROM_CS, 1);
-	
-	spi_eeprom_wait();
 	
 	port_pin_set_output_level(EEPROM_CS, 0);
 	spi_write_buffer_wait(&spieeprom_inst, data, size);
@@ -100,13 +98,13 @@ void spi_eeprom_wait()
 		uint8_t data;
 	};
 	struct command_frame command_data;
-	command_data.command = EEPROM_RDSR;
 	do
 	{
+		command_data.command = EEPROM_LPWP;
 		port_pin_set_output_level(EEPROM_CS, 0);
 		spi_transceive_buffer_wait(&spieeprom_inst, &command_data, &command_data, sizeof(struct command_frame));
 		port_pin_set_output_level(EEPROM_CS, 1);
-	} while((command_data.data & 1) == 1);
+	} while((command_data.data) == 0xFF);
 }
 
 //writes shield data to a specific address
@@ -163,28 +161,36 @@ bool is_timestamp_later(struct rtc_calendar_time *time1, struct rtc_calendar_tim
 //sets eeprom_data_pointer to point to the most recent shield data entry in eeprom
 void eeprom_find_latest_data()
 {
-	struct shield_data *latest_data = 0;
-	for(uint16_t i = 0; i < 20/*EEPROM_BYTE_TOTAL/sizeof(struct shield_data)*/; i++)
+	struct shield_data latest_data = {0};
+	struct shield_data *latest_data_address = 0;
+	for(struct shield_data *i = 0; i < 20 * sizeof(struct shield_data)/*EEPROM_BYTE_TOTAL/sizeof(struct shield_data)*/; i++)
 	{
-		struct shield_data temp = spi_eeprom_read_address(latest_data++);
-		if(is_timestamp_later(&temp.timestamp, &latest_data->timestamp))
-			eeprom_data_pointer = latest_data;
+		struct shield_data temp = spi_eeprom_read_address(i);
+		if(is_timestamp_later(&temp.timestamp, &latest_data.timestamp))
+		{
+			latest_data_address = i;
+			latest_data = temp;
+		}
 	}
+	eeprom_data_pointer = latest_data_address;
 }
 
 //writes data to eeprom and self-manages write address
 void eeprom_write_data(struct shield_data *data)
 {
-	//uint8_t pointerval = ((uint32_t) eeprom_data_pointer) & 0xFF;
-	uint16_t temp = 5;
 	if(((((uint32_t) eeprom_data_pointer) & 0xFF) + sizeof(shield_data)) <= 0x100)
 	{
 		spi_eeprom_write_address(++eeprom_data_pointer, data);
 	}
 	else
 	{
-		temp = 1;
 		eeprom_data_pointer = (((uint32_t) eeprom_data_pointer) & 0xFFFFFF00) + 0x100;
 		spi_eeprom_write_address(++eeprom_data_pointer, data);
 	}
+}
+
+//reads the data pointed to by eeprom_data_pointer
+struct shield_data eeprom_read_latest_data()
+{
+	return spi_eeprom_read_address(eeprom_data_pointer);
 }
