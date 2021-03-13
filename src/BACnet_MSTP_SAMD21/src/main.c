@@ -99,7 +99,7 @@ int main(void){
 	//bacnet_init();
 	mstimer_set(&Blink_Timer, 125);
 	
-	//test shield data structs
+	//shield data test structs (used for eeprom debugging)
 	/*
 	
 	struct shield_data data1, data2, data3, data4, temp;
@@ -166,6 +166,7 @@ int main(void){
 		//eeprom_write_data(test.databytes);
 		//rxbuff = eeprom_read_address(0);
 		
+		/*
 		if(get_fiber1_status() == data_ready)
 		{
 			current_fiber1_data.rssi_values = get_fiber1_data();
@@ -176,11 +177,12 @@ int main(void){
 		{
 			current_fiber2_data.rssi_values = get_fiber2_data();
 			reset_fiber2_status();
-		}		
+		}
+		*/
 		
 		//uint32_t test_meme = eeprom_write_byte(0x69);
 		
-		struct shield_data newData = spi_eeprom_read_address(0xF0);
+		//struct shield_data newData = spi_eeprom_read_address(0xF0);
 		
 		port_pin_set_output_level(PIN_PB16, 1);
 		delay_ms(1);
@@ -190,13 +192,15 @@ int main(void){
 		delay_ms(1);
 		port_pin_set_output_level(PIN_PA19, 0);
 		
+		/*
 		if(newData.rssi_values.GHz24RSSI == 0)
 		{
 			delay_ms(1);
 		}
+		*/
 		//bacnet_task();
 		
-		/*
+		
 		tag = 0;
 		disStart();
 		//set background
@@ -235,7 +239,7 @@ int main(void){
 			tempTag = 0;
 			delay_ms(50);
 		}
-		*/
+		
 	}
 	
 }//end main
@@ -266,13 +270,13 @@ void sim_system_init(void){
 	configure_ext_int_callback();
 
 	// initialize the LCD
-	//lcd_init_seq(); 
+	lcd_init_seq(); 
 	
 	
 	// set the interrupt masks for the LCD interrupts
-	//lcd_int_mask(LCD_DEFAULT_MASK);
+	lcd_int_mask(LCD_DEFAULT_MASK);
 	// write 1 to the LCD REG_INT_EN register to enable it
-	//lcd_int_enable();
+	lcd_int_enable();
     
 	spieeprom_init();
 	
