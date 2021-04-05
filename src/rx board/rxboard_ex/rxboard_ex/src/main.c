@@ -38,7 +38,7 @@ int main (void)
     delay_ms(100);
     
     //initialize the AX5043 (169 MHz) registers in preparation for RSSI reading
-   // spi40_rx_init();
+    spi40_rx_init();
     
     //initialize the MTXDOT (915 MHz) in preparation for RSSI reading
     //uart915_preconnect();
