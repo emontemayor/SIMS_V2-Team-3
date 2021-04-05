@@ -41,11 +41,15 @@ void spieeprom_init()
 	port_pin_set_output_level(EEPROM_WP, 1);
 	port_pin_set_output_level(EEPROM_HOLD, 1);
 	
-	eeprom_data_pointer = 0x20EC23F5;
+	//eeprom_data_pointer = 0x20EC23F5;
 	
 	
 	//update pointer with most recent write address
-	//eeprom_data_pointer = eeprom_find_latest_data();
+	eeprom_find_latest_data();
+	if(eeprom_data_pointer == 15)
+	{
+		delay_ms(1);
+	}
 }
 
 struct shield_data *get_eeprom_data_pointer(void)
@@ -163,7 +167,7 @@ void eeprom_find_latest_data()
 {
 	struct shield_data latest_data = {0};
 	struct shield_data *latest_data_address = 0;
-	for(struct shield_data *i = 0; i < 20 * sizeof(struct shield_data)/*EEPROM_BYTE_TOTAL/sizeof(struct shield_data)*/; i++)
+	for(struct shield_data *i = 0; i < EEPROM_BYTE_TOTAL/sizeof(struct shield_data); i++)
 	{
 		struct shield_data temp = spi_eeprom_read_address(i);
 		if(is_timestamp_later(&temp.timestamp, &latest_data.timestamp))
@@ -193,4 +197,13 @@ void eeprom_write_data(struct shield_data *data)
 struct shield_data eeprom_read_latest_data()
 {
 	return spi_eeprom_read_address(eeprom_data_pointer);
+}
+
+void eeprom_read_ten_data(struct shield_data target[10], struct shield_data *address)
+{
+	for(uint8_t i = 0; i < 10; i++)
+	{
+		struct shield_data temp = spi_eeprom_read_address(address--);
+		target[i] = temp;
+	}
 }

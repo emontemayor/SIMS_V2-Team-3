@@ -100,22 +100,22 @@ int main(void){
 	mstimer_set(&Blink_Timer, 125);
 	
 	//shield data test structs (used for eeprom debugging)
-	/*
+	
 	
 	struct shield_data data1, data2, data3, data4, temp;
 	struct shield_data zerodout = {0};
 	
-	data1.rssi_values.GHz24RSSI = 0x77;
-	data1.rssi_values.MHz169RSSI = 0x42;
-	data1.rssi_values.MHz27RSSI = 0x02;
-	data1.rssi_values.MHz915RSSI = 0xAF;
+	data1.rssi_values.GHz24RSSI = 0x45;
+	data1.rssi_values.MHz169RSSI = 0x45;
+	data1.rssi_values.MHz27RSSI = 0x45;
+	data1.rssi_values.MHz915RSSI = 0x45;
 	data1.timestamp.year = 2021;
 	data1.timestamp.month = 3;
 	data1.timestamp.day = 12;
 	data1.timestamp.pm = true;
 	data1.timestamp.hour = 4;
-	data1.timestamp.minute = 20;
-	
+	data1.timestamp.minute = 33;
+	/*
 	data2.rssi_values.GHz24RSSI = 0x10;
 	data2.rssi_values.MHz169RSSI = 0x20;
 	data2.rssi_values.MHz27RSSI = 0x30;
@@ -148,8 +148,19 @@ int main(void){
 	data4.timestamp.pm = true;
 	data4.timestamp.hour = 4;
 	data4.timestamp.minute = 20;
+	
+	
+	for(struct shield_data *i = 0; i < sizeof(struct shield_data) * 11; i++)
+	{
+		spi_eeprom_write_address(i, &data1);
+		data1.timestamp.minute++;
+		data1.rssi_values.GHz24RSSI += 15;
+		data1.rssi_values.MHz169RSSI += 35;
+		data1.rssi_values.MHz27RSSI -= 20;
+	}
 	*/
 	
+	spi_eeprom_write_address((struct shield_data *) (sizeof(struct shield_data) * 10), &data1);
 
 
 	struct rssi_vals *test = {10,20,30,40};

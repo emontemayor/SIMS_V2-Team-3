@@ -8,6 +8,7 @@
 
 #include "sim_gui.h"
 #include "uart_fiber.h"
+#include "spi_eeprom.h"
 
 /************************************************************************/
 /*                                Globals                               */
@@ -34,8 +35,8 @@ ft_uint32_t	attnStart=0, 		attnEnd=0,	\
             rssiStart=0,		rssiEnd=0,	\
             histStart=0,		histEnd=0;
 
-//2D array for history
-int16_t history[10][10];
+//array of shield_data structs for history screen
+struct shield_data history[10];
 
 
 /************************************************************************/
@@ -221,18 +222,35 @@ void historyOp(){
 
 	do {
 		tag = 0;
-		y = 125;
+		y = 100;
 		disStart();
 		tag = Ft_Gpu_Hal_Rd8(phost,REG_TOUCH_TAG);
 		Ft_Gpu_CoCmd_Append(phost, histStart, histEnd);
-
+		
+		/*
+		history[0].rssi_values.MHz169RSSI = 69;
+		history[0].timestamp.hour = 5;
+		*/
+		eeprom_read_ten_data(history, get_eeprom_data_pointer());
+		
+		Ft_Gpu_CoCmd_Text(phost, 50, y, 28, 0, "#    Time          Date                          27Mhz        169Mhz      915Mhz        2.4Ghz");
+		y += 35;
 		for(i = 0; i < 10; i++){
 			// put together the string
-			snprintf(buff, 128, "%02d. %02d:%02d:%02d   %02d/%02d/%04d                 %03d                       %03d                      %03d", \
-					i+1, history[i][0], history[i][1], history[i][2], history[i][3], history[i][4], \
-					history[i][5], history[i][6], history[i][7], history[i][8], history[i][9]);
+			snprintf(buff, 128, "%02d. %02d:%02d:%02d   %02d/%02d/%04d               %03d               %03d               %03d               %03d", \
+					i+1,
+					history[i].timestamp.hour,
+					history[i].timestamp.minute,
+					history[i].timestamp.second,
+					history[i].timestamp.month,
+					history[i].timestamp.day,
+					history[i].timestamp.year,
+					history[i].rssi_values.MHz27RSSI,
+					history[i].rssi_values.MHz169RSSI,
+					history[i].rssi_values.MHz915RSSI,
+					history[i].rssi_values.GHz24RSSI);
 			//send the string to the GLCD
-			Ft_Gpu_CoCmd_Text(phost, 50, y, 28, 0,buff);
+			Ft_Gpu_CoCmd_Text(phost, 50, y, 28, 0, buff);
 			//go to next line on the GLCD
 			y = y + 30;
 		}
@@ -609,7 +627,7 @@ void shiftHist(){
 	int i, j;
 	for(i = 9; i > 0; i--)
 		for (j = 0; j < 9; j++)
-			history[i][j] = history[i-1][j];
+			history[i] = history[i-1];
 }//end shiftHist
 
 
@@ -625,15 +643,15 @@ void saveHist(int16_t rssi169, int16_t rssi915, int16_t rssi245){
 	//shift history down once
 	shiftHist();
 	// put the time into the fist array
-	history[0][0] = time.hour;
-	history[0][1] = time.minute;
-	history[0][2] = time.second;
-	history[0][3] = time.month;
-	history[0][4] = time.day;
-	history[0][5] = time.year;
-	history[0][6] = rssi169;
-	history[0][7] = rssi915;
-	history[0][8] = rssi245;
+	history[0].timestamp.hour = time.hour;
+	history[0].timestamp.minute = time.minute;
+	history[0].timestamp.second = time.second;
+	history[0].timestamp.month = time.month;
+	history[0].timestamp.day = time.day;
+	history[0].timestamp.year = time.year;
+	history[0].rssi_values.MHz169RSSI = rssi169;
+	history[0].rssi_values.MHz915RSSI = rssi915;
+	history[0].rssi_values.GHz24RSSI = rssi245;
 	
 
 }//end saveHist

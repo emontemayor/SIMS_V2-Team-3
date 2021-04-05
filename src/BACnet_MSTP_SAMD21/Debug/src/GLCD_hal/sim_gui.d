@@ -171,7 +171,8 @@ src/GLCD_hal/sim_gui.d src/GLCD_hal/sim_gui.o: ../src/GLCD_hal/sim_gui.c \
  ../src/chanlib/ff.h ../src/chanlib/integer.h ../src/chanlib/ffconf.h \
  ../src/firmware/rssi_mngr.h ../src/firmware/uart_ib.h \
  ../src/firmware/rssi_mngr.h ../src/firmware/uart_fiber.h \
- ../src/GLCD_hal/uart_fiber.h
+ ../src/GLCD_hal/uart_fiber.h ../src/firmware/spi_eeprom.h \
+ ../src/firmware/uart_fiber.h
 
 ../src/GLCD_hal/sim_gui.h:
 
@@ -548,3 +549,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/firmware/uart_fiber.h:
 
 ../src/GLCD_hal/uart_fiber.h:
+
+../src/firmware/spi_eeprom.h:
+
+../src/firmware/uart_fiber.h:

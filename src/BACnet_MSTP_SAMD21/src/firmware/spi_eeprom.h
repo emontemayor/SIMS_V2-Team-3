@@ -75,4 +75,6 @@ void eeprom_write_data(struct shield_data* data);
 //was not called at some point before this function.
 struct shield_data eeprom_read_latest_data(void);
 
+void eeprom_read_ten_data(struct shield_data target[10], struct shield_data *address);
+
 #endif /* SPI_EEPROM_H_ */
