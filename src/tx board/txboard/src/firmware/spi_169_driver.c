@@ -433,7 +433,7 @@ void spi169_tx_init(void)
     //spi169_wr8(AX5043_FREQA3, 0x0A);
     
     // wait for crystal to start COMMENTED OUT FOR DEBUG PURPOSESSS AAHAHHHHH
-//    while((spi169_rd8(AX5043_XTALSTATUS) & 0x01) != 1);
+    while((spi169_rd8(AX5043_XTALSTATUS) & 0x01) != 1);
     
     // autorange the PLL once crystal has settled
     spi169_autorange();
