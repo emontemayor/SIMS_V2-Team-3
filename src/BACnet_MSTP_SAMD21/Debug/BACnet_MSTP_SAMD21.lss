@@ -15,23 +15,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .comment      00000059  00000000  00000000  0002009c  2**0
                   CONTENTS, READONLY
-  6 .debug_info   0006209c  00000000  00000000  000200f5  2**0
+  6 .debug_info   00062084  00000000  00000000  000200f5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00007cf8  00000000  00000000  00082191  2**0
+  7 .debug_abbrev 00007cf2  00000000  00000000  00082179  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    000105a4  00000000  00000000  00089e89  2**0
+  8 .debug_loc    000105a4  00000000  00000000  00089e6b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_aranges 00001040  00000000  00000000  0009a42d  2**0
+  9 .debug_aranges 00001040  00000000  00000000  0009a40f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00001630  00000000  00000000  0009b46d  2**0
+ 10 .debug_ranges 00001630  00000000  00000000  0009b44f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  0002219a  00000000  00000000  0009ca9d  2**0
+ 11 .debug_macro  0002219a  00000000  00000000  0009ca7f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   0001df10  00000000  00000000  000bec37  2**0
+ 12 .debug_line   0001df0f  00000000  00000000  000bec19  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    000956f8  00000000  00000000  000dcb47  2**0
+ 13 .debug_str    000956ef  00000000  00000000  000dcb28  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00002ec8  00000000  00000000  00172240  2**2
+ 14 .debug_frame  00002ec8  00000000  00000000  00172218  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -4182,11 +4182,11 @@ void eeprom_find_latest_data()
     175e:	4b0e      	ldr	r3, [pc, #56]	; (1798 <eeprom_find_latest_data+0x44>)
     1760:	4798      	blx	r3
 	struct shield_data *latest_data_address = 0;
-	for(struct shield_data *i = 0; i < EEPROM_BYTE_TOTAL/sizeof(struct shield_data); i++)
+	for(struct shield_data *i = 0; i < EEPROM_BYTE_TOTAL; i++)
     1762:	2400      	movs	r4, #0
 	struct shield_data *latest_data_address = 0;
     1764:	2500      	movs	r5, #0
-	for(struct shield_data *i = 0; i < EEPROM_BYTE_TOTAL/sizeof(struct shield_data); i++)
+	for(struct shield_data *i = 0; i < EEPROM_BYTE_TOTAL; i++)
     1766:	e000      	b.n	176a <eeprom_find_latest_data+0x16>
     1768:	340c      	adds	r4, #12
     176a:	4b0c      	ldr	r3, [pc, #48]	; (179c <eeprom_find_latest_data+0x48>)
@@ -4224,7 +4224,7 @@ void eeprom_find_latest_data()
     1794:	b007      	add	sp, #28
     1796:	bd30      	pop	{r4, r5, pc}
     1798:	000054df 	.word	0x000054df
-    179c:	00005554 	.word	0x00005554
+    179c:	0003ffff 	.word	0x0003ffff
     17a0:	0000168d 	.word	0x0000168d
     17a4:	000016e5 	.word	0x000016e5
     17a8:	20000494 	.word	0x20000494
@@ -13487,11 +13487,11 @@ __STATIC_FORCEINLINE void __DMB(void)
     50c2:	710b      	strb	r3, [r1, #4]
 	data1.timestamp.pm = true;
     50c4:	70cc      	strb	r4, [r1, #3]
-	data1.timestamp.hour = 4;
-    50c6:	3b08      	subs	r3, #8
+	data1.timestamp.hour = 5;
+    50c6:	3b07      	subs	r3, #7
     50c8:	708b      	strb	r3, [r1, #2]
 	data1.timestamp.minute = 33;
-    50ca:	331d      	adds	r3, #29
+    50ca:	331c      	adds	r3, #28
     50cc:	704b      	strb	r3, [r1, #1]
 	spi_eeprom_write_address((struct shield_data *) (sizeof(struct shield_data) * 10), &data1);
     50ce:	2078      	movs	r0, #120	; 0x78

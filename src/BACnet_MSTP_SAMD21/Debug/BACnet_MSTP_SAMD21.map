@@ -17684,7 +17684,7 @@ OUTPUT(BACnet_MSTP_SAMD21.elf elf32-littlearm)
  .comment       0x00000059       0x5a src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .comment       0x00000059       0x5a src/main.o
 
-.debug_info     0x00000000    0x6209c
+.debug_info     0x00000000    0x62084
  .debug_info    0x00000000      0xb8b src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_info    0x00000b8b     0x1be2 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
  .debug_info    0x0000276d     0x199b src/ASF/sam0/drivers/extint/extint_callback.o
@@ -17721,9 +17721,9 @@ OUTPUT(BACnet_MSTP_SAMD21.elf elf32-littlearm)
  .debug_info    0x00057850     0x3a43 src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
  .debug_info    0x0005b293     0x1410 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .debug_info    0x0005c6a3      0xd98 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_info    0x0005d43b     0x4c61 src/main.o
+ .debug_info    0x0005d43b     0x4c49 src/main.o
 
-.debug_abbrev   0x00000000     0x7cf8
+.debug_abbrev   0x00000000     0x7cf2
  .debug_abbrev  0x00000000      0x265 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_abbrev  0x00000265      0x3c7 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
  .debug_abbrev  0x0000062c      0x342 src/ASF/sam0/drivers/extint/extint_callback.o
@@ -17760,7 +17760,7 @@ OUTPUT(BACnet_MSTP_SAMD21.elf elf32-littlearm)
  .debug_abbrev  0x000071de      0x227 src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
  .debug_abbrev  0x00007405      0x292 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .debug_abbrev  0x00007697      0x257 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_abbrev  0x000078ee      0x40a src/main.o
+ .debug_abbrev  0x000078ee      0x404 src/main.o
 
 .debug_loc      0x00000000    0x105a4
  .debug_loc     0x00000000       0xc6 src/ASF/common2/services/delay/sam0/systick_counter.o
@@ -18095,7 +18095,7 @@ OUTPUT(BACnet_MSTP_SAMD21.elf elf32-littlearm)
  .debug_macro   0x000217d6      0x122 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .debug_macro   0x000218f8      0x8a2 src/main.o
 
-.debug_line     0x00000000    0x1df10
+.debug_line     0x00000000    0x1df0f
  .debug_line    0x00000000      0x9d1 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_line    0x000009d1      0xc58 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
  .debug_line    0x00001629      0x9de src/ASF/sam0/drivers/extint/extint_callback.o
@@ -18132,9 +18132,9 @@ OUTPUT(BACnet_MSTP_SAMD21.elf elf32-littlearm)
  .debug_line    0x0001b7d5      0x66c src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
  .debug_line    0x0001be41      0x935 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .debug_line    0x0001c776      0x409 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_line    0x0001cb7f     0x1391 src/main.o
+ .debug_line    0x0001cb7f     0x1390 src/main.o
 
-.debug_str      0x00000000    0x956f8
+.debug_str      0x00000000    0x956ef
  .debug_str     0x00000000    0x836bf src/ASF/common2/services/delay/sam0/systick_counter.o
                               0x83f8f (size before relaxing)
  .debug_str     0x000836bf      0xcba src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
@@ -18207,8 +18207,8 @@ OUTPUT(BACnet_MSTP_SAMD21.elf elf32-littlearm)
                               0x8415b (size before relaxing)
  .debug_str     0x00094f5d      0x68d src/ASF/sam0/utils/syscalls/gcc/syscalls.o
                                0x743a (size before relaxing)
- .debug_str     0x000955ea      0x10e src/main.o
-                              0x8d06a (size before relaxing)
+ .debug_str     0x000955ea      0x105 src/main.o
+                              0x8d052 (size before relaxing)
 
 .debug_frame    0x00000000     0x2ec8
  .debug_frame   0x00000000       0x48 src/ASF/common2/services/delay/sam0/systick_counter.o

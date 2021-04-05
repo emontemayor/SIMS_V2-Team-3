@@ -167,7 +167,7 @@ void eeprom_find_latest_data()
 {
 	struct shield_data latest_data = {0};
 	struct shield_data *latest_data_address = 0;
-	for(struct shield_data *i = 0; i < EEPROM_BYTE_TOTAL/sizeof(struct shield_data); i++)
+	for(struct shield_data *i = 0; i < EEPROM_BYTE_TOTAL; i++)
 	{
 		struct shield_data temp = spi_eeprom_read_address(i);
 		if(is_timestamp_later(&temp.timestamp, &latest_data.timestamp))

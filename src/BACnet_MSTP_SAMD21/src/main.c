@@ -113,9 +113,9 @@ int main(void){
 	data1.timestamp.month = 3;
 	data1.timestamp.day = 12;
 	data1.timestamp.pm = true;
-	data1.timestamp.hour = 4;
+	data1.timestamp.hour = 5;
 	data1.timestamp.minute = 33;
-	/*
+	
 	data2.rssi_values.GHz24RSSI = 0x10;
 	data2.rssi_values.MHz169RSSI = 0x20;
 	data2.rssi_values.MHz27RSSI = 0x30;
@@ -150,32 +150,23 @@ int main(void){
 	data4.timestamp.minute = 20;
 	
 	
-	for(struct shield_data *i = 0; i < sizeof(struct shield_data) * 11; i++)
+	
+	for(struct shield_data *i = sizeof(struct shield_data) * 560; i < (sizeof(struct shield_data) * 90) + sizeof(struct shield_data) * 11; i++)
 	{
 		spi_eeprom_write_address(i, &data1);
 		data1.timestamp.minute++;
-		data1.rssi_values.GHz24RSSI += 15;
-		data1.rssi_values.MHz169RSSI += 35;
-		data1.rssi_values.MHz27RSSI -= 20;
+		data1.rssi_values.GHz24RSSI += 1;
+		data1.rssi_values.MHz169RSSI += 1;
+		data1.rssi_values.MHz27RSSI -= 1;
 	}
-	*/
+	
 	
 	spi_eeprom_write_address((struct shield_data *) (sizeof(struct shield_data) * 10), &data1);
 
 
-	struct rssi_vals *test = {10,20,30,40};
 	//main home menu and GUI
 	while(1){
-		//delay_ms(1);
-		//union shield_data_union test;
-		struct measurement readings = {10,20,30,40};
-		//test.data.rssi_values= readings;
-		//test.data.timestamp.day = 29;
-		//test.data.timestamp.year = 2020;
-		//struct shield_data rxbuff;
-		//
-		//eeprom_write_data(test.databytes);
-		//rxbuff = eeprom_read_address(0);
+		
 		
 		/*
 		if(get_fiber1_status() == data_ready)
